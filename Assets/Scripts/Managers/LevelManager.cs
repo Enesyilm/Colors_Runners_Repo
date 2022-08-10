@@ -2,6 +2,8 @@ using System;
 //using Controllers;
 using Data.UnityObjects;
 using Data.ValueObjects;
+using Enums;
+using Commands;
 using Extentions;
 //using Keys;
 using Signals;
@@ -15,21 +17,23 @@ namespace Managers
 
         #region Public Variables
 
-        [Header("Data")] public LevelData Data;
+        [Header("CurrentLevelPrefab")] public LevelData Data;
 
         #endregion
 
         #region Serialized Variables
 
         [Space] [SerializeField] private GameObject levelHolder;
-        [SerializeField] private LevelLoaderCommand levelLoader;
-        [SerializeField] private ClearActiveLevelCommand levelClearer;
+        
+        
 
         #endregion
 
         #region Private Variables
 
          private int _levelID;
+         private LevelLoaderCommand levelLoader;
+         private ClearActiveLevelCommand levelClearer;
 
         #endregion
 
@@ -39,18 +43,25 @@ namespace Managers
         {
             _levelID = GetActiveLevel();
             Data = GetLevelData();
+            GetCommandComponents();
+        }
+
+        private void GetCommandComponents()
+        {
+            levelLoader = GetComponent<LevelLoaderCommand>();
+            levelClearer = GetComponent<ClearActiveLevelCommand>();
         }
 
         private int GetActiveLevel()
         {
-            
-            SaveSignals.
+
+            return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.Level);
         }
 
         private LevelData GetLevelData()
         {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
-            return Resources.Load<CD_Level>("Data/CD_Level").Levels[newLevelData];
+            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.Count;
+            return Resources.Load<CD_Level>("Data/CD_Level").LevelData[newLevelData];
         }
 
         #region Event Subscription
@@ -95,10 +106,7 @@ namespace Managers
             _levelID++;
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onSaveGameData?.Invoke(new SaveGameDataParams()
-            {
-                Level = _levelID
-            });
+            SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
@@ -106,10 +114,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onSaveGameData?.Invoke(new SaveGameDataParams()
-            {
-                Level = _levelID
-            });
+            SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
@@ -121,7 +126,8 @@ namespace Managers
 
         private void OnInitializeLevel()
         {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.Count;
+            Debug.Log("NewlevelDAta"+newLevelData);
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }
 

@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
 
   private SaveToDBCommand _saveToDBCommand;
   private InitializationSyncDatasCommand _initializationSyncDatasCommand;
+  private OnGetSaveDataCommand _getSaveDataCommand;
   
 
     #endregion
@@ -39,6 +40,7 @@ public class SaveManager : MonoBehaviour
         Data = GetSaveData();
         _initializationSyncDatasCommand = new InitializationSyncDatasCommand();
         _saveToDBCommand = new SaveToDBCommand();
+        _getSaveDataCommand = new OnGetSaveDataCommand();
         _initializationSyncDatasCommand.OnInitializeSyncDatas(Data);
         SaveSignals.Instance.onSendDataToManagers?.Invoke(Data);
 
@@ -69,6 +71,12 @@ public class SaveManager : MonoBehaviour
         SaveSignals.Instance.onGetSaveData-=OnGetSaveData;
 
     }
+
+    private int OnGetSaveData(SaveTypes _type)
+    {
+        return _getSaveDataCommand.OnGetSaveData(_type);
+    }
+
     #endregion
     
 
@@ -101,24 +109,5 @@ public class SaveManager : MonoBehaviour
            
             
     }
-    private int OnGetSaveData(SaveTypes _saveType)
-    {
-        switch (_saveType)
-        {
-            case SaveTypes.Bonus:
-                return ES3.Load<int>("Bonus");
-
-            case SaveTypes.Level:
-                return ES3.Load<int>("Level");
-
-            case SaveTypes.IdleLevel:
-                return ES3.Load<int>("IdleLevel");
-
-            case SaveTypes.TotalColorman:
-                return ES3.Load<int>("TotalColorman");
-            default:
-                return 0;
-            
-        }
-    }
+    
 }

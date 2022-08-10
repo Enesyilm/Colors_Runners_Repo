@@ -6,7 +6,7 @@ namespace Commands
     {
         public void OnInitializeSyncDatas(SaveData _data)
         {
-            if (!ES3.FileExists())
+            if (ES3.FileExists())
             {
                 _data.Level = ES3.Load<int>("Level", 0);
                 _data.Bonus = ES3.Load<int>("Bonus", 0);
