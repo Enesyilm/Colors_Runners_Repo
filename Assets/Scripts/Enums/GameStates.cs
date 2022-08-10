@@ -1,7 +1,8 @@
 namespace Enums
 {
-    public class GameStates
+    public enum GameStates
     {
-        
+        Idle,
+        Runner
     }
 }

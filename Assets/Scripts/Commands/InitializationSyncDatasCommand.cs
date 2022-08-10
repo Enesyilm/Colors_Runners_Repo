@@ -5,11 +5,15 @@ namespace Commands
     public class InitializationSyncDatasCommand
     {
         public void OnInitializeSyncDatas(SaveData _data)
-        { 
-            _data.BonusColorman=ES3.Load<int>("BonusColorman");
-            _data.CollectedColorman=ES3.Load<int>("CollectedColorman");
-            _data.CurrentLevel=ES3.Load<int>("CurrentLevel");
-            
+        {
+            if (!ES3.FileExists())
+            {
+                _data.Level = ES3.Load<int>("Level", 0);
+                _data.Bonus = ES3.Load<int>("Bonus", 0);
+                _data.IdleLevel = ES3.Load<int>("IdleLevel", 0);
+                _data.TotalColorman = ES3.Load<int>("TotalColorman", 0);
+                // _data.CurrentLevel= ES3.KeyExists("CurrentLevel") ? ES3.Load<int>("Level", 0) : 0;
+            }
         }
     }
 }

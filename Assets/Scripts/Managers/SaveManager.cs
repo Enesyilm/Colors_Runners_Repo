@@ -57,12 +57,17 @@ public class SaveManager : MonoBehaviour
     private void SubscribeEvents()
     {
         SaveSignals.Instance.onChangeSaveData+=OnChangeSaveData;
+        SaveSignals.Instance.onGetSaveData+=OnGetSaveData;
     }
+
     
+
 
     private void UnSubscribeEvents()
     {
         SaveSignals.Instance.onChangeSaveData-=OnChangeSaveData;
+        SaveSignals.Instance.onGetSaveData-=OnGetSaveData;
+
     }
     #endregion
     
@@ -72,26 +77,48 @@ public class SaveManager : MonoBehaviour
         switch (savetype)
             {
                 case SaveTypes.All:
-                    Data.BonusColorman=saveAmount;
-                    Data.CollectedColorman=saveAmount;
-                    Data.CurrentLevel=saveAmount;
+                    Data.Bonus=saveAmount;
+                    Data.TotalColorman=saveAmount;
+                    Data.Level=saveAmount;
+                    Data.IdleLevel = saveAmount;
                     break;
-                case SaveTypes.BonusColorman:
-                    Data.BonusColorman=saveAmount;
+                case SaveTypes.Bonus:
+                    Data.Bonus=saveAmount;
                     break;
-                case SaveTypes.CollectedColorman:
-                    Data.CollectedColorman=saveAmount;
+                case SaveTypes.TotalColorman:
+                    Data.TotalColorman=saveAmount;
                     break;
-                case SaveTypes.CurrentLevel:
-                    Data.CollectedColorman=saveAmount;
+                case SaveTypes.Level:
+                    Data.Level=saveAmount;
+                    break;
+                case SaveTypes.IdleLevel:
+                    Data.IdleLevel=saveAmount;
                     break;
             
             }
-            _saveToDBCommand.SaveDataToDatabase(Data);
+        _saveToDBCommand.SaveDataToDatabase(Data);
 
-            private BuildingData GetBuildingData() => Resources<BuildingData>.load("Data/CD_Level")
-                .IdleLevels[SaveData.CurrentidleLEvel].BuildingList[ID];
+           
             
     }
+    private int OnGetSaveData(SaveTypes _saveType)
+    {
+        switch (_saveType)
+        {
+            case SaveTypes.Bonus:
+                return ES3.Load<int>("Bonus");
 
+            case SaveTypes.Level:
+                return ES3.Load<int>("Level");
+
+            case SaveTypes.IdleLevel:
+                return ES3.Load<int>("IdleLevel");
+
+            case SaveTypes.TotalColorman:
+                return ES3.Load<int>("TotalColorman");
+            default:
+                return 0;
+            
+        }
+    }
 }
