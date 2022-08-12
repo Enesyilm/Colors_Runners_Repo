@@ -31,6 +31,7 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp-firstpass
     - Boxophobic.PolyverseSkies.Runtime
+    - Cinemachine
     - Assembly-CSharp
     - Boxophobic.Utils.Scripts
     - Boxophobic.PolyverseSkies.Scripts

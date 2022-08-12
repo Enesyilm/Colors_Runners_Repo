@@ -25,8 +25,6 @@ namespace Signals
         public UnityAction onPlay = delegate { };
         
         public UnityAction onReset = delegate { };
-
-        public UnityAction onSetCameraTarget = delegate { };
         
         public UnityAction onStageAreaReached = delegate { };
         
