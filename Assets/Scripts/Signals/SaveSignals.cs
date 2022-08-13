@@ -12,7 +12,9 @@ namespace Signals
     {
         
         public UnityAction<SaveTypes, int> onChangeSaveData=delegate{  };
+        
         public Func<SaveTypes,int>onGetSaveData= delegate { return 0; };
+        
         public UnityAction<SaveData>onSendDataToManagers=delegate {  };
     }
 }

@@ -1,10 +1,12 @@
 using System;
 using Managers.Abstracts;
-
+using DG.Tweening;
 using Managers.Abstracts.Concreates;
 using Cinemachine;
+using Enums;
 using UnityEngine;
 using Signals;
+using UnityEngine.Events;
 
 namespace Managers
 {
@@ -12,17 +14,26 @@ namespace Managers
     {
         #region Self Variables
 
+        #region Public Variables
+        public Transform initPosition;
+        
+
+        #endregion
         #region Serialized Variables
 
-        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] 
+        private CinemachineVirtualCamera virtualCamera;
+
+       
 
         #endregion
 
         #region Private Variables
 
         private Vector3 _initialPosition;
+        private Transform _playerManager;
         
-        private CameraBaseState _currentState;
+        public CameraBaseState _currentState;
         private StartState _startState=new StartState();
         private StartOfIdleState _startOfIdleState=new StartOfIdleState();
         private RunnerState _runnerState=new RunnerState();
@@ -35,8 +46,10 @@ namespace Managers
         #region Event Subscription
         private void Awake()
         {
+            
             virtualCamera = GetComponent<CinemachineVirtualCamera>();
             GetInitialPosition();
+            
         }
 
         private void OnEnable()
@@ -44,16 +57,21 @@ namespace Managers
             SubscribeEvents();
         }
 
+        private void Start()
+        {
+            OnCameraInitialization();
+        }
+
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += OnSetCameraTarget;
-            CoreGameSignals.Instance.onLevelInitialize+=OnStartState;
+            CoreGameSignals.Instance.onLevelInitialize += OnCameraInitialization;
+            CameraSignals.Instance.onChangeCameraStates += OnChangeCameraState;
             CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= OnSetCameraTarget;
+            CoreGameSignals.Instance.onLevelInitialize -= OnCameraInitialization;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
 
@@ -64,46 +82,71 @@ namespace Managers
 
         #endregion
         
-
-        private void Start()
-        {
-            _currentState = _startState;
-            _startState.EnterState(this);
-        }
-
+        
         private void Update()
         {
-            _currentState.UpdateState(this);
+            //currentState.UpdateState(this);
         }
+
+        #region Reset Methods
         private void GetInitialPosition()
         {
             _initialPosition = transform.localPosition;
         }
-
         private void OnMoveToInitialPosition()
         {
             transform.localPosition = _initialPosition;
         }
         
-        private void OnSetCameraTarget()
+
+        #endregion
+        
+        private void OnCameraInitialization()
         {
-            //var playerManager = FindObjectOfType<PlayerManager>().transform;player manager gelince kullanilacak
-            //virtualCamera.Follow = playerManager;
-            //virtualCamera.LookAt = playerManager;
-        }
-        private void OnStartState()
-        {
-            _currentState = _startState;
-            _currentState.EnterState(this);
-            
+            ChangeState(_startState);
         }
 
+        #region Subscribed Methods
+        #region States
+
+        private void OnChangeCameraState(CameraStates _currentState)
+        {
+            switch (_currentState)
+            {
+                case CameraStates.Idle:
+                    ChangeState(_idleState);
+                    break;
+                case CameraStates.Runner:
+                    ChangeState(_runnerState);
+                    break;
+                case CameraStates.StartState:
+                    ChangeState(_startState);
+                    break;
+                case CameraStates.StartOfIdle:
+                    ChangeState(_startOfIdleState);
+                    break;
+                
+            }
+        }
+        private void ChangeState(CameraBaseState _cameraState)
+        {
+           
+            var _playerManager =GameObject.FindWithTag("Player").transform;
+            _currentState = _cameraState;
+            _currentState.EnterState(this,virtualCamera,_playerManager);
+            
+        }
+        #endregion
         private void OnReset()
         {
             virtualCamera.Follow = null;
             virtualCamera.LookAt = null;
             OnMoveToInitialPosition();
         }
+        
+
+        #endregion
+        
         
     }
 }
