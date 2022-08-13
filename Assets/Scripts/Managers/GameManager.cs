@@ -19,12 +19,14 @@ namespace Managers
         private void Awake()
         {
             Application.targetFrameRate = 60;
+            
         }
 
 
         private void OnEnable()
         {
             SubscribeEvents();
+            CoreGameSignals.Instance.onGameInit?.Invoke();
         }
 
 
@@ -46,6 +48,7 @@ namespace Managers
         private void OnChangeGameState(GameStates newState)
         {
             States = newState;
+            CoreGameSignals.Instance.onGetGameState.Invoke(newState);
         }
 
         

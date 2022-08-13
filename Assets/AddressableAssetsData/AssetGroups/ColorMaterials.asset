@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ColorMaterials
+  m_EditorClassIdentifier: 
+  m_GroupName: ColorMaterials
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 61f1fcb6938ca6a48adc7a668d14c2ed
+  m_SerializeEntries:
+  - m_GUID: 79061adb8e3cebf4f98c5c1b6eb9e2e3
+    m_Address: Color_0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fd7d8a1c9fa768f44b3c4f141a471845
+    m_Address: Color_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cc48df51ea9b3854ba41105556728aca
+    m_Address: Color_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5202342a0ecdaf948999b0768acc181d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 077ef451ba9d4ed4b957356ea0abe293, type: 2}
+    - {fileID: 11400000, guid: 332d59b3680eabc41bafb9c68349819c, type: 2}

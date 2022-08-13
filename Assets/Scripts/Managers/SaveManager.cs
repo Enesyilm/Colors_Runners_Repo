@@ -106,8 +106,8 @@ public class SaveManager : MonoBehaviour
             }
         _saveToDBCommand.SaveDataToDatabase(Data);
 
-           
-            
+
+
     }
     
 }

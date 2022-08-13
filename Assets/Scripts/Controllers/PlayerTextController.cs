@@ -23,7 +23,6 @@ namespace Controllers
 
         public void UpdatePlayerScore(float totalScore)
         {
-            totalScore = Mathf.Floor(totalScore);
             playerScoreText.text = totalScore.ToString();
         }
     }
