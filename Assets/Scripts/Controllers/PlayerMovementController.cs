@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Data.ValueObjects;
+using Keys;
 
 namespace Controllers
 {
@@ -43,11 +44,11 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
-        //public void UpdateInputValue(HorizontalInputParams inputParam)
-        //{
-        //    _inputValue = 
-        //    _clampValues =
-        //}
+        public void UpdateInputValue(HorizontalInputParams inputParam)
+        {
+            _inputValue = inputParam.XValue;
+            _clampValues = inputParam.ClampValues;
+        }
 
         public void IsReadyToPlay(bool state)
         {

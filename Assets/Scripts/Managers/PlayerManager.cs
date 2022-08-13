@@ -2,6 +2,7 @@ using UnityEngine;
 using Data.UnityObjects;
 using Data.ValueObjects;
 using Controllers;
+using Keys;
 using Enums;
 using System.Collections;
 using Signals;
@@ -21,7 +22,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private PlayerMovementController playerMovementController;
-        [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        //[SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private PlayerTextController playerTextController;
 
         #endregion
@@ -48,26 +49,26 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            //InputSignals.Instance.onInputTaken += OnActivateMovement;
-            //PlayerSignals.Instance.onUpdateScore += OnUpdateScore;
-            //InputSignals.Instance.onInputReleased += OnDeactivateMovement;
-            //InputSignals.Instance.onInputDragged += OnGetInputValues;
-            //CoreGameSignals.Instance.onPlay += OnPlay;
-            //CoreGameSignals.Instance.onReset += OnReset;
-            //CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-            //CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
+            InputSignals.Instance.onInputTaken += OnActivateMovement;
+            InputSignals.Instance.onInputReleased += OnDeactivateMovement;
+            InputSignals.Instance.onInputDragged += OnGetInputValues;
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
+            //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
         }
 
         private void UnSubscribeEvents()
         {
-            //InputSignals.Instance.onInputTaken -= OnActivateMovement;
-            //PlayerSignals.Instance.onUpdateScore -= OnUpdateScore;
-            //InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
-            //InputSignals.Instance.onInputDragged -= OnGetInputValues;
-            //CoreGameSignals.Instance.onPlay -= OnPlay;
-            //CoreGameSignals.Instance.onReset -= OnReset;
-            //CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            //CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
+            InputSignals.Instance.onInputTaken -= OnActivateMovement;
+            InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
+            InputSignals.Instance.onInputDragged -= OnGetInputValues;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
+            //ScoreSignals.Instance.onUpdateScore -= OnUpdateScore;
         }
         #endregion
 
@@ -75,12 +76,6 @@ namespace Managers
         {
             Data = GetPlayerData();
             SendPlayerDataToMovementController();
-        }
-
-        private void OnUpdateScore(float totalScore)
-        {
-            playerTextController.UpdatePlayerScore(totalScore);
-            CurrentScore = totalScore;
         }
 
         private void SendPlayerDataToMovementController()
@@ -92,6 +87,27 @@ namespace Managers
 
         #region Subcribed Methods
 
+        #region Movement Controller
+        private void OnActivateMovement()
+        {
+            playerMovementController.EnableMovement();
+        }
+
+        private void OnDeactivateMovement()
+        {
+            playerMovementController.DisableMovement();
+        }
+
+        private void OnGetInputValues(HorizontalInputParams inputParam)
+        {
+            playerMovementController.UpdateInputValue(inputParam);
+        }
+        #endregion
+
+        private void OnPlay()
+        {
+            playerMovementController.IsReadyToPlay(true);
+        }
         private void OnLevelSuccessful()
         {
             playerMovementController.IsReadyToPlay(false);
@@ -101,32 +117,19 @@ namespace Managers
         {
             playerMovementController.IsReadyToPlay(false);
         }
-
-        private void OnPlay()
+        
+        private void OnUpdateScore(float totalScore)
         {
-            playerMovementController.IsReadyToPlay(true);
-        }
-
-        private void OnDeactivateMovement()
-        {
-            playerMovementController.DisableMovement();
-        }
-
-        //private void OnGetInputValues(HorizontalInputParams inputParam)
-        //{
-        //    playerMovementController.UpdateInputValue(inputParam);
-        //}
-
-        private void OnActivateMovement()
-        {
-            playerMovementController.EnableMovement();
+            playerTextController.UpdatePlayerScore(totalScore);
+            CurrentScore = totalScore;
         }
 
         private void OnReset()
         {
-            //CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            //CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             OnUpdateScore(0);
+            playerMovementController.OnReset();
         }
         #endregion
 
