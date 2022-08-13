@@ -17,7 +17,7 @@ namespace Managers
 
         #region Public Variables
 
-        [Header("CurrentLevelPrefab")] public LevelData Data;
+       
 
         #endregion
 
@@ -41,8 +41,8 @@ namespace Managers
 
         private void Awake()
         {
+            
             _levelID = GetActiveLevel();
-            Data = GetLevelData();
             GetCommandComponents();
         }
 
@@ -57,13 +57,6 @@ namespace Managers
 
             return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.Level);
         }
-
-        private LevelData GetLevelData()
-        {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.Count;
-            return Resources.Load<CD_Level>("Data/CD_Level").LevelData[newLevelData];
-        }
-
         #region Event Subscription
 
         private void OnEnable()
@@ -126,7 +119,7 @@ namespace Managers
 
         private void OnInitializeLevel()
         {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.Count;
+            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.LevelAmount;
             Debug.Log("NewlevelDAta"+newLevelData);
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }
