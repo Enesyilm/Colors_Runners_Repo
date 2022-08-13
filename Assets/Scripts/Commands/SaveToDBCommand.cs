@@ -5,9 +5,9 @@ namespace Commands
     {
         public void SaveDataToDatabase(SaveData _data)
         {
-            ES3.Save("BonusColorman",_data.BonusColorman);
-            ES3.Save("CollectedColorman",_data.CollectedColorman);
-            ES3.Save("CurrentLevel",_data.CurrentLevel);
+            ES3.Save("Bonus",_data.Bonus);
+            ES3.Save("TotalColorman",_data.TotalColorman);
+            ES3.Save("Level",_data.Level);
         }
     }
 }

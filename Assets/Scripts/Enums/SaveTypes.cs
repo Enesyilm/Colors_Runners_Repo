@@ -2,9 +2,10 @@ namespace Enums
 {
     public enum SaveTypes
     {
-        CollectedColorman,
-        CurrentLevel,
-        BonusColorman,
+        TotalColorman,
+        Level,
+        IdleLevel,
+        Bonus,
         All
     }
 }

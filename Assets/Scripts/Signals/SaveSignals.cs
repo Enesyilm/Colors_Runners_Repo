@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Extentions;
 using Enums;
@@ -9,7 +10,7 @@ namespace Signals
     public class SaveSignals : MonoSingleton<SaveSignals>
     {
         public UnityAction<SaveTypes,int>onChangeSaveData=delegate {  };
-        public UnityAction<SaveTypes>onSaveDataToDatabase=delegate {  };
+        public Func<SaveTypes,int>onGetSaveData= delegate { return 0; };
         public UnityAction<SaveData>onSendDataToManagers=delegate {  };
     }
 }

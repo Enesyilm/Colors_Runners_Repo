@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
 
   private SaveToDBCommand _saveToDBCommand;
   private InitializationSyncDatasCommand _initializationSyncDatasCommand;
+  private OnGetSaveDataCommand _getSaveDataCommand;
   
 
     #endregion
@@ -39,6 +40,7 @@ public class SaveManager : MonoBehaviour
         Data = GetSaveData();
         _initializationSyncDatasCommand = new InitializationSyncDatasCommand();
         _saveToDBCommand = new SaveToDBCommand();
+        _getSaveDataCommand = new OnGetSaveDataCommand();
         _initializationSyncDatasCommand.OnInitializeSyncDatas(Data);
         SaveSignals.Instance.onSendDataToManagers?.Invoke(Data);
 
@@ -57,13 +59,24 @@ public class SaveManager : MonoBehaviour
     private void SubscribeEvents()
     {
         SaveSignals.Instance.onChangeSaveData+=OnChangeSaveData;
+        SaveSignals.Instance.onGetSaveData+=OnGetSaveData;
     }
+
     
+
 
     private void UnSubscribeEvents()
     {
         SaveSignals.Instance.onChangeSaveData-=OnChangeSaveData;
+        SaveSignals.Instance.onGetSaveData-=OnGetSaveData;
+
     }
+
+    private int OnGetSaveData(SaveTypes _type)
+    {
+        return _getSaveDataCommand.OnGetSaveData(_type);
+    }
+
     #endregion
     
 
@@ -72,26 +85,29 @@ public class SaveManager : MonoBehaviour
         switch (savetype)
             {
                 case SaveTypes.All:
-                    Data.BonusColorman=saveAmount;
-                    Data.CollectedColorman=saveAmount;
-                    Data.CurrentLevel=saveAmount;
+                    Data.Bonus=saveAmount;
+                    Data.TotalColorman=saveAmount;
+                    Data.Level=saveAmount;
+                    Data.IdleLevel = saveAmount;
                     break;
-                case SaveTypes.BonusColorman:
-                    Data.BonusColorman=saveAmount;
+                case SaveTypes.Bonus:
+                    Data.Bonus=saveAmount;
                     break;
-                case SaveTypes.CollectedColorman:
-                    Data.CollectedColorman=saveAmount;
+                case SaveTypes.TotalColorman:
+                    Data.TotalColorman=saveAmount;
                     break;
-                case SaveTypes.CurrentLevel:
-                    Data.CollectedColorman=saveAmount;
+                case SaveTypes.Level:
+                    Data.Level=saveAmount;
+                    break;
+                case SaveTypes.IdleLevel:
+                    Data.IdleLevel=saveAmount;
                     break;
             
             }
-            _saveToDBCommand.SaveDataToDatabase(Data);
+        _saveToDBCommand.SaveDataToDatabase(Data);
 
-            private BuildingData GetBuildingData() => Resources<BuildingData>.load("Data/CD_Level")
-                .IdleLevels[SaveData.CurrentidleLEvel].BuildingList[ID];
+           
             
     }
-
+    
 }
