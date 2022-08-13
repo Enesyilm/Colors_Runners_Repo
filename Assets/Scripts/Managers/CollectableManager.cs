@@ -48,7 +48,7 @@ public class CollectableManager : MonoBehaviour
     }
     public void Death()
     {
-        CollectableAnimationController.ChangeAnimation(_currentAnimation);
+        ChangeAnimationOnController(CollectableAnimationTypes.Death);
         Destroy(this,1f);
     }
 }

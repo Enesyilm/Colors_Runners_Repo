@@ -60,9 +60,8 @@ namespace Managers
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
             }
-        
 
-        #endregion
+            #endregion
 
         private void FixedUpdate()
         {
@@ -76,9 +75,8 @@ namespace Managers
         }
         private void OnDecreaseStack(int _removedIndex)
         {
-            StackList[_removedIndex].GetComponent<>().Death();
+            StackList[_removedIndex].GetComponent<CollectableManager>().Death();
             StackList.RemoveAt(_removedIndex);
-            CollectableManager.Death();
 
         }
         private void OnDoubleStack()
@@ -105,7 +103,7 @@ namespace Managers
         {
             for (int i = 0; i <initAmount ; i++)
             {
-               var _gameObject= Instantiate(collectablePrefab, Vector3.back * i, StackList);
+               var _gameObject= Instantiate(collectablePrefab, Vector3.back * i, Quaternion.identity);
                OnIncreaseStack(_gameObject);
                _gameObject.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimationTypes.Crouch);
             }
