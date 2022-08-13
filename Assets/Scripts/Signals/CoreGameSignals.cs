@@ -12,6 +12,8 @@ namespace Signals
         
         public UnityAction<GameStates> onGetGameState = delegate { };
         
+        public UnityAction onGameInit = delegate { };
+        
         public UnityAction onLevelInitialize = delegate { };
         
         public UnityAction onClearActiveLevel = delegate { };

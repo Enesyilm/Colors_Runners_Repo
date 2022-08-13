@@ -1,6 +1,7 @@
 using System;
 using System.Security.Cryptography;
 using DG.Tweening;
+using Enums;
 using Signals;
 using UnityEngine;
 
@@ -41,7 +42,7 @@ namespace Controllers
             }
             if (other.CompareTag("TurretArea"))
             {
-                collectableManager.EnterTurretArea();
+                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
                 
             }
 
@@ -57,7 +58,7 @@ namespace Controllers
         {
             if (other.CompareTag("TurretArea"))
             {
-                collectableManager.ExitTurretArea();
+                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
             }
         }
     }
