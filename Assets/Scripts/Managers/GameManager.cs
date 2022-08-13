@@ -19,12 +19,14 @@ namespace Managers
         private void Awake()
         {
             Application.targetFrameRate = 60;
+            
         }
 
 
         private void OnEnable()
         {
             SubscribeEvents();
+            CoreGameSignals.Instance.onGameInit?.Invoke();
         }
 
 
