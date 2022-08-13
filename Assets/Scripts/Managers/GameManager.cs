@@ -46,6 +46,7 @@ namespace Managers
         private void OnChangeGameState(GameStates newState)
         {
             States = newState;
+            CoreGameSignals.Instance.onGetGameState.Invoke(newState);
         }
 
         
