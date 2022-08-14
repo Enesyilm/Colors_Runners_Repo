@@ -44,7 +44,7 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
-        public void UpdateInputValue(HorizontalInputParams inputParam)
+        public void UpdateInputValue(RunnerHorizontalInputParams inputParam)
         {
             _inputValue = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
@@ -75,9 +75,11 @@ namespace Controllers
         private void Move()
         {
             var velocity = rigidbody.velocity;
-            rigidbody.velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed, velocity.y,
+            
+            velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed,velocity.y,
                 _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
+            Debug.Log(rigidbody.velocity);
 
             Vector3 position;
             position = new Vector3(
