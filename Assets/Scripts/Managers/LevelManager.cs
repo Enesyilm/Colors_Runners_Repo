@@ -120,7 +120,6 @@ namespace Managers
         private void OnInitializeLevel()
         {
             var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.LevelAmount;
-            Debug.Log("NewlevelDAta"+newLevelData);
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }
 

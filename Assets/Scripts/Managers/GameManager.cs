@@ -26,7 +26,6 @@ namespace Managers
         private void OnEnable()
         {
             SubscribeEvents();
-            CoreGameSignals.Instance.onGameInit?.Invoke();
         }
 
 
