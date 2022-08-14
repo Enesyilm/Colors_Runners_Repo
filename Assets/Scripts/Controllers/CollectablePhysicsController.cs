@@ -22,17 +22,23 @@ namespace Controllers
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (CompareTag("Collected")&&other.CompareTag("Collectable"))
+            Debug.Log("OnTriggerEnter"+other.tag+"Mine tag "+this.tag);
+
+            if(CompareTag("Collected") && other.CompareTag("Collectable"))
             {
-                if (other.transform.parent.GetComponent<CollectableManager>().CurrentColorType==collectableManager.CurrentColorType)
+                Debug.Log("1. if OnTriggerEnter");
+               CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
+                if (_otherCollectableManager.CurrentColorType==collectableManager.CurrentColorType)
                 {
-                    other.transform.parent.tag = "Collected";
-                    StackSignals.Instance.onIncreaseStack?.Invoke(transform.parent.gameObject);
+                    Debug.Log("if Getcompeonent calisti");
+
+                    other.transform.tag = "Collected";
+                    _otherCollectableManager.IncreaseStack(other.transform.parent.gameObject);
                 }
                 else
                 {
-                    Destroy(other.transform.parent);
-                    StackSignals.Instance.onDecreaseStack?.Invoke( transform.parent.GetSiblingIndex());
+                    Destroy(other.transform.parent.gameObject);
+                    collectableManager.DecreaseStack();
                 }
             }
             if (other.CompareTag("Obstacle"))

@@ -25,7 +25,7 @@ namespace Managers
         [SerializeField] private GameObject collectablePrefab;
         [SerializeField] private int initAmount=4;
          [SerializeField]
-         private List<GameObject> StackList;
+         private List<GameObject> stackList;
 
         #endregion
 
@@ -47,6 +47,17 @@ namespace Managers
                 StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
+                CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
+                StackSignals.Instance.onAnimationChange += OnChangeAnimationInStack;
+
+            }
+
+            private void OnChangeAnimationInStack(CollectableAnimationTypes _currentAnimation)
+            {
+                for (int i = 0; i < stackList.Count; i++)
+                {
+                    stackList[i].GetComponent<CollectableManager>().ChangeAnimationOnController(_currentAnimation);
+                }
             }
 
             private void OnDisable()
@@ -59,47 +70,54 @@ namespace Managers
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
-            }
+                CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
+                StackSignals.Instance.onAnimationChange -= OnChangeAnimationInStack;
 
+            }
             #endregion
 
         private void FixedUpdate()
         {
             OnLerpStack();
         }
-
         #region Subscribed Methods
         private void OnIncreaseStack(GameObject _currentGameObject)
         {
-           StackList.Add(_currentGameObject);
+            _currentGameObject.transform.SetParent(transform);
+            stackList.Add(_currentGameObject);
         }
         private void OnDecreaseStack(int _removedIndex)
         {
-            StackList[_removedIndex].GetComponent<CollectableManager>().Death();
-            StackList.RemoveAt(_removedIndex);
+            stackList.RemoveAt(_removedIndex);
+            stackList.TrimExcess();
 
         }
-        private void OnDoubleStack()
-        {
-            throw new NotImplementedException();
-        }
-
         private void OnLerpStack()
         {
-            if (StackList.Count > 0)
+            if (stackList.Count > 0)
             {
-                StackList[0].transform.position = playerManager.position;
-                for (int index = 1; index < StackList.Count; index++)
+                // stackList[0].transform.position = playerManager.position;
+                stackList[0].transform.position = new Vector3(
+                    Mathf.Lerp(stackList[0].transform.position.x, playerManager.transform.position.x,.2f),
+                    Mathf.Lerp(stackList[0].transform.position.y, playerManager.transform.position.y,.2f),
+                    Mathf.Lerp(stackList[0].transform.position.z, playerManager.transform.position.z-1,.2f));
+                Quaternion _toPlayerRotation = Quaternion.LookRotation(playerManager.transform.position - stackList[0].transform.position);
+                _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
+                stackList[0].transform.rotation = Quaternion.Slerp( playerManager.transform.rotation,_toPlayerRotation,1f);
+                for (int index = 1; index < stackList.Count; index++)
                 {
-                    StackList[index].transform.position = new Vector3(
-                        Mathf.Lerp(StackList[index].transform.position.x, StackList[index - 1].transform.position.x,.2f),
-                        Mathf.Lerp(StackList[index].transform.position.y, StackList[index - 1].transform.position.y,.2f),
-                        Mathf.Lerp(StackList[index].transform.position.z, StackList[index - 1].transform.position.z-1,.2f));
+                    stackList[index].transform.position = new Vector3(
+                        Mathf.Lerp(stackList[index].transform.position.x, stackList[index - 1].transform.position.x,.2f),
+                        Mathf.Lerp(stackList[index].transform.position.y, stackList[index - 1].transform.position.y,.2f),
+                        Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-1,.2f));
+                        Quaternion toRotation = Quaternion.LookRotation(stackList[index - 1].transform.position - stackList[index].transform.position);
+                        toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                        stackList[index].transform.rotation = Quaternion.Slerp( stackList[index-1].transform.rotation,toRotation,1f);
                 }
                 
             }
         }
-        private void OnInitialStack()
+        private void OnChangeStack(int initAmount)
         {
             for (int i = 0; i <initAmount ; i++)
             {
@@ -109,6 +127,17 @@ namespace Managers
             }
 
             
+        }
+        private void OnDoubleStack()
+        {
+            OnChangeStack(stackList.Count * 2);
+        }
+
+
+        public void OnInitalStackSettings()
+        {//deger datadan gelmeli
+            OnChangeStack(initAmount);
+            StackSignals.Instance.onAnimationChange?.Invoke(CollectableAnimationTypes.Crouch);
         }
 
         #endregion

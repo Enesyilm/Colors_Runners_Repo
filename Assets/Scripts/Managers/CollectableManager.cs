@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Controllers;
 using Enums;
+using Signals;
 
 public class CollectableManager : MonoBehaviour
 {
@@ -14,16 +15,13 @@ public class CollectableManager : MonoBehaviour
     public CollectableMeshController CollectableMeshController; 
     public CollectableMovementController CollectableMovementController; 
     public CollectablePhysicsController CollectablePhysicsController; 
-    public CollectableAnimationController CollectableAnimationController; 
+    public CollectableAnimationController CollectableAnimationController;
 
-    
 
     #endregion
 
     #region Serialized Variables
-
     
-
     #endregion
 
     #region Private Variables
@@ -42,6 +40,17 @@ public class CollectableManager : MonoBehaviour
     {
         
     }
+
+    public void DecreaseStack()
+    {
+        StackSignals.Instance.onDecreaseStack?.Invoke( transform.GetSiblingIndex());
+        Destroy(gameObject);
+    }
+    public void IncreaseStack(GameObject other)
+    {
+        StackSignals.Instance.onIncreaseStack?.Invoke(other);
+        ChangeAnimationOnController(CollectableAnimationTypes.Run);
+    }
     public void ChangeAnimationOnController(CollectableAnimationTypes _currentAnimation)
     {
         CollectableAnimationController.ChangeAnimation(_currentAnimation);
@@ -49,6 +58,6 @@ public class CollectableManager : MonoBehaviour
     public void Death()
     {
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
-        Destroy(this,1f);
+        Destroy(gameObject,5f);
     }
 }
