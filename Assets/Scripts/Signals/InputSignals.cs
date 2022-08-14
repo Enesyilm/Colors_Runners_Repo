@@ -10,7 +10,7 @@ namespace Signals
         public UnityAction onDisableInput = delegate { };
         public UnityAction onFirstTimeTouchTaken = delegate { };
         public UnityAction onInputTaken = delegate { };
-        public UnityAction<HorizontalInputParams> onInputDragged = delegate { };
+        public UnityAction<RunnerHorizontalInputParams> onInputDragged = delegate { };
         public UnityAction onInputReleased = delegate { };
     }
 }

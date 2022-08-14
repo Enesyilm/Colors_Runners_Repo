@@ -22,7 +22,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private PlayerMovementController playerMovementController;
-        //[SerializeField] private PlayerPhysicsController playerPhysicsController;
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private PlayerTextController playerTextController;
 
         #endregion
@@ -98,7 +98,7 @@ namespace Managers
             playerMovementController.DisableMovement();
         }
 
-        private void OnGetInputValues(HorizontalInputParams inputParam)
+        private void OnGetInputValues(RunnerHorizontalInputParams inputParam)
         {
             playerMovementController.UpdateInputValue(inputParam);
         }
