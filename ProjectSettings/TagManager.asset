@@ -9,6 +9,9 @@ TagManager:
   - TurretArea
   - Obstacle
   - Collectable
+  - DroneArea
+  - DroneColorArea
+  - ColoredGround
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Managers;
 
@@ -12,11 +13,10 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerManager manager;
+        [SerializeField] private PlayerManager playerManager;
         [SerializeField] private new Collider collider;
         [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private GameObject playerObj;
-        [SerializeField] private GameObject collectedObjHolder;
         #endregion
 
         #region Private Variables
@@ -32,6 +32,14 @@ namespace Controllers
             }
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("DroneArea"))
+            {
+                Debug.Log("OnTrigger Exit Calisti");
+                playerManager.StopVerticalMovement();
+            }
+        }
     }
 
 }

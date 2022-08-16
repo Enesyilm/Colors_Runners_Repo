@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,12 @@ namespace Controllers
         public void SetMovementData(PlayerMovementData playerMovementData)
         {
             _movementData = playerMovementData;
+        }
+
+        private void Awake()
+        {
+            _isReadyToMove = true;
+            _isReadyToPlay = true;
         }
 
         public void EnableMovement()
@@ -79,8 +86,6 @@ namespace Controllers
             velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed,velocity.y,
                 _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
-            Debug.Log(rigidbody.velocity);
-
             Vector3 position;
             position = new Vector3(
                 Mathf.Clamp(rigidbody.position.x, _clampValues.x,
@@ -107,6 +112,12 @@ namespace Controllers
             Stop();
             _isReadyToPlay = false;
             _isReadyToMove = false;
+        }
+
+        public void StopVerticalMovement()
+        {
+            _movementData.ForwardSpeed = 0;
+            rigidbody.angularVelocity =Vector3.zero;
         }
     }
 }

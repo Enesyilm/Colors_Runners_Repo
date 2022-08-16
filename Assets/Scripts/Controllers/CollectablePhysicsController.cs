@@ -4,6 +4,7 @@ using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Controllers
 {
@@ -22,16 +23,12 @@ namespace Controllers
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("OnTriggerEnter"+other.tag+"Mine tag "+this.tag);
 
             if(CompareTag("Collected") && other.CompareTag("Collectable"))
             {
-                Debug.Log("1. if OnTriggerEnter");
-               CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
+                CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
                 if (_otherCollectableManager.CurrentColorType==collectableManager.CurrentColorType)
                 {
-                    Debug.Log("if Getcompeonent calisti");
-
                     other.transform.tag = "Collected";
                     _otherCollectableManager.IncreaseStack(other.transform.parent.gameObject);
                 }
@@ -51,6 +48,36 @@ namespace Controllers
                 collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
                 
             }
+            if (other.CompareTag("DroneArea")&&CompareTag("Collected"))
+            {
+                // transform.parent.DOMove(new Vector3(other.transform.localPosition.x,transform.position.y,
+                //     Random.Range(other.transform.localScale.z/2,other.transform.localScale.z)),1f);
+                collectableManager.DeListStack();
+                
+            }
+
+            if (other.CompareTag("ColoredGround") && CompareTag("Collected"))
+            {
+                collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);
+                if (collectableManager.CurrentColorType == other.GetComponent<DroneColorAreaController>().ColorType)
+                {
+                    collectableManager.MatchType = MatchType.Match;
+                }
+                else
+                {
+                    collectableManager.MatchType = MatchType.UnMatched;
+
+                }
+                tag = "Collectable";
+            }
+            // if (other.CompareTag("DroneColorArea"))
+            // {
+            //     // transform.parent.DOMove(new Vector3(other.transform.localPosition.x,transform.position.y,
+            //     //     Random.Range(other.transform.localScale.z/2,other.transform.localScale.z)),1f);
+            //     transform.parent.DOMove(new Vector3(other.transform.position.x,transform.position.y,transform.position.z+Random.Range(other.transform.localPosition.z/2,other.transform.localPosition.z)),1f);
+            //     collectableManager.DeListStack();
+            //     
+            // }
 
             if (other.CompareTag("Bullet"))
             {
