@@ -21,15 +21,21 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerMovementController playerMovementController;
-        [SerializeField] private PlayerPhysicsController playerPhysicsController;
-        [SerializeField] private PlayerTextController playerTextController;
+        [SerializeField] 
+        private PlayerMovementController playerMovementController;
+        [SerializeField] 
+        private PlayerPhysicsController playerPhysicsController;
+        [SerializeField] 
+        private PlayerTextController playerTextController;
+        [SerializeField]
+        private ColorTypes _currentColor;
 
         #endregion
 
         #region Private Variables
 
         private PlayerData Data;
+        
 
         #endregion
 
@@ -56,6 +62,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
+            PlayerSignal.Instance.onGetColor += OnGetColorType;
             //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
         }
 
@@ -76,6 +83,7 @@ namespace Managers
         {
             Data = GetPlayerData();
             SendPlayerDataToMovementController();
+            
         }
 
         private void SendPlayerDataToMovementController()
@@ -106,7 +114,7 @@ namespace Managers
 
         private void OnPlay()
         {
-            playerMovementController.IsReadyToPlay(true);
+            playerMovementController.EnableMovement();
         }
         private void OnLevelSuccessful()
         {
@@ -123,6 +131,19 @@ namespace Managers
             playerTextController.UpdatePlayerScore(totalScore);
             CurrentScore = totalScore;
         }
+        public void StopVerticalMovement()
+        {
+            playerMovementController.DisableStopVerticalMovement();
+        }
+        public void EnableVerticalMovement()
+        {
+            playerMovementController.EnableVerticalMovement();
+        }
+
+        public void RepositionPlayerForDrone(GameObject _other)
+        {
+            playerMovementController.RepositionPlayerForDrone(_other);
+        }
 
         private void OnReset()
         {
@@ -133,6 +154,10 @@ namespace Managers
         }
         #endregion
 
+       public ColorTypes OnGetColorType()
+       {
+           return _currentColor;
+       }
     }
 }
 

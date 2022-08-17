@@ -4,6 +4,7 @@ using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Controllers
 {
@@ -22,50 +23,72 @@ namespace Controllers
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("OnTriggerEnter"+other.tag+"Mine tag "+this.tag);
 
-            if(CompareTag("Collected") && other.CompareTag("Collectable"))
+            if (CompareTag("Collected"))
             {
-                Debug.Log("1. if OnTriggerEnter");
-               CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
-                if (_otherCollectableManager.CurrentColorType==collectableManager.CurrentColorType)
+                if( other.CompareTag("Collectable"))
                 {
-                    Debug.Log("if Getcompeonent calisti");
-
-                    other.transform.tag = "Collected";
-                    _otherCollectableManager.IncreaseStack(other.transform.parent.gameObject);
+                    CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
+                    if (_otherCollectableManager.CurrentColorType==collectableManager.CurrentColorType)
+                    {
+                        other.transform.tag = "Collected";
+                        _otherCollectableManager.IncreaseStack();
+                    }
+                    else
+                    {
+                        Destroy(other.transform.parent.gameObject);
+                        collectableManager.DecreaseStack();
+                    }
+                }
+                if (other.CompareTag("Obstacle"))
+                {
+                    Destroy(other.transform.parent);
+                
+                }
+                if (other.CompareTag("TurretArea"))
+                {
+                    collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
+                
+                }
+                if (other.CompareTag("ColoredGround"))
+                {
+                    collectableManager.DeListStack();
+                    collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);//ucu ayni fonksiyonda tetiklenecek
+                    collectableManager.CheckColorType(other.GetComponent<DroneColorAreaController>());
+                    tag = "Collectable";
+                }
+                if (other.CompareTag("Bullet"))
+                {
+                    collectableManager.Death();
+                    StackSignals.Instance.onDecreaseStack?.Invoke(transform.parent.GetSiblingIndex());
+                    Destroy(gameObject, 1f);
+                }
+            }
+            if (other.CompareTag("DroneAreaPhysics"))
+            {
+                if (collectableManager.MatchType == MatchType.Match)
+                {
+                    collectableManager.IncreaseStack();
                 }
                 else
                 {
-                    Destroy(other.transform.parent.gameObject);
-                    collectableManager.DecreaseStack();
+                    collectableManager.Death();
+                    
                 }
             }
-            if (other.CompareTag("Obstacle"))
-            {
-                Destroy(other.transform.parent);
                 
-            }
-            if (other.CompareTag("TurretArea"))
-            {
-                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
-                
-            }
-
-            if (other.CompareTag("Bullet"))
-            {
-                collectableManager.Death();
-                StackSignals.Instance.onDecreaseStack?.Invoke(transform.parent.GetSiblingIndex());
-                Destroy(gameObject, 1f);
-            }
         }
-
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("TurretArea"))
+            if (CompareTag("Collected"))
             {
-                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
+                if (other.CompareTag("TurretArea")||other.CompareTag("DroneAreaPhysics"))
+                {
+                    collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
+                }
             }
-        }
+            
+        } 
+
     }
 }

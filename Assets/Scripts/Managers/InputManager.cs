@@ -96,22 +96,27 @@ namespace Managers
         
         void OnPlayerInputMouseDeltaStart(InputAction.CallbackContext context)
         {
-            _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, 0f);
-            Vector2 mouseDeltaPos = new Vector2(context.ReadValue<Vector2>().x, 0f);
+            //if (!isReadyForTouch) return;
+            //{
+                _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, 0f);
+                Vector2 mouseDeltaPos = new Vector2(context.ReadValue<Vector2>().x, 0f);
 
-            if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
-                _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
-            else if (mouseDeltaPos.x < -Data.HorizontalInputSpeed)
-                _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
-            else
-                _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                    Data.ClampSpeed);
-            
-            InputSignals.Instance.onInputDragged?.Invoke(new RunnerHorizontalInputParams()
-            {
-                XValue = _moveVector.x, 
-                ClampValues = new Vector2(Data.ClampSides.x, Data.ClampSides.y) 
-            });
+                if (mouseDeltaPos.x > Data.HorizontalInputSpeed)
+                    _moveVector.x = Data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
+                
+                else if (mouseDeltaPos.x < -Data.HorizontalInputSpeed)
+                    _moveVector.x = -Data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
+                else
+                    _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
+                        Data.ClampSpeed);
+
+                
+                InputSignals.Instance.onInputDragged?.Invoke(new RunnerHorizontalInputParams()
+                {
+                    XValue = _moveVector.x,
+                    ClampValues = new Vector2(Data.ClampSides.x, Data.ClampSides.y)
+                });
+            //}
         }
 
         void OnPlayerInputMouseDeltaPerformed(InputAction.CallbackContext context)

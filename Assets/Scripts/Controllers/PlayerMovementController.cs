@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Data.ValueObjects;
 using Keys;
+using DG.Tweening;
 
 namespace Controllers
 {
@@ -32,6 +35,7 @@ namespace Controllers
         {
             _movementData = playerMovementData;
         }
+        
 
         public void EnableMovement()
         {
@@ -79,8 +83,6 @@ namespace Controllers
             velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed,velocity.y,
                 _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
-            Debug.Log(rigidbody.velocity);
-
             Vector3 position;
             position = new Vector3(
                 Mathf.Clamp(rigidbody.position.x, _clampValues.x,
@@ -107,6 +109,22 @@ namespace Controllers
             Stop();
             _isReadyToPlay = false;
             _isReadyToMove = false;
+        }
+
+        public  void EnableVerticalMovement()
+        {
+            
+            //movementData.ForwardSpeed = 5;
+        }
+        public void RepositionPlayerForDrone(GameObject _other)
+        {
+            Debug.Log("RepositionPlayerForDrone");
+           transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z),3f);
+        }
+        public void DisableStopVerticalMovement()
+        {
+            _movementData.ForwardSpeed = 0;
+            rigidbody.angularVelocity =Vector3.zero;
         }
     }
 }

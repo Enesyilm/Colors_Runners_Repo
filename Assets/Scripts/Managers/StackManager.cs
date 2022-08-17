@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Enums;
 using Signals;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.Events;
 
 namespace Managers
@@ -18,26 +20,31 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-
+        
+        [SerializeField] 
+        private GameObject collectablePrefab;
+        [SerializeField] 
+        private int initAmount=4;
         [SerializeField]
-        private Transform playerManager;
-
-        [SerializeField] private GameObject collectablePrefab;
-        [SerializeField] private int initAmount=4;
-         [SerializeField]
-         private List<GameObject> stackList;
+        private List<GameObject> stackList;
+        [SerializeField]
+        private Transform tempHolder;
 
         #endregion
 
         #region Private Variables
-       
+        private Transform _playerManager;
+
 
         #endregion
 
         #endregion
 
         #region EventSubcription
-            private void OnEnable()
+
+        
+
+        private void OnEnable()
             {
                 SubscribeEvents();
             }
@@ -45,10 +52,12 @@ namespace Managers
             private void SubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
+                StackSignals.Instance.onDroneArea += OnDroneArea;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
                 StackSignals.Instance.onAnimationChange += OnChangeAnimationInStack;
+                
 
             }
 
@@ -68,6 +77,8 @@ namespace Managers
             private void UnSubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
+                StackSignals.Instance.onDroneArea -= OnDroneArea;
+                // StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
@@ -92,18 +103,36 @@ namespace Managers
             stackList.TrimExcess();
 
         }
+        private void OnDroneArea(int index)
+        {
+            
+            stackList[index].transform.parent = tempHolder;
+            stackList.RemoveAt(index);
+            stackList.TrimExcess();
+            if (stackList.Count == 0)
+            {
+                Debug.Log("if");
+                DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
+                //DroneAreaFinal();
+            }
+                
+        }
+        private void OnFindPlayer()
+        {
+            _playerManager=GameObject.FindWithTag("Player").transform;
+        }
         private void OnLerpStack()
         {
             if (stackList.Count > 0)
             {
-                // stackList[0].transform.position = playerManager.position;
+                // stackList[0].transform.position = _playerManager.position;
                 stackList[0].transform.position = new Vector3(
-                    Mathf.Lerp(stackList[0].transform.position.x, playerManager.transform.position.x,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.y, playerManager.transform.position.y,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.z, playerManager.transform.position.z-1,.2f));
-                Quaternion _toPlayerRotation = Quaternion.LookRotation(playerManager.transform.position - stackList[0].transform.position);
+                    Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
+                    Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
+                    Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-1,.2f));
+                Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
                 _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
-                stackList[0].transform.rotation = Quaternion.Slerp( playerManager.transform.rotation,_toPlayerRotation,1f);
+                stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
                 for (int index = 1; index < stackList.Count; index++)
                 {
                     stackList[index].transform.position = new Vector3(
@@ -136,9 +165,12 @@ namespace Managers
 
         public void OnInitalStackSettings()
         {//deger datadan gelmeli
+            OnFindPlayer();
             OnChangeStack(initAmount);
             StackSignals.Instance.onAnimationChange?.Invoke(CollectableAnimationTypes.Crouch);
         }
+
+        
 
         #endregion
     }
