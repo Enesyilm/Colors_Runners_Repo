@@ -18,10 +18,10 @@ public class DroneAreaManager : MonoBehaviour
 
    #region Serialized Variables
 
-   [SerializeField] 
-   private Transform droneAreaTempHolder;
-   
+   [SerializeField]
+   private GameObject droneColliderObject;
 
+   [SerializeField] private List<Collider> droneColliderForDetect;
    #endregion
 
    #region Private Variables
@@ -45,43 +45,26 @@ public class DroneAreaManager : MonoBehaviour
 
    private void SubscribeEvents()
    {
-      DroneAreaSignals.Instance.onDroneAreaEnter += OnSetDroneAreaHolder;
-      DroneAreaSignals.Instance.onDroneAreasCollectablesDeath += OnSendCollectablesBackToDeath;
+      DroneAreaSignals.Instance.onDroneCheckCompleted += onDroneCheckCompleted;
 
    }
-
-   private async void OnSendCollectablesBackToDeath()
+   private void UnSubscribeEvents()
    {
-      for (int i = 0; i < droneAreaTempHolder.childCount; i++)
+      DroneAreaSignals.Instance.onDroneCheckCompleted -= onDroneCheckCompleted;
+   }
+   
+
+   private void onDroneCheckCompleted()
+   {
+      droneColliderObject.SetActive(true);
+      foreach (var collider in droneColliderForDetect)
       {
-         await Task.Delay(100);
-         if (droneAreaTempHolder.transform.GetChild(i).GetComponent<CollectableManager>().MatchType != MatchType.Match)
-         {
-            droneAreaTempHolder.transform.GetChild(i).GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimationTypes.Death);
-            Destroy(droneAreaTempHolder.GetChild(i).gameObject,3f);
-         }
+         collider.enabled=false;
          
       }
    }
-   private void OnSendCollectablesBackToStack()
-   {
-      for (int i = 0; i < droneAreaTempHolder.childCount; i++)
-      {
-         StackSignals.Instance.onRebuildStack?.Invoke(droneAreaTempHolder.transform.GetChild(i).gameObject);
-      }
-   }
-
-   private void UnSubscribeEvents()
-   {
-      DroneAreaSignals.Instance.onDroneAreaEnter -= OnSetDroneAreaHolder;
-      DroneAreaSignals.Instance.onDroneAreasCollectablesDeath -= OnSendCollectablesBackToDeath;
-   }
-
+   
    #endregion
-   private void OnSetDroneAreaHolder(GameObject _collectable)
-   {
-      _collectable.transform.SetParent(droneAreaTempHolder);
-      
-   }
+   
    
 }

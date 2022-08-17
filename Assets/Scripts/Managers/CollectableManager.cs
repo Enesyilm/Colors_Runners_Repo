@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commands;
 using UnityEngine;
 using Controllers;
@@ -44,9 +45,10 @@ public class CollectableManager : MonoBehaviour
         StackSignals.Instance.onDroneArea?.Invoke(transform.GetSiblingIndex());
         //StackSignals.Instance.onDecreaseStackOnDroneArea?.Invoke(transform.GetSiblingIndex());
     }
-    public void IncreaseStack(GameObject other)
+    public async void IncreaseStack()
     {
-        StackSignals.Instance.onIncreaseStack?.Invoke(other);
+        await Task.Delay(3000);
+        StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
     }
     public void ChangeAnimationOnController(CollectableAnimationTypes _currentAnimation)
@@ -65,9 +67,19 @@ public class CollectableManager : MonoBehaviour
         CurrentColorType = colorType;
         //CollectableMeshController.ChangeCollectableMaterial();
     }
-    public void Death()
+    public async void Death()
     {
+        //await Task.Delay(3500);
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
-        Destroy(gameObject,5f);
+        Destroy(gameObject,3f);
+    }
+
+    public void CheckColorType(DroneColorAreaController _droneColorAreaController)
+    {
+        CollectableMeshController.CheckColorType(_droneColorAreaController);
+    }
+    public void CheckMatchType(DroneColorAreaController _droneColorAreaController)
+    {
+        CollectableMeshController.CheckColorType(_droneColorAreaController);
     }
 }

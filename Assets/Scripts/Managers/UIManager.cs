@@ -52,6 +52,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+
         }
 
         private void OnDisable()
@@ -63,6 +64,7 @@ namespace Managers
 
         private void OnOpenPanel(UIPanelTypes panelParam)
         {
+            Debug.Log("panelParam"+panelParam);
             uiPanelController.OpenPanel(panelParam);
         }
 
@@ -97,10 +99,11 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.IdlePanel);
         }
-
+        
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
+            
         }
 
         public void NextLevel()

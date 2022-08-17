@@ -30,6 +30,12 @@ namespace Controllers
             {
                 //UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
             }
+            if(other.CompareTag("DroneAreaPhysics"))
+            {
+                Debug.Log("DroneAreaPhysics");
+                playerManager.RepositionPlayerForDrone(other.gameObject);
+                playerManager.EnableVerticalMovement();
+            }
         }
 
         private void OnTriggerExit(Collider other)

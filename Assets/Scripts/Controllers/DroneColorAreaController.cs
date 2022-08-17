@@ -70,40 +70,12 @@ namespace Controllers
 
         #endregion
         
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Collected"))
-            {
-                //other.tag = "Collectable";
-               
-                                
-            }
+        // private async void DroneAreaFinal()
+        // {
+        //     await Task.Delay(3000);
+        //     _playerManager.transform.position = new Vector3(tr.x,_playerManager.transform.position.y,newPos.z);
+        // }
 
-        }
-
-       // public void OnDroneAreaExitTrigger()
-       //  {
-       //      Debug.Log("_colorType PlayerSignal.Instance.onGetColor?.Invoke()"+
-       //                (_colorType != PlayerSignal.Instance.onGetColor?.Invoke()));
-       //      Debug.Log("_colorType "+_colorType+"onGetColor?.Invoke()"+
-       //                (PlayerSignal.Instance.onGetColor?.Invoke()));
-       //      if (_colorType != PlayerSignal.Instance.onGetColor?.Invoke())
-       //      {
-       //          foreach (var collectable in _tempList)
-       //          {
-       //              Debug.Log("Destroy Calisti");
-       //              Destroy(collectable);
-       //          }
-       //      }
-       //      else
-       //      {
-       //          foreach (var collectable in _tempList)
-       //          {
-       //              Debug.Log("Stackadd Calisti");
-       //              collectable.GetComponent<CollectableManager>().IncreaseStack(collectable);
-       //          }
-       //      }
-       //      
-       //  }
+       
     }
 }

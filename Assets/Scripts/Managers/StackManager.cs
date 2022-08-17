@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -55,7 +56,6 @@ namespace Managers
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
-                StackSignals.Instance.onRebuildStack += OnRebuildStack;
                 StackSignals.Instance.onAnimationChange += OnChangeAnimationInStack;
                 
 
@@ -81,7 +81,6 @@ namespace Managers
                 // StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
-                StackSignals.Instance.onRebuildStack -= OnRebuildStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
                 StackSignals.Instance.onAnimationChange -= OnChangeAnimationInStack;
 
@@ -106,14 +105,16 @@ namespace Managers
         }
         private void OnDroneArea(int index)
         {
-                stackList[index].transform.parent = tempHolder;
-             DroneAreaSignals.Instance.onDroneAreaEnter?.Invoke(stackList[index].gameObject);
-             stackList.RemoveAt(index);
-             stackList.TrimExcess();
-             if (stackList.Count == 0)
-             {
-                 DroneAreaSignals.Instance.onDroneAreasCollectablesDeath?.Invoke();
-             }
+            
+            stackList[index].transform.parent = tempHolder;
+            stackList.RemoveAt(index);
+            stackList.TrimExcess();
+            if (stackList.Count == 0)
+            {
+                Debug.Log("if");
+                DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
+                //DroneAreaFinal();
+            }
                 
         }
         private void OnFindPlayer()
@@ -156,32 +157,6 @@ namespace Managers
 
             
         }
-        // private void OnDecreaseStackOnDroneArea(int currentIndex)
-        // {
-        //
-        //     DroneAreaSignals.Instance.onDroneAreaEnter?.Invoke(stackList[currentIndex].gameObject);
-        //
-        //     stackList.RemoveAt(currentIndex);
-        //
-        //     stackList.TrimExcess();
-        //
-        //     if (stackList.Count == 0)
-        //     {
-        //         DroneAreaSignals.Instance.onDroneAreasCollectablesDeath?.Invoke();
-        //     }
-        //
-        // }
-
-        private void OnRebuildStack(GameObject gameObject)
-        {
-            for (int i = 0; i < tempHolder.transform.childCount; i++)
-            {
-                if (tempHolder.transform.GetChild(i) != gameObject)
-                {
-                    //Destroy(stackHolder.transform.GetChild(i));
-                }
-            }
-        }
         private void OnDoubleStack()
         {
             OnChangeStack(stackList.Count * 2);
@@ -194,6 +169,8 @@ namespace Managers
             OnChangeStack(initAmount);
             StackSignals.Instance.onAnimationChange?.Invoke(CollectableAnimationTypes.Crouch);
         }
+
+        
 
         #endregion
     }

@@ -56,10 +56,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.21253446
+  m_Radius: 0.118996486
   m_Height: 1.4778016
   m_Direction: 1
-  m_Center: {x: -0.0075166225, y: 0.72700727, z: 0.0040145963}
+  m_Center: {x: -0.0075166225, y: 0.72700727, z: -0.001181975}
 --- !u!54 &7418111174249906966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialdeneme: {fileID: 2100000, guid: fd7d8a1c9fa768f44b3c4f141a471845, type: 2}
+  collectableManager: {fileID: 7238826796179776721}
 --- !u!1001 &7238826795655062169
 PrefabInstance:
   m_ObjectHideFlags: 0

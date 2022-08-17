@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Data.ValueObjects;
 using Keys;
+using DG.Tweening;
 
 namespace Controllers
 {
@@ -33,12 +35,7 @@ namespace Controllers
         {
             _movementData = playerMovementData;
         }
-
-        private void Awake()
-        {
-            _isReadyToMove = true;
-            _isReadyToPlay = true;
-        }
+        
 
         public void EnableMovement()
         {
@@ -114,7 +111,17 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
-        public void StopVerticalMovement()
+        public  void EnableVerticalMovement()
+        {
+            
+            //movementData.ForwardSpeed = 5;
+        }
+        public void RepositionPlayerForDrone(GameObject _other)
+        {
+            Debug.Log("RepositionPlayerForDrone");
+           transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z),3f);
+        }
+        public void DisableStopVerticalMovement()
         {
             _movementData.ForwardSpeed = 0;
             rigidbody.angularVelocity =Vector3.zero;

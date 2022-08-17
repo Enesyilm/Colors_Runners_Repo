@@ -83,6 +83,7 @@ namespace Managers
         {
             Data = GetPlayerData();
             SendPlayerDataToMovementController();
+            
         }
 
         private void SendPlayerDataToMovementController()
@@ -113,7 +114,7 @@ namespace Managers
 
         private void OnPlay()
         {
-            playerMovementController.IsReadyToPlay(true);
+            playerMovementController.EnableMovement();
         }
         private void OnLevelSuccessful()
         {
@@ -132,7 +133,16 @@ namespace Managers
         }
         public void StopVerticalMovement()
         {
-            playerMovementController.StopVerticalMovement();
+            playerMovementController.DisableStopVerticalMovement();
+        }
+        public void EnableVerticalMovement()
+        {
+            playerMovementController.EnableVerticalMovement();
+        }
+
+        public void RepositionPlayerForDrone(GameObject _other)
+        {
+            playerMovementController.RepositionPlayerForDrone(_other);
         }
 
         private void OnReset()

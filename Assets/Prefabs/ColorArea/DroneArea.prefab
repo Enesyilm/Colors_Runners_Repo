@@ -220,6 +220,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorType: 1
   openDroneAreaExit: 0
+--- !u!1 &6013378629259194105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7838973945513507495}
+  - component: {fileID: 2045148031580301983}
+  m_Layer: 0
+  m_Name: Physics
+  m_TagString: DroneAreaPhysics
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7838973945513507495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013378629259194105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5213241218378453016}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2045148031580301983
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013378629259194105}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.0228863, y: 1.16585, z: 4}
+  m_Center: {x: 0, y: -0.08292502, z: -0.005923271}
 --- !u!1 &6474521922378969450
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5213241218378453016}
   - component: {fileID: 8959556454185221694}
+  - component: {fileID: 1544170011024702942}
   m_Layer: 0
   m_Name: DroneArea
   m_TagString: DroneArea
@@ -250,6 +295,7 @@ Transform:
   m_Children:
   - {fileID: 3505023477490455398}
   - {fileID: 1694447204499375168}
+  - {fileID: 7838973945513507495}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -266,3 +312,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 0.8609674, z: 0.28890944}
   m_Center: {x: 0, y: -0.25, z: -2.1494}
+--- !u!114 &1544170011024702942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474521922378969450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6607122bed0de1b47bbcec837e014d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneColliderObject: {fileID: 6013378629259194105}
+  droneColliderForDetect:
+  - {fileID: 1016661678348455343}
+  - {fileID: 1016661678348455343}
