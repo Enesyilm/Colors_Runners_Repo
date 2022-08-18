@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6251118573580109881}
   - component: {fileID: 3844736819880049672}
   - component: {fileID: 6562466670213868877}
+  - component: {fileID: 810783559358315170}
   m_Layer: 0
   m_Name: sawmesh
   m_TagString: Untagged
@@ -294,7 +295,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  loopType: 1
+  loopType: 2
   loops: -1
   id: 
   isRelative: 0
@@ -329,6 +330,19 @@ MonoBehaviour:
   optionalRotationMode: 1
   optionalScrambleMode: 0
   optionalString: 
+--- !u!65 &810783559358315170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094082428328690602}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6324661, y: 1.6324657, z: 0.24541046}
+  m_Center: {x: -0.0000075399876, y: -0.000009298325, z: 0}
 --- !u!1 &5267397869660438107
 GameObject:
   m_ObjectHideFlags: 0
