@@ -472,7 +472,7 @@ MonoBehaviour:
   showWpLength: 0
   pathColor: {r: 1, g: 1, b: 1, a: 0.5}
   lastSrcPosition: {x: 2.99, y: -1.66, z: 14.04}
-  lastSrcRotation: {x: -0, y: -0, z: 0.08715612, w: -0.99619466}
+  lastSrcRotation: {x: 0, y: 0, z: -0.08715578, w: 0.9961947}
   wpsDropdown: 1
   dropToFloorOffset: 0
 --- !u!114 &4058958542790866780
