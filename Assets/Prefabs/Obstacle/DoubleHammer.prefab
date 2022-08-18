@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1230470868600427381}
   - component: {fileID: 959190053647819550}
   - component: {fileID: 2220087393892697007}
+  - component: {fileID: 7642256164250103555}
+  - component: {fileID: 7993672468731453365}
   m_Layer: 0
   m_Name: Stickhammer
   m_TagString: Untagged
@@ -26,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110827729034207706}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9961947, w: 0.08715588}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4695976942820346156}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 170}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &1230470868600427381
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -191,6 +193,32 @@ MonoBehaviour:
   optionalRotationMode: 0
   optionalScrambleMode: 0
   optionalString: 
+--- !u!65 &7642256164250103555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110827729034207706}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21499157, y: 3.6368868, z: 0.9207274}
+  m_Center: {x: -0.0049347878, y: -1.6111573, z: -0.0000045895576}
+--- !u!65 &7993672468731453365
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110827729034207706}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.270147, y: 1.0329256, z: 0.9207274}
+  m_Center: {x: -0.010831952, y: -3.9466195, z: -0.0000045895576}
 --- !u!1 &1378400628858887608
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +344,8 @@ GameObject:
   - component: {fileID: 6681488584442454999}
   - component: {fileID: 8889434130263430941}
   - component: {fileID: 1664502479143366353}
+  - component: {fileID: 2345703275596881704}
+  - component: {fileID: 4751740957233620388}
   m_Layer: 0
   m_Name: Stickhammer
   m_TagString: Untagged
@@ -330,13 +360,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943813190026950344}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9961947, w: 0.08715588}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1119456506434948979}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 170}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &6681488584442454999
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -495,6 +525,32 @@ MonoBehaviour:
   optionalRotationMode: 0
   optionalScrambleMode: 0
   optionalString: 
+--- !u!65 &2345703275596881704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943813190026950344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21499157, y: 3.6368868, z: 0.9207274}
+  m_Center: {x: -0.0049347878, y: -1.6111573, z: -0.0000045895576}
+--- !u!65 &4751740957233620388
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943813190026950344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.270147, y: 1.0329256, z: 0.9207274}
+  m_Center: {x: -0.010831952, y: -3.9466195, z: -0.0000045895576}
 --- !u!1 &7179807694778271716
 GameObject:
   m_ObjectHideFlags: 0
