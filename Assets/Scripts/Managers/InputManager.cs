@@ -98,6 +98,7 @@ namespace Managers
         {
             //if (!isReadyForTouch) return;
             //{
+            
                 _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, 0f);
                 Vector2 mouseDeltaPos = new Vector2(context.ReadValue<Vector2>().x, 0f);
 

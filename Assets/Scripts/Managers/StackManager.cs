@@ -56,9 +56,15 @@ namespace Managers
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
+                CoreGameSignals.Instance.onPlay +=OnInitRunAnimation;
                 StackSignals.Instance.onAnimationChange += OnChangeAnimationInStack;
                 
 
+            }
+
+            private void OnInitRunAnimation()
+            {
+                OnChangeAnimationInStack(CollectableAnimationTypes.Run);
             }
 
             private void OnChangeAnimationInStack(CollectableAnimationTypes _currentAnimation)
@@ -111,7 +117,6 @@ namespace Managers
             stackList.TrimExcess();
             if (stackList.Count == 0)
             {
-                Debug.Log("if");
                 DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
                 //DroneAreaFinal();
             }

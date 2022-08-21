@@ -42,7 +42,6 @@ namespace Controllers
         {
             if (other.CompareTag("DroneArea"))
             {
-                Debug.Log("OnTrigger Exit Calisti");
                 playerManager.StopVerticalMovement();
             }
         }

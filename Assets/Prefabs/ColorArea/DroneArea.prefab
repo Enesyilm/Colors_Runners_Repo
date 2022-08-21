@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc48df51ea9b3854ba41105556728aca, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79061adb8e3cebf4f98c5c1b6eb9e2e3, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -327,4 +327,4 @@ MonoBehaviour:
   droneColliderObject: {fileID: 6013378629259194105}
   droneColliderForDetect:
   - {fileID: 1016661678348455343}
-  - {fileID: 1016661678348455343}
+  - {fileID: 8560156270454481339}

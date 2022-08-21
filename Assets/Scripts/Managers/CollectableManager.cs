@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ public class CollectableManager : MonoBehaviour
     }
     public async void IncreaseStack()
     {
-        await Task.Delay(3000);
+        await Task.Delay(2000);
         StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
     }
@@ -67,11 +68,19 @@ public class CollectableManager : MonoBehaviour
         CurrentColorType = colorType;
         //CollectableMeshController.ChangeCollectableMaterial();
     }
-    public async void Death()
+    public async void DelayedDeath(bool _isDelayed)
     {
-        //await Task.Delay(3500);
+        if (_isDelayed)
+        {
+        await Task.Delay(3000);
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
         Destroy(gameObject,3f);
+        }
+        else
+        {
+            ChangeAnimationOnController(CollectableAnimationTypes.Death);
+            Destroy(gameObject,3f);
+        }
     }
 
     public void CheckColorType(DroneColorAreaController _droneColorAreaController)
@@ -81,5 +90,10 @@ public class CollectableManager : MonoBehaviour
     public void CheckMatchType(DroneColorAreaController _droneColorAreaController)
     {
         CollectableMeshController.CheckColorType(_droneColorAreaController);
+    }
+
+    private void OnDestroy()
+    {
+        ChangeAnimationOnController(CollectableAnimationTypes.Death);
     }
 }
