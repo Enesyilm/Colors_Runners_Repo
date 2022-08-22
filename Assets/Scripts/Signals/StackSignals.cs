@@ -12,7 +12,7 @@ namespace Signals
         public UnityAction<int> onDroneArea = delegate { };
         public UnityAction<int> onDecreaseStackOnDroneArea = delegate { };
         public UnityAction onDoubleStack = delegate { };
-        public UnityAction onColorChange = delegate { };
+        public UnityAction<ColorTypes> onColorChange = delegate { };
         public UnityAction<GameObject> onRebuildStack = delegate { };
         public UnityAction<CollectableAnimationTypes> onAnimationChange = delegate { };
 

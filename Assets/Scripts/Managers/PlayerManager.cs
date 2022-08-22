@@ -62,7 +62,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
-            PlayerSignal.Instance.onGetColor += OnGetColorType;
+            PlayerSignal.Instance.onChangeVerticalSpeed += OnChangeVerticalSpeed;
             //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
         }
 
@@ -75,6 +75,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
+            PlayerSignal.Instance.onChangeVerticalSpeed -= OnChangeVerticalSpeed;
             //ScoreSignals.Instance.onUpdateScore -= OnUpdateScore;
         }
         #endregion
@@ -133,16 +134,21 @@ namespace Managers
         }
         public void StopVerticalMovement()
         {
-            playerMovementController.DisableStopVerticalMovement();
+            playerMovementController.ChangeVerticalMovement(0);
         }
         public void EnableVerticalMovement()
         {
-            playerMovementController.EnableVerticalMovement();
+            playerMovementController.ChangeVerticalMovement(10);
         }
 
         public void RepositionPlayerForDrone(GameObject _other)
         {
             playerMovementController.RepositionPlayerForDrone(_other);
+        }
+
+        public void OnChangeVerticalSpeed(float _verticalSpeed)
+        {
+            playerMovementController.ChangeVerticalMovement(_verticalSpeed);
         }
 
         private void OnReset()
@@ -153,11 +159,6 @@ namespace Managers
             playerMovementController.OnReset();
         }
         #endregion
-
-       public ColorTypes OnGetColorType()
-       {
-           return _currentColor;
-       }
     }
 }
 

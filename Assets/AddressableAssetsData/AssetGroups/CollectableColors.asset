@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CollectableColors
+  m_EditorClassIdentifier: 
+  m_GroupName: CollectableColors
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 02d4bb7bcb5d98840937edb44bf1c9d3
+  m_SerializeEntries:
+  - m_GUID: b13163ed9434fb840a27a797d7ead2f8
+    m_Address: Collectable/Color_Blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 95785c4cfaa04aa4d9e0050b4e5166a3
+    m_Address: Collectable/Color_Cream
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a8f20c1fcd9e0c41a87a948e7b9cb63
+    m_Address: Collectable/Color_DarkBlue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: de92841c04f80ae45ac57334ca3877c6
+    m_Address: Collectable/Color_DarkGreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 94afed453a32450429081ea6f66c4e3b
+    m_Address: Collectable/Color_Green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ca799f6d8e5cc4c4696e2d32c9fcc88c
+    m_Address: Collectable/Color_LightGreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c5abb6b0c2b10cb46a54395d89a54a35
+    m_Address: Collectable/Color_LightRed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 02efb5218e0d93247bda6d9ef729e94d
+    m_Address: Collectable/Color_Orange
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 00bd5843f561d604aa4e9d3514ea04ab
+    m_Address: Collectable/Color_Pink
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dcdb174f5eee1b948ba2d81c0391374b
+    m_Address: Collectable/Color_Red
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 435053b2eb3494a40a9f3b226751d0c9
+    m_Address: Collectable/Color_Turquoise
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2bf4636f4025ae644989387be5881a18
+    m_Address: Collectable/Color_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5202342a0ecdaf948999b0768acc181d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d1b5de945781a0c49a1c473ca40ff7fe, type: 2}
+    - {fileID: 11400000, guid: 57f957f0f3e13cf4c9ea29b844142211, type: 2}

@@ -56,13 +56,20 @@ public class DroneAreaManager : MonoBehaviour
 
    private void OnDroneCheckCompleted()
    {
-      droneColliderObject.SetActive(true);
+      ChangeColliders();
+      
+
+   }
+   private async void ChangeColliders()
+   {
       foreach (var collider in droneColliderForDetect)
       {
-         Debug.Log("Kapandi");
-         collider.enabled=false;
          
+         collider.enabled=false;
       }
+      droneColliderObject.SetActive(true);
+      await Task.Delay(200);
+      droneColliderObject.SetActive(false);
    }
 
    

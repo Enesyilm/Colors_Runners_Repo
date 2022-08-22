@@ -16,7 +16,55 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 8897b7192a5e6ed47a330b0a5e2e715e
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: aeb564f9d55cca34f907e48bab31cc68
+    m_Address: Assets/Art/Materials/PortalMaterials/Blue 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0e591114b07480e42beebedf1adf80fa
+    m_Address: PortalColors/Color_Cream
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ce0a23c521b24fd4591ca5db778111b8
+    m_Address: PortalColors/Color_DarkBlue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2cb827dcd2f86b245a288eb176f1b09c
+    m_Address: PortalColors/Color_DarkGreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2f5e0199df202b345809dbc0bc798150
+    m_Address: PortalColors/Color_Green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d7cdca0e6463a4543acc2f9172adcd51
+    m_Address: PortalColors/Color_LightGreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9ff4417bd1dccd646b650124d1976c06
+    m_Address: PortalColors/Color_LightRed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fcab7ee5ba1b9ac4e88ad2493278e1b8
+    m_Address: PortalColors/Color_Orange
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f15a47ba0db534246b08da7a5135455f
+    m_Address: PortalColors/Color_Pink
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a7c9b2a5c45763b4fbe750e1f4877bc0
+    m_Address: PortalColors/Red
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e91e5d63de517f5458ef7273c8ce4c57
+    m_Address: PortalColors/Color_Turquoise
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fbd936b307e8bac49a26e594194c2682
+    m_Address: PortalColors/Color_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5202342a0ecdaf948999b0768acc181d, type: 2}
   m_SchemaSet:

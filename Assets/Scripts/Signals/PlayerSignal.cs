@@ -2,11 +2,12 @@ using System;
 using Enums;
 using Extentions;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Signals
 {
     public class PlayerSignal : MonoSingleton<PlayerSignal>
     {
-        public Func<ColorTypes> onGetColor= delegate { return 0;};
+        public UnityAction<float> onChangeVerticalSpeed=delegate{  };
     }
 }

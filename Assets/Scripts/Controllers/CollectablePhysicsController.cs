@@ -32,7 +32,6 @@ namespace Controllers
                     CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
                     if (_otherCollectableManager.CurrentColorType==collectableManager.CurrentColorType)
                     {
-                        Debug.LogWarning("Collectable carpisti");
                         other.transform.tag = "Collected";
                         _otherCollectableManager.IncreaseStack();
                     }
@@ -44,30 +43,25 @@ namespace Controllers
                 }
                 if (other.CompareTag("Obstacle"))
                 {
-                    Destroy(other.transform.parent);
+                    Destroy(other.transform.parent.gameObject);
+                    collectableManager.DecreaseStack();
                 
                 }
                 if (other.CompareTag("TurretAreaGround"))
                 {
                     TurretAreaController _turretAreaController=other.GetComponent<TurretAreaController>();
                     TurretAreaManager _turretAreaManager=other.GetComponentInParent<TurretAreaManager>();
-                    if(collectableManager.CurrentColorType==_turretAreaController.colorType)
+                    collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
+                    if(collectableManager.CurrentColorType!=_turretAreaController.colorType)
                     {
-                        Debug.Log("if TurretAreaGround");
-                        collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
-                    }
-                    else
-                    {
-                        collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
                         _turretAreaManager.AddTargetToList(transform.parent.gameObject);
                     }
-                
                 }
                 if (other.CompareTag("ColoredGround"))
                 {
                     collectableManager.DeListStack();
                     collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);//ucu ayni fonksiyonda tetiklenecek
-                    collectableManager.CheckColorType(other.GetComponent<DroneColorAreaController>());
+                    collectableManager.CheckColorType(other.GetComponent<DroneColorAreaManager>());
                     tag = "Untagged";
                 }
             }
@@ -83,15 +77,24 @@ namespace Controllers
                     
                 }
             }
+            if (other.CompareTag("DroneAreaPhysics"))
+            {
+                tag = "Collected";
+            }
                 
         }
         private void OnTriggerExit(Collider other)
         {
             
 
-            if (other.CompareTag("TurretAreaGround") ||other.CompareTag("DroneAreaPhysics"))
+            if (other.CompareTag("TurretAreaGround"))
             {
                 gameObject.tag = "Collected";
+                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
+            }
+
+            if (other.CompareTag("DroneAreaPhysics"))
+            {
                 collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
             }
             

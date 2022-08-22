@@ -11,8 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: df695d70c539c3d4c87b79de307ab7bb, type: 3}
   m_ShaderKeywords: _FRESNELHIGHLIGHTS_ON _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
     _MK_DETAIL_BLEND_MIX _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS
-    _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC _MK_SURFACE_TYPE_TRANSPARENT _MK_WRAPPED_DIFFUSE
-    _RECEIVE_SHADOWS_OFF _WRAPPEDLIGHTING_ON
+    _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC _MK_SURFACE_TYPE_TRANSPARENT _MK_WORKFLOW_SPECULAR
+    _MK_WRAPPED_DIFFUSE _RECEIVE_SHADOWS_OFF _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -27,7 +27,7 @@ Material:
     m_TexEnvs:
     - _AlbedoMap:
         m_Texture: {fileID: 2800000, guid: f66169c1a0cbade4ea4c12ba8c87ccb4, type: 3}
-        m_Scale: {x: 0.73, y: 1}
+        m_Scale: {x: 0.75, y: 1}
         m_Offset: {x: 0.42, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
@@ -253,7 +253,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _RenderFace: 0
+    - _RenderFace: 2
     - _RenderPriority: 0
     - _Rim: 0
     - _RimSize: 1
@@ -278,19 +278,19 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 1
     - _ThresholdMapScale: 1
     - _VertexAnimation: 0
     - _VertexAnimationIntensity: 0.05
     - _VertexAnimationStutter: 0
-    - _Workflow: 0
+    - _Workflow: 1
     - _WorkflowMode: 1
     - _WrappedLighting: 1
     - _ZTest: 4
     - _ZWrite: 0
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 0.49803922}
+    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 0.44705883}
     - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}

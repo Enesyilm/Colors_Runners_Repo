@@ -43,7 +43,6 @@ namespace Managers
         public void ResetTurretArea()
         {
             CancelInvoke("KillFromTargetList");
-            Debug.Log("reset Calisti");
             _targetList.Clear();
             _turretState = TurretStates.Search;
         }

@@ -14,12 +14,13 @@ namespace Controllers
 
         #region Public Variables
 
-        public ColorTypes ColorType; 
+        public ColorTypes CurrentColorType; 
 
         #endregion
         #region Serialized Variables
         
         [SerializeField]bool openDroneAreaExit;
+        [SerializeField] private DroneAreaMeshController droneAreaMeshController;
 
         #endregion
         #region Private Variables
@@ -61,6 +62,7 @@ namespace Controllers
         private void OnSetColor()
         {
            //renk gelecek _meshRenderer.material.color = Resources.Load<Material>("/Data/").color;
+           droneAreaMeshController.ChangeAreaColor(CurrentColorType);
         }
 
         void UnSubscribeEvents()

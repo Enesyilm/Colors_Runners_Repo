@@ -32,6 +32,7 @@ namespace Managers
         #region Private Variables
 
          private int _levelID;
+         private int _idleLevelID;
          private LevelLoaderCommand levelLoader;
          private ClearActiveLevelCommand levelClearer;
 
@@ -56,6 +57,11 @@ namespace Managers
         {
 
             return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.Level);
+        }
+        private int GetActiveIdleLevel()
+        {
+
+            return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.IdleLevel);
         }
         #region Event Subscription
 
@@ -102,6 +108,14 @@ namespace Managers
             SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
+        private void OnNextIdleLevel()
+        {
+            _levelID++;
+            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
+            SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
+            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+        }
 
         private void OnRestartLevel()
         {
@@ -121,6 +135,11 @@ namespace Managers
         {
             var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.LevelAmount;
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
+        }
+        private void OnInitializeIdleLevel()
+        {
+            //var newLevelData = _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").LevelData.LevelAmount;
+            //levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
         }
 
         private void OnClearActiveLevel()

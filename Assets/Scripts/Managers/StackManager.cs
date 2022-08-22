@@ -58,22 +58,12 @@ namespace Managers
                 CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
                 CoreGameSignals.Instance.onPlay +=OnInitRunAnimation;
                 StackSignals.Instance.onAnimationChange += OnChangeAnimationInStack;
-                
+                StackSignals.Instance.onColorChange += OnChangeColor;
+
 
             }
 
-            private void OnInitRunAnimation()
-            {
-                OnChangeAnimationInStack(CollectableAnimationTypes.Run);
-            }
-
-            private void OnChangeAnimationInStack(CollectableAnimationTypes _currentAnimation)
-            {
-                for (int i = 0; i < stackList.Count; i++)
-                {
-                    stackList[i].GetComponent<CollectableManager>().ChangeAnimationOnController(_currentAnimation);
-                }
-            }
+           
 
             private void OnDisable()
             {
@@ -89,6 +79,7 @@ namespace Managers
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
                 StackSignals.Instance.onAnimationChange -= OnChangeAnimationInStack;
+                StackSignals.Instance.onColorChange -= OnChangeColor;
 
             }
             #endregion
@@ -105,11 +96,16 @@ namespace Managers
         }
         private void OnDecreaseStack(int _removedIndex)
         {
+            if (stackList[_removedIndex] is null)
+            {
+                return;
+            }
+            stackList[_removedIndex].SetActive(false);
             stackList.RemoveAt(_removedIndex);
             stackList.TrimExcess();
 
         }
-        private void OnDroneArea(int index)
+        private async void OnDroneArea(int index)
         {
             
             stackList[index].transform.parent = tempHolder;
@@ -117,6 +113,7 @@ namespace Managers
             stackList.TrimExcess();
             if (stackList.Count == 0)
             {
+                await Task.Delay(2000);
                 DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
                 //DroneAreaFinal();
             }
@@ -138,16 +135,20 @@ namespace Managers
                 Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
                 _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
                 stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
-                for (int index = 1; index < stackList.Count; index++)
+                if (stackList.Count > 1)
                 {
-                    stackList[index].transform.position = new Vector3(
-                        Mathf.Lerp(stackList[index].transform.position.x, stackList[index - 1].transform.position.x,.2f),
-                        Mathf.Lerp(stackList[index].transform.position.y, stackList[index - 1].transform.position.y,.2f),
-                        Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-1,.2f));
+                    for (int index = 1; index < stackList.Count; index++)
+                    {
+                        stackList[index].transform.position = new Vector3(
+                            Mathf.Lerp(stackList[index].transform.position.x, stackList[index - 1].transform.position.x,.2f),
+                            Mathf.Lerp(stackList[index].transform.position.y, stackList[index - 1].transform.position.y,.2f),
+                            Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-1,.2f));
                         Quaternion toRotation = Quaternion.LookRotation(stackList[index - 1].transform.position - stackList[index].transform.position);
                         toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
                         stackList[index].transform.rotation = Quaternion.Slerp( stackList[index-1].transform.rotation,toRotation,1f);
+                    }
                 }
+                
                 
             }
         }
@@ -161,6 +162,25 @@ namespace Managers
             }
 
             
+        }
+        private void OnChangeColor(ColorTypes colorType)
+        {
+            for (int i = 0; i < stackList.Count; i++)
+            {
+                stackList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
+            }
+        }
+        private void OnInitRunAnimation()
+        {
+            OnChangeAnimationInStack(CollectableAnimationTypes.Run);
+        }
+
+        private void OnChangeAnimationInStack(CollectableAnimationTypes _currentAnimation)
+        {
+            for (int i = 0; i < stackList.Count; i++)
+            {
+                stackList[i].GetComponent<CollectableManager>().ChangeAnimationOnController(_currentAnimation);
+            }
         }
         private void OnDoubleStack()
         {

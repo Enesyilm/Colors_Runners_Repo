@@ -111,14 +111,13 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
-        public  void EnableVerticalMovement()
+        public  void ChangeVerticalMovement(float _verticalSpeed)
         {
             
-            _movementData.ForwardSpeed = 5;
+            _movementData.ForwardSpeed = _verticalSpeed;
         }
         public void RepositionPlayerForDrone(GameObject _other)
         {
-            Debug.Log("RepositionPlayerForDrone");
            transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z+_other.transform.localScale.z),3f);
         }
         public void DisableStopVerticalMovement()

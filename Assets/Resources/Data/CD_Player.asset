@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerData:
     PlayerMovementData:
-      ForwardSpeed: 5
+      ForwardSpeed: 10
       SidewaysSpeed: 2
     ScaleCounter: 1.5

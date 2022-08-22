@@ -13,6 +13,7 @@ namespace Commands
                  transform.position.y,groundtransform.position.z+zValue),2f).OnComplete(
                      ()=>{
                          transform.GetComponent<CollectableManager>().ChangeAnimationOnController(CollectableAnimationTypes.Crouch);
+                         
                       
                          
                      } )
