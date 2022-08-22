@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,6 +27,9 @@ public class CollectableManager : MonoBehaviour
     #region Serialized Variables
 
     [SerializeField] private CollectableMovementCommand movementCommand;
+
+    [SerializeField]
+    private CapsuleCollider collider;
     #endregion
 
     #region Private Variables
@@ -34,10 +38,18 @@ public class CollectableManager : MonoBehaviour
 
     #endregion
     #endregion
+
+    private void Awake()
+    {
+        OnChangeColor(CurrentColorType);
+    }
+
     public void DecreaseStack()
     {
         StackSignals.Instance.onDecreaseStack?.Invoke( transform.GetSiblingIndex());
-        Destroy(gameObject);
+        gameObject.transform.parent = null;
+        DelayedDeath(false);
+        
     }
     public void DeListStack()
     {
@@ -47,7 +59,7 @@ public class CollectableManager : MonoBehaviour
     }
     public async void IncreaseStack()
     {
-        await Task.Delay(3000);
+        await Task.Delay(2000);
         StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
     }
@@ -56,30 +68,53 @@ public class CollectableManager : MonoBehaviour
         CollectableAnimationController.ChangeAnimation(_currentAnimation);
     }
 
-    public void SetCollectablePositionOnDroneArea(Transform groundTransform)
+    public async void SetCollectablePositionOnDroneArea(Transform groundTransform)
     {
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
         movementCommand.MoveToGround(groundTransform);
+        ActivateOutline(false);
+        await Task.Delay(3000);
+        ActivateOutline(true);
+
     }
 
-    private void OnChangeColor(ColorTypes colorType)
+    public void OnChangeColor(ColorTypes colorType)
     {
         CurrentColorType = colorType;
-        //CollectableMeshController.ChangeCollectableMaterial();
+        CollectableMeshController.ChangeCollectableMaterial(CurrentColorType);
     }
-    public async void Death()
+    private void ActivateOutline(bool _state)
     {
-        //await Task.Delay(3500);
+        CollectableMeshController.ActivateOutline(_state);
+    }
+    public async void DelayedDeath(bool _isDelayed)
+    {
+        if (_isDelayed)
+        { 
+        collider.enabled=false;
+        await Task.Delay(3000);
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
         Destroy(gameObject,3f);
+        }
+        else
+        {
+            ChangeAnimationOnController(CollectableAnimationTypes.Death);
+            collider.enabled=false;
+            Destroy(gameObject,.1f);
+        }
     }
 
-    public void CheckColorType(DroneColorAreaController _droneColorAreaController)
+    public void CheckColorType(DroneColorAreaManager _droneColorAreaManager)
     {
-        CollectableMeshController.CheckColorType(_droneColorAreaController);
+        CollectableMeshController.CheckColorType(_droneColorAreaManager);
     }
-    public void CheckMatchType(DroneColorAreaController _droneColorAreaController)
+    public void CheckMatchType(DroneColorAreaManager _droneColorAreaManager)
     {
-        CollectableMeshController.CheckColorType(_droneColorAreaController);
+        CollectableMeshController.CheckColorType(_droneColorAreaManager);
+    }
+
+    private void OnDestroy()
+    {
+        ChangeAnimationOnController(CollectableAnimationTypes.Death);
     }
 }

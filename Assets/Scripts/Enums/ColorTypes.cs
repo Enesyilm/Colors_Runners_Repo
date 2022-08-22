@@ -2,9 +2,18 @@ namespace Enums
 {
     public enum ColorTypes
     {
-        Color1,
-        Color2,
-        Color3,
-        Color4,
+        Blue,
+        Cream,
+        DarkBlue,
+        DarkGreen,
+        Green,
+        LightGreen,
+        LightRed,
+        Orange,
+        Pink,
+        Red,
+        Turquoise,
+        Yellow,
+        
     }
 }

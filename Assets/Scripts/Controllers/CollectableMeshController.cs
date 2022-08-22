@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Enums;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,9 +13,6 @@ namespace Controllers
 
         #region Public Variables
 
-        public Material materialdeneme;
-
-
 
         #endregion
 
@@ -22,32 +20,27 @@ namespace Controllers
 
         [SerializeField] private CollectableManager collectableManager;
 
+        [SerializeField]
+        private SkinnedMeshRenderer meshRenderer;
         #endregion
 
         #endregion
 
-        private void Awake()
+        public void ChangeCollectableMaterial(ColorTypes _colorType)
         {
-            ChangeCollectableMaterial(1);
+
+            var colorHandler=Addressables.LoadAssetAsync<Material>($"Collectable/Color_{_colorType}");
+           
+             if (colorHandler.WaitForCompletion() != null)
+             {
+                 meshRenderer.material = colorHandler.Result;
+             }
+            
         }
 
-        public void ChangeCollectableMaterial(int index)
+        public void CheckColorType(DroneColorAreaManager _droneColorAreaRef)
         {
-
-            // var colorHandler=Addressables.LoadAssetAsync<Material>($"Color_{0}");
-            //
-            //  if (colorHandler.WaitForCompletion() != null)
-            //  {
-            //      Debug.Log("Color geldi");
-            //      GetComponent<SkinnedMeshRenderer>().material = colorHandler.Result;
-            //  }
-            //  Debug.Log("Color gelmedi");
-            //  // GetComponent<SkinnedMeshRenderer>().material=Resources.Load<>()
-        }
-
-        public void CheckColorType(DroneColorAreaController _droneColorAreaRef)
-        {
-            if (collectableManager.CurrentColorType == _droneColorAreaRef.ColorType)
+            if (collectableManager.CurrentColorType == _droneColorAreaRef.CurrentColorType)
             {
                 collectableManager.MatchType = MatchType.Match;
             }
@@ -56,6 +49,11 @@ namespace Controllers
                 collectableManager.MatchType = MatchType.UnMatched;
 
             }
+        }
+        public void ActivateOutline(bool _isOutlineActive)
+        {
+            float _outlineValue = _isOutlineActive ? 71 : 0;
+            meshRenderer.material.DOFloat(_outlineValue,"_OutlineSize",1f);
         }
     }
 }    

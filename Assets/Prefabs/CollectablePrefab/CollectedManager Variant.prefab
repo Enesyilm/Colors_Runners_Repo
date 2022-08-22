@@ -57,11 +57,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7238826796179776721, guid: 44297df32da71024bb54105ef6729da1, type: 3}
       propertyPath: CurrentColorType
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7238826796179776723, guid: 44297df32da71024bb54105ef6729da1, type: 3}
       propertyPath: m_Name
-      value: CollectableManager Variant
+      value: CollectedManager Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44297df32da71024bb54105ef6729da1, type: 3}

@@ -45,26 +45,34 @@ public class DroneAreaManager : MonoBehaviour
 
    private void SubscribeEvents()
    {
-      DroneAreaSignals.Instance.onDroneCheckCompleted += onDroneCheckCompleted;
+      DroneAreaSignals.Instance.onDroneCheckCompleted += OnDroneCheckCompleted;
 
    }
    private void UnSubscribeEvents()
    {
-      DroneAreaSignals.Instance.onDroneCheckCompleted -= onDroneCheckCompleted;
+      DroneAreaSignals.Instance.onDroneCheckCompleted -= OnDroneCheckCompleted;
    }
    
 
-   private void onDroneCheckCompleted()
+   private void OnDroneCheckCompleted()
    {
-      droneColliderObject.SetActive(true);
+      ChangeColliders();
+      
+
+   }
+   private async void ChangeColliders()
+   {
       foreach (var collider in droneColliderForDetect)
       {
-         collider.enabled=false;
          
+         collider.enabled=false;
       }
+      droneColliderObject.SetActive(true);
+      await Task.Delay(200);
+      droneColliderObject.SetActive(false);
    }
+
+   
    
    #endregion
-   
-   
 }

@@ -6,13 +6,15 @@ TagManager:
   tags:
   - Bullet
   - Collected
-  - TurretArea
   - Obstacle
   - Collectable
   - DroneArea
   - DroneColorArea
   - ColoredGround
   - DroneAreaPhysics
+  - JumpArea
+  - TurretAreaGround
+  - Portal
   layers:
   - Default
   - TransparentFX

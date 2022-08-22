@@ -17,16 +17,52 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 61f1fcb6938ca6a48adc7a668d14c2ed
   m_SerializeEntries:
-  - m_GUID: 79061adb8e3cebf4f98c5c1b6eb9e2e3
-    m_Address: Color_0
+  - m_GUID: 995b6e9543843e04db4779894f98350f
+    m_Address: CoreColor/Color_Red
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: fd7d8a1c9fa768f44b3c4f141a471845
-    m_Address: Color_1
+  - m_GUID: 3fcb87abc23f7114aa6d1d13a82744f8
+    m_Address: CoreColor/Color_Turquoise
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: cc48df51ea9b3854ba41105556728aca
-    m_Address: Color_2
+  - m_GUID: a9523721053ac1147afb4294436487c8
+    m_Address: CoreColor/Color_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b464761f383a4d54c9d4ca2570146d19
+    m_Address: CoreColor/Color_Pink
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: af9032688a0e7ab45b0524df726ee992
+    m_Address: CoreColor/Color_Orange
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7a3b18ca8cb718a4b814b0d5bd853ca6
+    m_Address: CoreColor/Color_LightRed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cac379a5a6c86ff41a36534f00c06117
+    m_Address: CoreColor/Color_LightGreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f25077fd039830f49a20a246050cf285
+    m_Address: CoreColor/Color_Green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b6a6b42baccd0645a3485a8325b340f
+    m_Address: CoreColor/Color_DarkGreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9ffff75d388719468b03fddcccd9f8e
+    m_Address: CoreColor/Color_DarkBlue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a0ffdf800b6918e49bb342039a180303
+    m_Address: CoreColor/Color_Cream
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9af77edcd286cd745bfde62734e1aa08
+    m_Address: CoreColor/Color_Blue
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

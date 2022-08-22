@@ -2,6 +2,7 @@ using System;
 using System.Security.Cryptography;
 using DG.Tweening;
 using Enums;
+using Managers;
 using Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -42,26 +43,26 @@ namespace Controllers
                 }
                 if (other.CompareTag("Obstacle"))
                 {
-                    Destroy(other.transform.parent);
+                    Destroy(other.transform.parent.gameObject);
+                    collectableManager.DecreaseStack();
                 
                 }
-                if (other.CompareTag("TurretArea"))
+                if (other.CompareTag("TurretAreaGround"))
                 {
+                    TurretAreaController _turretAreaController=other.GetComponent<TurretAreaController>();
+                    TurretAreaManager _turretAreaManager=other.GetComponentInParent<TurretAreaManager>();
                     collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
-                
+                    if(collectableManager.CurrentColorType!=_turretAreaController.colorType)
+                    {
+                        _turretAreaManager.AddTargetToList(transform.parent.gameObject);
+                    }
                 }
                 if (other.CompareTag("ColoredGround"))
                 {
                     collectableManager.DeListStack();
                     collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);//ucu ayni fonksiyonda tetiklenecek
-                    collectableManager.CheckColorType(other.GetComponent<DroneColorAreaController>());
-                    tag = "Collectable";
-                }
-                if (other.CompareTag("Bullet"))
-                {
-                    collectableManager.Death();
-                    StackSignals.Instance.onDecreaseStack?.Invoke(transform.parent.GetSiblingIndex());
-                    Destroy(gameObject, 1f);
+                    collectableManager.CheckColorType(other.GetComponent<DroneColorAreaManager>());
+                    tag = "Untagged";
                 }
             }
             if (other.CompareTag("DroneAreaPhysics"))
@@ -72,20 +73,29 @@ namespace Controllers
                 }
                 else
                 {
-                    collectableManager.Death();
+                    collectableManager.DelayedDeath(true);
                     
                 }
+            }
+            if (other.CompareTag("DroneAreaPhysics"))
+            {
+                tag = "Collected";
             }
                 
         }
         private void OnTriggerExit(Collider other)
         {
-            if (CompareTag("Collected"))
+            
+
+            if (other.CompareTag("TurretAreaGround"))
             {
-                if (other.CompareTag("TurretArea")||other.CompareTag("DroneAreaPhysics"))
-                {
-                    collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
-                }
+                gameObject.tag = "Collected";
+                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
+            }
+
+            if (other.CompareTag("DroneAreaPhysics"))
+            {
+                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
             }
             
         } 

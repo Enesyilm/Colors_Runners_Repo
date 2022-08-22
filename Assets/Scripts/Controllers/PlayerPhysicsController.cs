@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Managers;
+using Signals;
 
 namespace Controllers
 {
@@ -32,9 +33,12 @@ namespace Controllers
             }
             if(other.CompareTag("DroneAreaPhysics"))
             {
-                Debug.Log("DroneAreaPhysics");
                 playerManager.RepositionPlayerForDrone(other.gameObject);
                 playerManager.EnableVerticalMovement();
+            }
+             if (other.CompareTag("Portal"))
+            {
+                StackSignals.Instance.onColorChange?.Invoke(other.GetComponent<ColorController>().ColorType);
             }
         }
 
@@ -42,7 +46,6 @@ namespace Controllers
         {
             if (other.CompareTag("DroneArea"))
             {
-                Debug.Log("OnTrigger Exit Calisti");
                 playerManager.StopVerticalMovement();
             }
         }

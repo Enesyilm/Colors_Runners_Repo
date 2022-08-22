@@ -64,7 +64,6 @@ namespace Managers
 
         private void OnOpenPanel(UIPanelTypes panelParam)
         {
-            Debug.Log("panelParam"+panelParam);
             uiPanelController.OpenPanel(panelParam);
         }
 
