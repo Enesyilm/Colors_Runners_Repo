@@ -12,6 +12,7 @@ namespace Signals
         public UnityAction onInputTaken = delegate { };
         public UnityAction<RunnerHorizontalInputParams> onInputDragged = delegate { };
         public UnityAction onInputReleased = delegate { };
+        public UnityAction<bool> onSidewaysEnable = delegate { };
     }
 }
 
