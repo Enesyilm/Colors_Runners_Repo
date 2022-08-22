@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Controllers
 {
-    public class DroneColorAreaController : MonoBehaviour
+    public class DroneColorAreaManager : MonoBehaviour
     {
         #region Self Variables
 
