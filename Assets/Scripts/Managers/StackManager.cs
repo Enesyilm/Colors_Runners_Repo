@@ -74,7 +74,6 @@ namespace Managers
             {
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
                 StackSignals.Instance.onDroneArea -= OnDroneArea;
-                // StackSignals.Instance.onDecreaseStackOnDroneArea -= OnDecreaseStackOnDroneArea;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
@@ -113,7 +112,8 @@ namespace Managers
             stackList.TrimExcess();
             if (stackList.Count == 0)
             {
-                await Task.Delay(2000);
+                DroneAreaSignals.Instance.onDroneCheckStarted?.Invoke();
+                await Task.Delay(5000);
                 DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
                 //DroneAreaFinal();
             }

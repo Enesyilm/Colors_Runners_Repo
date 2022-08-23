@@ -59,7 +59,7 @@ public class CollectableManager : MonoBehaviour
     }
     public async void IncreaseStack()
     {
-        await Task.Delay(2000);
+        //await Task.Delay(2000);
         StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
     }

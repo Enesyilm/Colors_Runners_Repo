@@ -7,6 +7,7 @@ namespace Signals
 {
     public class DroneAreaSignals : MonoSingleton<DroneAreaSignals>
     {
+        public UnityAction onDroneCheckStarted=delegate {  };
         public UnityAction onDroneCheckCompleted =delegate { };
 
     }

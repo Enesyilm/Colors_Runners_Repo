@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 8897b7192a5e6ed47a330b0a5e2e715e
   m_SerializeEntries:
   - m_GUID: aeb564f9d55cca34f907e48bab31cc68
-    m_Address: Assets/Art/Materials/PortalMaterials/Blue 1.mat
+    m_Address: PortalColors/Color_Blue
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 0e591114b07480e42beebedf1adf80fa
