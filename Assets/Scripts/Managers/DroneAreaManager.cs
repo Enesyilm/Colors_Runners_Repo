@@ -20,6 +20,8 @@ public class DroneAreaManager : MonoBehaviour
 
    [SerializeField]
    private GameObject droneColliderObject;
+   [SerializeField]
+   private GameObject droneObject;
 
    [SerializeField] private List<Collider> droneColliderForDetect;
    #endregion
@@ -46,13 +48,20 @@ public class DroneAreaManager : MonoBehaviour
    private void SubscribeEvents()
    {
       DroneAreaSignals.Instance.onDroneCheckCompleted += OnDroneCheckCompleted;
+      DroneAreaSignals.Instance.onDroneCheckStarted += OnDroneCheckStarted;
 
    }
    private void UnSubscribeEvents()
    {
       DroneAreaSignals.Instance.onDroneCheckCompleted -= OnDroneCheckCompleted;
+      DroneAreaSignals.Instance.onDroneCheckStarted -= OnDroneCheckStarted;
    }
-   
+
+   private void OnDroneCheckStarted()
+   {
+      droneObject.SetActive(true);
+   }
+
 
    private void OnDroneCheckCompleted()
    {
@@ -67,6 +76,8 @@ public class DroneAreaManager : MonoBehaviour
          
          collider.enabled=false;
       }
+
+      
       droneColliderObject.SetActive(true);
       await Task.Delay(200);
       droneColliderObject.SetActive(false);
