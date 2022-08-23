@@ -52,7 +52,7 @@ namespace Managers
             private void SubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
-                StackSignals.Instance.onDroneArea += OnDroneArea;
+                StackSignals.Instance.onDroneArea += OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
@@ -62,18 +62,10 @@ namespace Managers
 
 
             }
-
-           
-
-            private void OnDisable()
-            {
-                UnSubscribeEvents();
-            }
-
             private void UnSubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
-                StackSignals.Instance.onDroneArea -= OnDroneArea;
+                StackSignals.Instance.onDroneArea -= OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
@@ -81,49 +73,18 @@ namespace Managers
                 StackSignals.Instance.onColorChange -= OnChangeColor;
 
             }
+            private void OnDisable()
+            {
+                UnSubscribeEvents();
+            }
+
             #endregion
 
         private void FixedUpdate()
         {
-            OnLerpStack();
+            LerpStack();
         }
-        #region Subscribed Methods
-        private void OnIncreaseStack(GameObject _currentGameObject)
-        {
-            _currentGameObject.transform.SetParent(transform);
-            stackList.Add(_currentGameObject);
-        }
-        private void OnDecreaseStack(int _removedIndex)
-        {
-            if (stackList[_removedIndex] is null)
-            {
-                return;
-            }
-            stackList[_removedIndex].SetActive(false);
-            stackList.RemoveAt(_removedIndex);
-            stackList.TrimExcess();
-
-        }
-        private async void OnDroneArea(int index)
-        {
-            
-            stackList[index].transform.parent = tempHolder;
-            stackList.RemoveAt(index);
-            stackList.TrimExcess();
-            if (stackList.Count == 0)
-            {
-                DroneAreaSignals.Instance.onDroneCheckStarted?.Invoke();
-                await Task.Delay(5000);
-                DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
-                //DroneAreaFinal();
-            }
-                
-        }
-        private void OnFindPlayer()
-        {
-            _playerManager=GameObject.FindWithTag("Player").transform;
-        }
-        private void OnLerpStack()
+        private void LerpStack()
         {
             if (stackList.Count > 0)
             {
@@ -152,6 +113,38 @@ namespace Managers
                 
             }
         }
+        #region Subscribed Methods
+        private void OnIncreaseStack(GameObject _currentGameObject)
+        {
+            _currentGameObject.transform.SetParent(transform);
+            stackList.Add(_currentGameObject);
+        }
+        private void OnDecreaseStack(int _removedIndex)
+        {
+            if (stackList[_removedIndex] is null)
+            {
+                return;
+            }
+            stackList[_removedIndex].SetActive(false);
+            stackList.RemoveAt(_removedIndex);
+            stackList.TrimExcess();
+
+        }
+        private async void OnDroneAreaDecrease(int index)
+        {
+            
+            stackList[index].transform.parent = tempHolder;
+            stackList.RemoveAt(index);
+            stackList.TrimExcess();
+            if (stackList.Count == 0)
+            {
+                DroneAreaSignals.Instance.onDroneCheckStarted?.Invoke();
+                await Task.Delay(5000);
+                DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
+            }
+                
+        }
+      
         private void OnChangeStack(int initAmount)
         {
             for (int i = 0; i <initAmount ; i++)
@@ -167,7 +160,7 @@ namespace Managers
         {
             for (int i = 0; i < stackList.Count; i++)
             {
-                stackList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
+                stackList[i].GetComponent<CollectableManager>().ChangeColor(colorType);
             }
         }
         private void OnInitRunAnimation()
@@ -188,9 +181,9 @@ namespace Managers
         }
 
 
-        public void OnInitalStackSettings()
+        private void OnInitalStackSettings()
         {//deger datadan gelmeli
-            OnFindPlayer();
+            FindPlayer();
             OnChangeStack(initAmount);
             StackSignals.Instance.onAnimationChange?.Invoke(CollectableAnimationTypes.Crouch);
         }
@@ -198,5 +191,10 @@ namespace Managers
         
 
         #endregion
+          private void FindPlayer()
+        {
+            _playerManager=GameObject.FindWithTag("Player").transform;
+        }
+        
     }
 }

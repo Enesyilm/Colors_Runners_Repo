@@ -7,9 +7,10 @@ namespace Commands
 {
     public class IdleLevelLoaderCommand : MonoBehaviour
     {
-        public void InitializeLevel(int _levelID, Transform levelHolder)
+        public void InitializeIdleLevel(int _idleLevelID, Transform levelHolder)
         {
-            Instantiate(Resources.Load<GameObject>($"Prefabs/IdleLevelPrefabs/level {_levelID}"), levelHolder);
+            Debug.Log("_idleLevel"+_idleLevelID);
+            Instantiate(Resources.Load<GameObject>($"Prefabs/IdleLevelPrefabs/IdleLevel {_idleLevelID}"), levelHolder);
         }
     }
 }

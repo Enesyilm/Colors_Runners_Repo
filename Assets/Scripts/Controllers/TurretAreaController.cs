@@ -12,7 +12,7 @@ namespace Controllers
         #region Self Region
 
         #region Public Variables
-        public ColorTypes colorType; 
+        public ColorTypes ColorType; 
         public Vector3 CurrentTargetPos;
 
         

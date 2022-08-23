@@ -7,7 +7,8 @@ namespace Controllers
     {
         #region Self Variables
         #region Serialized Variables
-        [SerializeField] private Animator animator;
+        [SerializeField] 
+        private Animator animator;
         #endregion
         #endregion
 

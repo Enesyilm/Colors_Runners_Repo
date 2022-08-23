@@ -15,10 +15,6 @@ public class CollectableManager : MonoBehaviour
     #region Public Variables
 
     public ColorTypes CurrentColorType;
-    public CollectableMeshController CollectableMeshController; 
-    public CollectableMovementController CollectableMovementController; 
-    public CollectablePhysicsController CollectablePhysicsController; 
-    public CollectableAnimationController CollectableAnimationController;
     public MatchType MatchType;
 
 
@@ -26,8 +22,14 @@ public class CollectableManager : MonoBehaviour
 
     #region Serialized Variables
 
-    [SerializeField] private CollectableMovementCommand movementCommand;
-
+    [SerializeField] 
+    private CollectableMovementCommand movementCommand;
+    [SerializeField]
+    private CollectableMeshController collectableMeshController; 
+    [SerializeField]
+    private CollectablePhysicsController collectablePhysicsController; 
+    [SerializeField]
+    private CollectableAnimationController collectableAnimationController;
     [SerializeField]
     private CapsuleCollider collider;
     #endregion
@@ -41,7 +43,12 @@ public class CollectableManager : MonoBehaviour
 
     private void Awake()
     {
-        OnChangeColor(CurrentColorType);
+        ChangeColor(CurrentColorType);
+    }
+    public void ChangeColor(ColorTypes colorType)
+    {
+        CurrentColorType = colorType;
+        collectableMeshController.ChangeCollectableMaterial(CurrentColorType);
     }
 
     public void DecreaseStack()
@@ -53,39 +60,30 @@ public class CollectableManager : MonoBehaviour
     }
     public void DeListStack()
     {
-        //transform.parent = null;
         StackSignals.Instance.onDroneArea?.Invoke(transform.GetSiblingIndex());
-        //StackSignals.Instance.onDecreaseStackOnDroneArea?.Invoke(transform.GetSiblingIndex());
     }
-    public async void IncreaseStack()
+    public void IncreaseStack()
     {
-        //await Task.Delay(2000);
         StackSignals.Instance.onIncreaseStack?.Invoke(gameObject);
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
     }
     public void ChangeAnimationOnController(CollectableAnimationTypes _currentAnimation)
     {
-        CollectableAnimationController.ChangeAnimation(_currentAnimation);
+        collectableAnimationController.ChangeAnimation(_currentAnimation);
     }
 
     public async void SetCollectablePositionOnDroneArea(Transform groundTransform)
     {
         ChangeAnimationOnController(CollectableAnimationTypes.Run);
         movementCommand.MoveToGround(groundTransform);
-        ActivateOutline(false);
+        ChangeOutlineState(false);
         await Task.Delay(3000);
-        ActivateOutline(true);
-
+        ChangeOutlineState(true);
     }
-
-    public void OnChangeColor(ColorTypes colorType)
+    
+    private void ChangeOutlineState(bool _state)
     {
-        CurrentColorType = colorType;
-        CollectableMeshController.ChangeCollectableMaterial(CurrentColorType);
-    }
-    private void ActivateOutline(bool _state)
-    {
-        CollectableMeshController.ActivateOutline(_state);
+        collectableMeshController.ActivateOutline(_state);
     }
     public async void DelayedDeath(bool _isDelayed)
     {
@@ -106,15 +104,11 @@ public class CollectableManager : MonoBehaviour
 
     public void CheckColorType(DroneColorAreaManager _droneColorAreaManager)
     {
-        CollectableMeshController.CheckColorType(_droneColorAreaManager);
-    }
-    public void CheckMatchType(DroneColorAreaManager _droneColorAreaManager)
-    {
-        CollectableMeshController.CheckColorType(_droneColorAreaManager);
+        collectableMeshController.CheckColorType(_droneColorAreaManager);
     }
 
     private void OnDestroy()
     {
-        ChangeAnimationOnController(CollectableAnimationTypes.Death);
+        
     }
 }
