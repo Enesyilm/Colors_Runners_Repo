@@ -11,15 +11,26 @@
                     "id": "f582461e-94e6-4fab-8df6-36fefdfbfc85",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "MouseDelta",
                     "type": "Value",
-                    "id": "bafda0cb-db9a-4bda-b8e2-1a277f246f6f",
+                    "id": "b219a77d-e76a-4364-b93f-3809ae04b8f0",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseLeftButton",
+                    "type": "Button",
+                    "id": "fabe9709-80c7-4935-b54f-2c90c23e884e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -79,24 +90,46 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "281eec36-1a67-4908-af0e-9083ea842977",
+                    "name": "One Modifier",
+                    "id": "528e1041-82dc-48ab-82c6-5d110226e5ad",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseDelta",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "5fd05917-3567-4087-8cff-951e3bd9e5c8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "d9e94569-9cde-4e53-87b0-e187e5278e0f",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MouseDelta",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "33e6df1b-05ca-4a58-aba6-19e1d9f69b4c",
-                    "path": "<Touchscreen>/primaryTouch/delta",
+                    "id": "fed07834-11ce-4ba4-a690-4ead42eecb63",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseDelta",
+                    "action": "MouseLeftButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -112,7 +145,8 @@
                     "id": "abacc251-3e5d-4c9c-8806-de7077f690a5",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [

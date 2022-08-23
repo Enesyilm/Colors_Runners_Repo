@@ -12,12 +12,7 @@ namespace Controllers
     public class PlayerMovementController : MonoBehaviour
     {
         #region Self Variables
-
-        #region Public Variables
-        #endregion
-
         #region Serialized Variables
-
         [SerializeField] private new Rigidbody rigidbody;
         #endregion
 
@@ -27,8 +22,8 @@ namespace Controllers
         private bool _isReadyToMove, _isReadyToPlay;
         private float _inputValue;
         private Vector2 _clampValues;
+        private bool _sidewaysEnable = false;
         #endregion
-
         #endregion
 
         public void SetMovementData(PlayerMovementData playerMovementData)
@@ -36,7 +31,6 @@ namespace Controllers
             _movementData = playerMovementData;
         }
         
-
         public void EnableMovement()
         {
             _isReadyToMove = true;
@@ -63,7 +57,7 @@ namespace Controllers
         {
             if (_isReadyToPlay)
             {
-                if (_isReadyToMove)
+                if (_isReadyToMove && _sidewaysEnable)
                 {
                     Move();
                 }
@@ -111,10 +105,14 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
+        public void SetSidewayEnabled(bool isSidewayEnabled)
+        {
+            _sidewaysEnable = isSidewayEnabled;
+        }
+
         public  void ChangeVerticalMovement(float _verticalSpeed)
         {
-            
-            _movementData.ForwardSpeed = _verticalSpeed;
+             _movementData.ForwardSpeed = _verticalSpeed;
         }
         public void RepositionPlayerForDrone(GameObject _other)
         {

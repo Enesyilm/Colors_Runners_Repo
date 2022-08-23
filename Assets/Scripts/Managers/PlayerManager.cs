@@ -63,6 +63,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             PlayerSignal.Instance.onChangeVerticalSpeed += OnChangeVerticalSpeed;
+            InputSignals.Instance.onSidewaysEnable += OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
         }
 
@@ -76,6 +77,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             PlayerSignal.Instance.onChangeVerticalSpeed -= OnChangeVerticalSpeed;
+            InputSignals.Instance.onSidewaysEnable -= OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore -= OnUpdateScore;
         }
         #endregion
@@ -149,6 +151,11 @@ namespace Managers
         public void OnChangeVerticalSpeed(float _verticalSpeed)
         {
             playerMovementController.ChangeVerticalMovement(_verticalSpeed);
+        }
+        
+        public void OnSidewaysEnable(bool isSidewayEnable)
+        {
+            playerMovementController.SetSidewayEnabled(isSidewayEnable);
         }
 
         private void OnReset()
