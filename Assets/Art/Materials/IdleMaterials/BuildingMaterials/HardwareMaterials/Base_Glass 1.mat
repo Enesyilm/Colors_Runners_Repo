@@ -22,7 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Base_Glass 1
   m_Shader: {fileID: 4800000, guid: 22c8483a0088cff4ea29f92544b8304b, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _MK_ALBEDO_MAP _MK_BLEND_PREMULTIPLY _MK_SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _MK_ALBEDO_MAP _MK_BLEND_PREMULTIPLY _MK_COLOR_GRADING_ALBEDO
+    _MK_SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -119,7 +120,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorGrading: 0
+    - _ColorGrading: 1
     - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -145,7 +146,7 @@ Material:
     - _ReceiveShadows: 1
     - _RenderFace: 2
     - _RenderPriority: 0
-    - _Saturation: 1
+    - _Saturation: 2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -158,7 +159,7 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 1
     - _UVSec: 0
     - _VertexAnimation: 0

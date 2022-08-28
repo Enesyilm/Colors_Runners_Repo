@@ -270,6 +270,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3076838280962783583}
     m_Modifications:
+    - target: {fileID: 192748275373879582, guid: 8b117b7d42de6054491e46c0c4a54f81, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4868673214224436285, guid: 8b117b7d42de6054491e46c0c4a54f81, type: 3}
       propertyPath: m_Name
       value: ApartmentBuilding (2)
@@ -489,6 +493,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3076838280962783583}
     m_Modifications:
+    - target: {fileID: 192748275373879582, guid: 8b117b7d42de6054491e46c0c4a54f81, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4868673214224436285, guid: 8b117b7d42de6054491e46c0c4a54f81, type: 3}
       propertyPath: m_Name
       value: ApartmentBuilding (1)
@@ -562,6 +570,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3076838280962783583}
     m_Modifications:
+    - target: {fileID: 192748275373879582, guid: 8b117b7d42de6054491e46c0c4a54f81, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4868673214224436285, guid: 8b117b7d42de6054491e46c0c4a54f81, type: 3}
       propertyPath: m_Name
       value: ApartmentBuilding
@@ -827,6 +839,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4868673214224436286, guid: a414cf386d1e3644e909d67fae57eedf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540255088817947501, guid: a414cf386d1e3644e909d67fae57eedf, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
