@@ -8,6 +8,9 @@ using Enums;
 using Signals;
 using UnityEngine;
 
+namespace Managers
+{
+    
 public class SaveManager : MonoBehaviour
 {
   #region Self Variables
@@ -42,10 +45,11 @@ public class SaveManager : MonoBehaviour
         _saveToDBCommand = new SaveToDBCommand();
         _getSaveDataCommand = new OnGetSaveDataCommand();
         _initializationSyncDatasCommand.OnInitializeSyncDatas(Data);
-        SaveSignals.Instance.onSendDataToManagers?.Invoke(Data);
+        
 
     }
 
+   
     private SaveData GetSaveData() => Resources.Load<CD_Save>("Data/CD_Save").SaveData;
 
     #region Subscribe Events
@@ -59,27 +63,47 @@ public class SaveManager : MonoBehaviour
     private void SubscribeEvents()
     {
         SaveSignals.Instance.onChangeSaveData+=OnChangeSaveData;
-        SaveSignals.Instance.onGetSaveData+=OnGetSaveData;
+        SaveSignals.Instance.onChangeIdleLevelListData+=OnChangeIdleLevelListData;
+        SaveSignals.Instance.onGetIntSaveData+=OnGetIntSaveData;
+        SaveSignals.Instance.onGetIdleSaveData+=OnGetIdleSaveData;
+        CoreGameSignals.Instance.onGameInit += OnLevelIdleInitialize;
     }
 
+    private void OnLevelIdleInitialize()
+    {
+        SaveSignals.Instance.onSendDataToManagers?.Invoke(Data);
+        
+    }
     
 
 
     private void UnSubscribeEvents()
     {
         SaveSignals.Instance.onChangeSaveData-=OnChangeSaveData;
-        SaveSignals.Instance.onGetSaveData-=OnGetSaveData;
+        SaveSignals.Instance.onChangeIdleLevelListData-=OnChangeIdleLevelListData;
+        SaveSignals.Instance.onGetIntSaveData-=OnGetIntSaveData;
+        SaveSignals.Instance.onGetIdleSaveData-=OnGetIdleSaveData;
+        CoreGameSignals.Instance.onGameInit -= OnLevelIdleInitialize;
+
 
     }
 
-    private int OnGetSaveData(SaveTypes _type)
+    private IdleLevelListData OnGetIdleSaveData()
     {
-        return _getSaveDataCommand.OnGetSaveData(_type);
+        return _getSaveDataCommand.GetIdleLevelData();
+    }
+    private void OnChangeIdleLevelListData(IdleLevelListData _idleLevelListData)
+    {
+        Data.IdleLevelListData=_idleLevelListData;
+        Debug.Log("Data"+Data.IdleLevelListData.IdleLevelData[0].IdleBuildingData[0].PayedAmount);
+        _saveToDBCommand.SaveDataToDatabase(Data);
+    }
+    private int OnGetIntSaveData(SaveTypes _type)
+    {
+        return _getSaveDataCommand.GetIntSaveData(_type);
     }
 
     #endregion
-    
-
     private void OnChangeSaveData(SaveTypes savetype, int saveAmount)
     {
         switch (savetype)
@@ -109,5 +133,20 @@ public class SaveManager : MonoBehaviour
 
 
     }
-    
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            SaveSignals.Instance.onApplicationPause?.Invoke();
+            
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        SaveSignals.Instance.onApplicationPause?.Invoke();
+    }
+   
+}
+
 }

@@ -1,4 +1,5 @@
 using Controllers;
+using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private UIPanelController uiPanelController;
+
+        [SerializeField]
+        private RectTransform arrow;
         [SerializeField] private LevelPanelController levelPanelController;
         [SerializeField] private IdlePanelController idlePanelController;
 
@@ -42,6 +46,34 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
+        }
+
+        private void CursorMovementOnRoulette()
+        {
+            Sequence _sequence = DOTween.Sequence();
+            _sequence.Join(arrow.transform.DORotate(new Vector3(0, 0, 30), 1).SetEase(Ease.Linear))
+                .SetLoops(-1, LoopType.Yoyo);
+            _sequence.Join(arrow.transform.DOLocalMoveX(-200, 1).SetEase(Ease.Linear)
+                .SetLoops(-1, LoopType.Yoyo));
+        }
+
+        private void OnChangeGameState(GameStates _gameState)
+        {
+            switch (_gameState)
+            {
+                case GameStates.Roulette:
+                    OnOpenPanel(UIPanelTypes.RoulettePanel);
+                    CursorMovementOnRoulette();
+                    break;
+                case GameStates.Idle:
+                    OnOpenPanel(UIPanelTypes.IdlePanel);
+                    OnClosePanel(UIPanelTypes.RoulettePanel);
+                    break;
+                case GameStates.Runner:
+                    OnOpenPanel(UIPanelTypes.StartPanel);
+                    break;
+            }
         }
 
         private void UnsubscribeEvents()
@@ -52,6 +84,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
 
         }
 
@@ -82,6 +115,7 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.LevelPanel);
         }
+        
 
         private void OnLevelFailed()
         {
@@ -123,6 +157,12 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
+        }
+        public void EnterIdle()
+        {
+            
+            CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
+            NewCameraSignals.Instance.onChangeCameraState(CameraStates.Idle);
         }
     }
 }

@@ -25,6 +25,10 @@ namespace Managers
         private PlayerMovementController playerMovementController;
         [SerializeField] 
         private PlayerPhysicsController playerPhysicsController;
+        [SerializeField]
+        private PlayerAnimationController playerAnimationController;
+        [SerializeField]
+        private PlayerMeshController playerMeshController;
         [SerializeField] 
         private PlayerTextController playerTextController;
         [SerializeField]
@@ -35,6 +39,7 @@ namespace Managers
         #region Private Variables
 
         private PlayerData Data;
+        private PlayerState _playerState=PlayerState.Runner;
         
 
         #endregion
@@ -63,6 +68,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             PlayerSignal.Instance.onChangeVerticalSpeed += OnChangeVerticalSpeed;
+            PlayerSignal.Instance.onIncreaseScale += OnIncreaseSize;
             InputSignals.Instance.onSidewaysEnable += OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
         }
@@ -77,9 +83,12 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             PlayerSignal.Instance.onChangeVerticalSpeed -= OnChangeVerticalSpeed;
+            PlayerSignal.Instance.onIncreaseScale -= OnIncreaseSize;
             InputSignals.Instance.onSidewaysEnable -= OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore -= OnUpdateScore;
         }
+        
+
         #endregion
 
         private void Awake()
@@ -138,6 +147,16 @@ namespace Managers
         {
             playerMovementController.ChangeVerticalMovement(0);
         }
+
+        public void ChangeAnimation(PlayerAnimationTypes _animationType)
+        {
+            //playerAnimationController.ChangeAnimation(_animationType);
+        }
+        public void StopAllMovement()
+        {
+            playerMovementController.StopAllMovement();
+            ChangeAnimation(PlayerAnimationTypes.Idle);
+        }
         public void EnableVerticalMovement()
         {
             playerMovementController.ChangeVerticalMovement(10);
@@ -166,6 +185,15 @@ namespace Managers
             playerMovementController.OnReset();
         }
         #endregion
+
+        public void OnIncreaseSize()
+        {
+            playerMeshController.IncreasePlayerSize();
+        } public void ActivateMesh()
+        {
+            NewCameraSignals.Instance.onChangeCameraState.Invoke(CameraStates.StartOfIdle);
+            playerMeshController.ActiveMesh();
+        }
     }
 }
 

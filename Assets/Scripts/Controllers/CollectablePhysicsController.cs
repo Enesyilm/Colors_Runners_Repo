@@ -15,10 +15,7 @@ namespace Controllers
 
         #region Serialized Variables
         [SerializeField]
-        private CollectableManager collectableManager;
-        
-        
-
+        private CollectableManager manager;
         #endregion
 
         #endregion
@@ -30,7 +27,7 @@ namespace Controllers
                 if( other.CompareTag("Collectable"))
                 {
                     CollectableManager _otherCollectableManager =other.transform.parent.GetComponent<CollectableManager>();
-                    if (_otherCollectableManager.CurrentColorType==collectableManager.CurrentColorType)
+                    if (_otherCollectableManager.CurrentColorType==manager.CurrentColorType)
                     {
                         other.transform.tag = "Collected";
                         _otherCollectableManager.IncreaseStack();
@@ -38,65 +35,71 @@ namespace Controllers
                     else
                     {
                         Destroy(other.transform.parent.gameObject);
-                        collectableManager.DecreaseStack();
+                        manager.DecreaseStack();
                     }
                 }
+
+                
                 if (other.CompareTag("Obstacle"))
                 {
                     Destroy(other.transform.parent.gameObject);
-                    collectableManager.DecreaseStack();
+                    manager.DecreaseStack();
                 
                 }
                 if (other.CompareTag("TurretAreaGround"))
                 {
                     TurretAreaController _turretAreaController=other.GetComponent<TurretAreaController>();
                     TurretAreaManager _turretAreaManager=other.GetComponentInParent<TurretAreaManager>();
-                    collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
-                    if(collectableManager.CurrentColorType!=_turretAreaController.colorType)
+                    manager.ChangeAnimationOnController(CollectableAnimationTypes.CrouchRun);
+                    if(manager.CurrentColorType!=_turretAreaController.ColorType)
                     {
                         _turretAreaManager.AddTargetToList(transform.parent.gameObject);
                     }
                 }
                 if (other.CompareTag("ColoredGround"))
                 {
-                    collectableManager.DeListStack();
-                    collectableManager.SetCollectablePositionOnDroneArea(other.gameObject.transform);//ucu ayni fonksiyonda tetiklenecek
-                    collectableManager.CheckColorType(other.GetComponent<DroneColorAreaManager>());
+                    manager.DeListStack();
+                    manager.SetCollectablePositionOnDroneArea(other.gameObject.transform);//ucu ayni fonksiyonda tetiklenecek
+                    manager.CheckColorType(other.GetComponent<DroneColorAreaManager>());
                     tag = "Untagged";
                 }
             }
-            if (other.CompareTag("DroneAreaPhysics"))
+            if (other.CompareTag("Roulette"))
             {
-                if (collectableManager.MatchType == MatchType.Match)
-                {
-                    collectableManager.IncreaseStack();
-                }
-                else
-                {
-                    collectableManager.DelayedDeath(true);
-                    
-                }
+                manager.DecreaseStackOnIdle();
+                Debug.Log("Roulette Calisti");
             }
             if (other.CompareTag("DroneAreaPhysics"))
             {
                 tag = "Collected";
+                if (manager.MatchType == MatchType.Match)
+                {
+                    manager.IncreaseStack();
+                }
+                else
+                {
+                    manager.DelayedDeath(true);
+                    
+                }
             }
-                
+             
         }
         private void OnTriggerExit(Collider other)
         {
+            if (CompareTag("Collected"))
+            {
+                if (other.CompareTag("TurretAreaGround"))
+                {
+                    gameObject.tag = "Collected";
+                    manager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
+                }
+
+                if (other.CompareTag("DroneAreaPhysics"))
+                {
+                    manager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
+                }
+            }
             
-
-            if (other.CompareTag("TurretAreaGround"))
-            {
-                gameObject.tag = "Collected";
-                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
-            }
-
-            if (other.CompareTag("DroneAreaPhysics"))
-            {
-                collectableManager.ChangeAnimationOnController(CollectableAnimationTypes.Run);
-            }
             
         } 
 

@@ -9,5 +9,6 @@ namespace Enums
         LevelPanel,
         FailPanel,
         IdlePanel,
+        RoulettePanel,
     }
 }

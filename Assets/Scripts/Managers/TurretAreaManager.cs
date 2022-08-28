@@ -35,16 +35,17 @@ namespace Managers
         #endregion
 
         #endregion
-
-        private void Start()
-        {
-            InvokeRepeating("KillFromTargetList",0,0.8f);
-        }
+        
         public void ResetTurretArea()
         {
             CancelInvoke("KillFromTargetList");
             _targetList.Clear();
             _turretState = TurretStates.Search;
+        }
+
+        public void Start()
+        {
+            InvokeRepeating("KillFromTargetList",0,0.8f);
         }
 
         public void AddTargetToList(GameObject _other)
@@ -64,7 +65,6 @@ namespace Managers
             }
             
         }
-
         private TurretStates ChangeTurretState(TurretStates _currentState)
         {
            return _turretState = _currentState;

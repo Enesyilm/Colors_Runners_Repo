@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Enums;
@@ -52,7 +53,7 @@ namespace Managers
             private void SubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
-                StackSignals.Instance.onDroneArea += OnDroneArea;
+                StackSignals.Instance.onDroneArea += OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
@@ -62,18 +63,10 @@ namespace Managers
 
 
             }
-
-           
-
-            private void OnDisable()
-            {
-                UnSubscribeEvents();
-            }
-
             private void UnSubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
-                StackSignals.Instance.onDroneArea -= OnDroneArea;
+                StackSignals.Instance.onDroneArea -= OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
@@ -81,17 +74,64 @@ namespace Managers
                 StackSignals.Instance.onColorChange -= OnChangeColor;
 
             }
+            private void OnDisable()
+            {
+                UnSubscribeEvents();
+            }
+
             #endregion
 
         private void FixedUpdate()
         {
-            OnLerpStack();
+            LerpStack();
+        }
+        private void LerpStack()
+        {
+            if (stackList.Count > 0)
+            {
+                // stackList[0].transform.position = _playerManager.position;
+                stackList[0].transform.position = new Vector3(
+                    Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
+                    Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
+                    Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-.8f,.2f));
+                Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
+                _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
+                stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
+                if (stackList.Count > 1)
+                {
+                    for (int index = 1; index < stackList.Count; index++)
+                    {
+                        stackList[index].transform.position = new Vector3(
+                            Mathf.Lerp(stackList[index].transform.position.x, stackList[index - 1].transform.position.x,.2f),
+                            Mathf.Lerp(stackList[index].transform.position.y, stackList[index - 1].transform.position.y,.2f),
+                            Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-.8f,.2f));
+                        Quaternion toRotation = Quaternion.LookRotation(stackList[index - 1].transform.position - stackList[index].transform.position);
+                        toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
+                        stackList[index].transform.rotation = Quaternion.Slerp( stackList[index-1].transform.rotation,toRotation,1f);
+                    }
+                }
+                
+                
+            }
         }
         #region Subscribed Methods
         private void OnIncreaseStack(GameObject _currentGameObject)
         {
             _currentGameObject.transform.SetParent(transform);
             stackList.Add(_currentGameObject);
+            StartCoroutine(ScaleUp());
+        }
+
+        private IEnumerator ScaleUp()
+        {
+            for (int i = 0; i<stackList.Count; i++)
+            {
+                Vector3 Scale=Vector3.one*1.2f;
+                stackList[i].transform.DOScale(Scale, 0.1f).SetEase(Ease.InOutSine);
+                yield return new WaitForSeconds(.05f);
+                stackList[i].transform.DOScale(Vector3.one,0.1f ).SetDelay(0.2f).SetEase(Ease.Flash); 
+                yield return new WaitForSeconds(.05f);
+            }
         }
         private void OnDecreaseStack(int _removedIndex)
         {
@@ -104,7 +144,7 @@ namespace Managers
             stackList.TrimExcess();
 
         }
-        private async void OnDroneArea(int index)
+        private async void OnDroneAreaDecrease(int index)
         {
             
             stackList[index].transform.parent = tempHolder;
@@ -115,43 +155,10 @@ namespace Managers
                 DroneAreaSignals.Instance.onDroneCheckStarted?.Invoke();
                 await Task.Delay(5000);
                 DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
-                //DroneAreaFinal();
             }
                 
         }
-        private void OnFindPlayer()
-        {
-            _playerManager=GameObject.FindWithTag("Player").transform;
-        }
-        private void OnLerpStack()
-        {
-            if (stackList.Count > 0)
-            {
-                // stackList[0].transform.position = _playerManager.position;
-                stackList[0].transform.position = new Vector3(
-                    Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-1,.2f));
-                Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
-                _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
-                stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
-                if (stackList.Count > 1)
-                {
-                    for (int index = 1; index < stackList.Count; index++)
-                    {
-                        stackList[index].transform.position = new Vector3(
-                            Mathf.Lerp(stackList[index].transform.position.x, stackList[index - 1].transform.position.x,.2f),
-                            Mathf.Lerp(stackList[index].transform.position.y, stackList[index - 1].transform.position.y,.2f),
-                            Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-1,.2f));
-                        Quaternion toRotation = Quaternion.LookRotation(stackList[index - 1].transform.position - stackList[index].transform.position);
-                        toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
-                        stackList[index].transform.rotation = Quaternion.Slerp( stackList[index-1].transform.rotation,toRotation,1f);
-                    }
-                }
-                
-                
-            }
-        }
+      
         private void OnChangeStack(int initAmount)
         {
             for (int i = 0; i <initAmount ; i++)
@@ -167,7 +174,7 @@ namespace Managers
         {
             for (int i = 0; i < stackList.Count; i++)
             {
-                stackList[i].GetComponent<CollectableManager>().OnChangeColor(colorType);
+                stackList[i].GetComponent<CollectableManager>().ChangeColor(colorType);
             }
         }
         private void OnInitRunAnimation()
@@ -188,9 +195,9 @@ namespace Managers
         }
 
 
-        public void OnInitalStackSettings()
+        private void OnInitalStackSettings()
         {//deger datadan gelmeli
-            OnFindPlayer();
+            FindPlayer();
             OnChangeStack(initAmount);
             StackSignals.Instance.onAnimationChange?.Invoke(CollectableAnimationTypes.Crouch);
         }
@@ -198,5 +205,10 @@ namespace Managers
         
 
         #endregion
+          private void FindPlayer()
+        {
+            _playerManager=GameObject.FindWithTag("Player").transform;
+        }
+        
     }
 }

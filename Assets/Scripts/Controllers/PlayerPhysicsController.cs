@@ -1,4 +1,5 @@
 using System;
+using Enums;
 using UnityEngine;
 using Managers;
 using Signals;
@@ -27,10 +28,7 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Finish"))
-            {
-                //UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
-            }
+            
             if(other.CompareTag("DroneAreaPhysics"))
             {
                 playerManager.RepositionPlayerForDrone(other.gameObject);
@@ -47,6 +45,12 @@ namespace Controllers
             if (other.CompareTag("DroneArea"))
             {
                 playerManager.StopVerticalMovement();
+            }
+            if (other.CompareTag("Roulette"))
+            {
+                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
+                playerManager.StopAllMovement();
+                playerManager.ActivateMesh();
             }
         }
     }

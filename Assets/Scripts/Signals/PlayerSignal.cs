@@ -9,5 +9,7 @@ namespace Signals
     public class PlayerSignal : MonoSingleton<PlayerSignal>
     {
         public UnityAction<float> onChangeVerticalSpeed=delegate{  };
+        public UnityAction onIncreaseScale=delegate{  };
+        
     }
 }

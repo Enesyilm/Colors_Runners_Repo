@@ -18,7 +18,8 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private CollectableManager collectableManager;
+        [SerializeField] 
+        private CollectableManager collectableManager;
 
         [SerializeField]
         private SkinnedMeshRenderer meshRenderer;
@@ -30,25 +31,14 @@ namespace Controllers
         {
 
             var colorHandler=Addressables.LoadAssetAsync<Material>($"Collectable/Color_{_colorType}");
-           
-             if (colorHandler.WaitForCompletion() != null)
-             {
-                 meshRenderer.material = colorHandler.Result;
-             }
-            
+            meshRenderer.material = (colorHandler.WaitForCompletion() != null)?colorHandler.Result:null;
         }
 
         public void CheckColorType(DroneColorAreaManager _droneColorAreaRef)
         {
-            if (collectableManager.CurrentColorType == _droneColorAreaRef.CurrentColorType)
-            {
-                collectableManager.MatchType = MatchType.Match;
-            }
-            else
-            {
-                collectableManager.MatchType = MatchType.UnMatched;
-
-            }
+            collectableManager.MatchType = (collectableManager.CurrentColorType == _droneColorAreaRef.CurrentColorType)
+                ? MatchType.Match
+                : MatchType.UnMatched;
         }
         public void ActivateOutline(bool _isOutlineActive)
         {

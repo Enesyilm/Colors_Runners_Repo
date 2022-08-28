@@ -18,6 +18,7 @@ namespace Controllers
         
 
         #endregion
+       
         private void OnTriggerExit(Collider other)
         {
             if(other.CompareTag("Collected"))

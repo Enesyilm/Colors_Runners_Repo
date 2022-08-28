@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164af7b88844446eafc9699fc63ca506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableManager: {fileID: 7238826796179776721}
+  manager: {fileID: 7238826796179776721}
 --- !u!136 &4230901396149910288
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -76,49 +76,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &7238826795472673383
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7238826795472673380}
-  - component: {fileID: 7238826795472673381}
-  m_Layer: 0
-  m_Name: Movement
-  m_TagString: Collectable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7238826795472673380
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7238826795472673383}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7238826796179776720}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7238826795472673381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7238826795472673383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8df2e22733844a4d8910800e63362e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7238826796179776723
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +107,6 @@ Transform:
   m_Children:
   - {fileID: 7205693310137271666}
   - {fileID: 7238826795343868217}
-  - {fileID: 7238826795472673380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,12 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentColorType: 5
-  CollectableMeshController: {fileID: 7238826796631104913}
-  CollectableMovementController: {fileID: 7238826795472673381}
-  CollectablePhysicsController: {fileID: 7238826795343868230}
-  CollectableAnimationController: {fileID: 7238826796716933103}
   MatchType: 0
   movementCommand: {fileID: 2564772926364043363}
+  collectableMeshController: {fileID: 7238826796631104913}
+  collectablePhysicsController: {fileID: 7238826795343868230}
+  collectableAnimationController: {fileID: 7238826796716933103}
   collider: {fileID: 4230901396149910288}
 --- !u!114 &2564772926364043363
 MonoBehaviour:
