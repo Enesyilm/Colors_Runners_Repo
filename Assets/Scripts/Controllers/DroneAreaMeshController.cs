@@ -18,15 +18,8 @@ namespace Controllers
         #endregion
         public void ChangeAreaColor(ColorTypes _colorType)
         {
-
             var colorHandler=Addressables.LoadAssetAsync<Material>($"CoreColor/Color_{_colorType}");
-           
-            if (colorHandler.WaitForCompletion() != null)
-            {
-                meshRenderer.material = colorHandler.Result;
-            }
-            
-            
+            meshRenderer.material = (colorHandler.WaitForCompletion() != null)?colorHandler.Result:null;
         }
     }
 }

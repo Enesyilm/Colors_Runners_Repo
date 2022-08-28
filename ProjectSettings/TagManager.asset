@@ -15,6 +15,7 @@ TagManager:
   - JumpArea
   - TurretAreaGround
   - Portal
+  - Roulette
   layers:
   - Default
   - TransparentFX

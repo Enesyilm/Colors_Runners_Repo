@@ -5,6 +5,7 @@ using Data.ValueObjects;
 using Enums;
 using Commands;
 using Extentions;
+using Managers.Abstracts.Concreates;
 //using Keys;
 using Signals;
 using UnityEngine;
@@ -34,6 +35,7 @@ namespace Managers
          private int _levelID;
          private int _idleLevelID;
          private LevelLoaderCommand levelLoader;
+         private IdleLevelLoaderCommand idleLevelLoader;
          private ClearActiveLevelCommand levelClearer;
 
         #endregion
@@ -44,24 +46,27 @@ namespace Managers
         {
             
             _levelID = GetActiveLevel();
+            _idleLevelID = GetActiveIdleLevel();
             GetCommandComponents();
         }
+
+        
 
         private void GetCommandComponents()
         {
             levelLoader = GetComponent<LevelLoaderCommand>();
+            idleLevelLoader = GetComponent<IdleLevelLoaderCommand>();
             levelClearer = GetComponent<ClearActiveLevelCommand>();
         }
 
         private int GetActiveLevel()
         {
 
-            return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.Level);
+            return SaveSignals.Instance.onGetIntSaveData.Invoke(SaveTypes.Level);
         }
         private int GetActiveIdleLevel()
         {
-
-            return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.IdleLevel);
+            return _idleLevelID;
         }
         #region Event Subscription
 
@@ -73,19 +78,24 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
+            CoreGameSignals.Instance.onLevelIdleInitialize += OnInitializeIdleLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
+            CoreGameSignals.Instance.onGetIdleLevelID += OnGetIdleLevelID;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
+            CoreGameSignals.Instance.onLevelIdleInitialize -= OnInitializeIdleLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
+            CoreGameSignals.Instance.onGetIdleLevelID -= OnGetIdleLevelID;
+
         }
 
         private void OnDisable()
@@ -98,6 +108,7 @@ namespace Managers
         private void Start()
         {
             OnInitializeLevel();
+            OnInitializeIdleLevel();
         }
 
         private void OnNextLevel()
@@ -110,11 +121,11 @@ namespace Managers
         }
         private void OnNextIdleLevel()
         {
-            _levelID++;
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            _idleLevelID++;
+            CoreGameSignals.Instance.onClearActiveIdleLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.IdleLevel,_idleLevelID);
+            CoreGameSignals.Instance.onLevelIdleInitialize?.Invoke();
         }
 
         private void OnRestartLevel()
@@ -129,6 +140,10 @@ namespace Managers
         {
             return _levelID;
         }
+        private int OnGetIdleLevelID()
+        {
+            return _idleLevelID;
+        }
 
 
         private void OnInitializeLevel()
@@ -138,8 +153,8 @@ namespace Managers
         }
         private void OnInitializeIdleLevel()
         {
-            //var newLevelData = _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").LevelData.LevelAmount;
-            //levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
+            var newLevelData = _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelListData.IdleLevelData.Count;
+            idleLevelLoader.InitializeIdleLevel(newLevelData, levelHolder.transform);
         }
 
         private void OnClearActiveLevel()

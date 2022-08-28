@@ -341,7 +341,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6, y: 0.8609674, z: 0.28890944}
-  m_Center: {x: 0, y: -0.25, z: -2.1494}
+  m_Center: {x: 0, y: -0.25, z: -1.88}
 --- !u!114 &1544170011024702942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droneColliderObject: {fileID: 6013378629259194105}
+  droneObject: {fileID: 0}
   droneColliderForDetect:
   - {fileID: 1016661678348455343}
   - {fileID: 8560156270454481339}

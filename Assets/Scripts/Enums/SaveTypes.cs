@@ -5,6 +5,7 @@ namespace Enums
         TotalColorman,
         Level,
         IdleLevel,
+        IdleLevelData,
         Bonus,
         All
     }

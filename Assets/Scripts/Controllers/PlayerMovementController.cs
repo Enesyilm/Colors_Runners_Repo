@@ -92,7 +92,7 @@ namespace Controllers
             rigidbody.angularVelocity = Vector3.zero;
         }
 
-        private void Stop()
+        public void Stop()
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
@@ -122,6 +122,11 @@ namespace Controllers
         {
             _movementData.ForwardSpeed = 0;
             rigidbody.angularVelocity =Vector3.zero;
+        }
+
+        public void StopAllMovement()
+        {
+            _isReadyToPlay = false;
         }
     }
 }

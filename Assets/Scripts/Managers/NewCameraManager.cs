@@ -69,6 +69,8 @@ namespace Managers
         private void UnSubscribeEvents()
         {
             NewCameraSignals.Instance.onChangeCameraState-=OnChangeCameraState;
+            CoreGameSignals.Instance.onGameInit-=OnGameInit;
+
         }
         private void OnDisable()
         {
