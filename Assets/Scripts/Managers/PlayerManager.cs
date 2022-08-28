@@ -71,8 +71,6 @@ namespace Managers
             PlayerSignal.Instance.onIncreaseScale += OnIncreaseSize;
             InputSignals.Instance.onSidewaysEnable += OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
-            CoreGameSignals.Instance.onChangeGameStateNew += OnChangeGameStateNew;//yeni
-            InputSignals.Instance.onIdleInputDragged += OnGetIdleInputValues;//Yeni
         }
 
         private void UnSubscribeEvents()
@@ -88,9 +86,6 @@ namespace Managers
             PlayerSignal.Instance.onIncreaseScale -= OnIncreaseSize;
             InputSignals.Instance.onSidewaysEnable -= OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore -= OnUpdateScore;
-            CoreGameSignals.Instance.onChangeGameStateNew -= OnChangeGameStateNew; //YENi
-            InputSignals.Instance.onIdleInputDragged -= OnGetIdleInputValues;//yeni
-
         }
         
 
@@ -127,12 +122,6 @@ namespace Managers
         {
             playerMovementController.UpdateInputValue(inputParam);
         }
-        private void OnGetIdleInputValues(IdleInputParams idleInputParams)//Yeni
-        {
-            Debug.Log("Sinyal Çalýþtý");
-            playerMovementController.UpdateIdleInputValue(idleInputParams);
-        }
-
         #endregion
 
         private void OnPlay()
@@ -141,13 +130,11 @@ namespace Managers
         }
         private void OnLevelSuccessful()
         {
-            Debug.Log("OnLevelSuccessful");
             playerMovementController.IsReadyToPlay(false);
         }
 
         private void OnLevelFailed()
         {
-            Debug.Log("OnLevelFailed");
             playerMovementController.IsReadyToPlay(false);
         }
         
@@ -190,12 +177,6 @@ namespace Managers
             playerMovementController.SetSidewayEnabled(isSidewayEnable);
         }
 
-        public void OnChangeGameStateNew() //New
-        {
-            
-            playerMovementController.ChangeGameState();
-        }
-
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
@@ -208,8 +189,7 @@ namespace Managers
         public void OnIncreaseSize()
         {
             playerMeshController.IncreasePlayerSize();
-        }
-        public void ActivateMesh()
+        } public void ActivateMesh()
         {
             NewCameraSignals.Instance.onChangeCameraState.Invoke(CameraStates.StartOfIdle);
             playerMeshController.ActiveMesh();

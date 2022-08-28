@@ -38,7 +38,6 @@ namespace Controllers
             {
                 StackSignals.Instance.onColorChange?.Invoke(other.GetComponent<ColorController>().ColorType);
             }
-            
         }
 
         private void OnTriggerExit(Collider other)
@@ -52,7 +51,6 @@ namespace Controllers
                 CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
                 playerManager.StopAllMovement();
                 playerManager.ActivateMesh();
-                
             }
         }
     }

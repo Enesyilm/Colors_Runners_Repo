@@ -235,7 +235,6 @@ GameObject:
   - component: {fileID: 4550324299801343837}
   - component: {fileID: 5209661320691600101}
   - component: {fileID: 1414629497647160702}
-  - component: {fileID: 6021870970283572811}
   m_Layer: 0
   m_Name: Lane Line
   m_TagString: Untagged
@@ -251,7 +250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3408423869972138339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.75, z: 0}
+  m_LocalPosition: {x: 0, y: 5.55, z: 0}
   m_LocalScale: {x: 1, y: 0.25, z: 4}
   m_Children: []
   m_Father: {fileID: 2078554315385012292}
@@ -306,19 +305,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6021870970283572811
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3408423869972138339}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6480653756238900526
 GameObject:
   m_ObjectHideFlags: 0

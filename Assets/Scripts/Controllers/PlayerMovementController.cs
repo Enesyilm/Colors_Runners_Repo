@@ -6,9 +6,6 @@ using UnityEngine;
 using Data.ValueObjects;
 using Keys;
 using DG.Tweening;
-using Managers;
-using Signals;
-
 
 namespace Controllers
 {
@@ -16,29 +13,19 @@ namespace Controllers
     {
         #region Self Variables
         #region Serialized Variables
-        [SerializeField]private new Rigidbody rigidbody;
-        [SerializeField]private PlayerManager playerManager;
-
+        [SerializeField] private new Rigidbody rigidbody;
         #endregion
 
         #region Private Variables
 
         private PlayerMovementData _movementData;
-        
-        
         private bool _isReadyToMove, _isReadyToPlay;
         private float _inputValue;
-        private float _inputXValue;
-        private float _inputZValue;
         private Vector2 _clampValues;
         private bool _sidewaysEnable = false;
-        private bool _isRunner =true;//true
-        
         #endregion
         #endregion
 
-
-        
         public void SetMovementData(PlayerMovementData playerMovementData)
         {
             _movementData = playerMovementData;
@@ -60,15 +47,6 @@ namespace Controllers
             _inputValue = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
         }
-        public void UpdateIdleInputValue(IdleInputParams idleInputParams) //Yeni
-        {
-            Debug.Log("Movement Data");
-            _isRunner = false;
-            _inputXValue = idleInputParams.IdleXValue;
-            _inputZValue = idleInputParams.IdleZValue;
-        }
-
-
 
         public void IsReadyToPlay(bool state)
         {
@@ -77,12 +55,11 @@ namespace Controllers
 
         private void FixedUpdate()
         {
-            Debug.Log("ÝsreadyToplay " + _isReadyToPlay + "ÝsReadToMove" + _isReadyToMove + "_sidewaysEnable" + _sidewaysEnable);
             if (_isReadyToPlay)
             {
                 if (_isReadyToMove && _sidewaysEnable)
                 {
-                    Move(); //revize ettim
+                    Move();
                 }
                 else
                 {
@@ -93,7 +70,7 @@ namespace Controllers
                 Stop();
         }
 
-        private void RunnerMove()
+        private void Move()
         {
             var velocity = rigidbody.velocity;
             
@@ -107,45 +84,6 @@ namespace Controllers
                 (position = rigidbody.position).y,
                 position.z);
             rigidbody.position = position;
-        }
-
-        private void IdleMove() //Yeni
-        {
-            var velocity = rigidbody.velocity;
-            Debug.Log("ÝDLE ÇALIÞIYOR");
-            velocity = new Vector3(_inputXValue * _movementData.IdleSidewaysSpeed, velocity.y,
-                _inputZValue * _movementData.IdleForwardSpeed);
-            rigidbody.velocity = velocity;
-            Debug.Log("VELOCÝTY"+velocity);
-            if (_inputXValue != 0 && _inputZValue != 0)
-            {
-                playerManager.ChangeAnimation(Enums.PlayerAnimationTypes.Run);
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputXValue, 0, _inputZValue));
-                transform.rotation = toRotation;
-            }
-
-        }
-
-        private void Move() //yeni
-        {
-            Debug.Log("ÝSRUnner"+_isRunner);
-            if (_isRunner)
-            {
-                RunnerMove();
-            }
-            else
-            {
-                Debug.Log("MOVEIDLE");
-                IdleMove();
-            }
-        }
-
-        public void ChangeGameState() //new
-        {//state deðiince inputu deðiþ
-            _isRunner = false;
-            _isReadyToPlay = true;
-            _sidewaysEnable = true;
-            
         }
 
         private void StopSideways()
@@ -188,7 +126,6 @@ namespace Controllers
 
         public void StopAllMovement()
         {
-            Debug.Log("StopAllMovement");
             _isReadyToPlay = false;
         }
     }

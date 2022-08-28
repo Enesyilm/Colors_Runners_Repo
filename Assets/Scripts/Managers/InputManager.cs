@@ -23,7 +23,6 @@ namespace Managers
 
         [SerializeField] private bool isReadyForTouch;
         [SerializeField] private bool isFirstTimeTouchTaken =false;
-        [SerializeField] private FloatingJoystick joystick;
 
         #endregion
 
@@ -34,7 +33,6 @@ namespace Managers
         private float _currentVelocity; //ref type
         private Vector3 _moveVector; //ref type
         private Vector3 _playerMovementValue;
-
 
         #endregion
 
@@ -54,7 +52,7 @@ namespace Managers
         private void OnEnable()
         {
             _playerInput.Runner.Enable();
-            SubscribeEvents();
+             SubscribeEvents();
         }
 
         private void SubscribeEvents()
@@ -66,10 +64,6 @@ namespace Managers
             _playerInput.Runner.MouseDelta.performed += OnPlayerInputMouseDeltaPerformed;
             _playerInput.Runner.MouseDelta.canceled += OnPlayerInputMouseDeltaCanceled;
             _playerInput.Runner.MouseLeftButton.started += OnMouseLeftButtonStart;
-            _playerInput.Idle.JoyStick.started += OnPlayerInputIdleJoystickStart; //YENÝ
-            _playerInput.Idle.JoyStick.performed += OnPlayerInputIdleJoystickPerformed; //YENÝ
-            _playerInput.Idle.JoyStick.canceled += OnPlayerInputIdleJoystickCanceled;//YENÝ
-            CoreGameSignals.Instance.onChangeGameStateNew += OnChangeInputState;//yeni
         }
 
         private void UnSubscribeEvents()
@@ -78,13 +72,11 @@ namespace Managers
             InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+
+            
             _playerInput.Runner.MouseDelta.performed -= OnPlayerInputMouseDeltaPerformed;
             _playerInput.Runner.MouseDelta.canceled -= OnPlayerInputMouseDeltaCanceled;
             _playerInput.Runner.MouseLeftButton.started -= OnMouseLeftButtonStart;
-            _playerInput.Idle.JoyStick.started -= OnPlayerInputIdleJoystickStart;//YENÝ
-            _playerInput.Idle.JoyStick.performed -= OnPlayerInputIdleJoystickPerformed;//YENÝ
-            _playerInput.Idle.JoyStick.canceled -= OnPlayerInputIdleJoystickCanceled;//YENÝ
-            CoreGameSignals.Instance.onChangeGameStateNew -= OnChangeInputState; //yeni
         }
 
         private void OnDisable()
@@ -132,55 +124,9 @@ namespace Managers
                 CoreGameSignals.Instance.onPlay?.Invoke();
             }
         }
-
-        void OnPlayerInputIdleJoystickStart(InputAction.CallbackContext cntx)//YENÝ
-        {
-            //state Bu ise baþla
-           // Debug.Log("JOYSTCÝK STARTED" + cntx.ReadValue<Vector2>());
-            _playerMovementValue = new Vector3(cntx.ReadValue<Vector2>().x, 0f, cntx.ReadValue<Vector2>().y);
-            InputSignals.Instance.onIdleInputDragged?.Invoke(new IdleInputParams()
-            {
-                IdleXValue = _playerMovementValue.x,
-                IdleZValue = _playerMovementValue.z
-            });
-
-
-        }
-
-        void OnPlayerInputIdleJoystickPerformed(InputAction.CallbackContext cntx)//YENÝ
-        {
-            //state Bu ise baþla
-            _playerMovementValue = new Vector3(cntx.ReadValue<Vector2>().x, 0f, cntx.ReadValue<Vector2>().y);
-           // Debug.Log("JOYSTCÝK PERFORMED"+cntx.ReadValue<Vector2>());
-            InputSignals.Instance.onIdleInputDragged?.Invoke(new IdleInputParams()
-            {
-                IdleXValue = _playerMovementValue.x,
-                IdleZValue =_playerMovementValue.z
-            });
-        }
-
-        void OnPlayerInputIdleJoystickCanceled(InputAction.CallbackContext cntx)//YENÝ
-        {
-            
-            _playerMovementValue = Vector3.zero;
-            Debug.Log("JOYSTCÝK CANCELED" + cntx.ReadValue<Vector2>());
-            InputSignals.Instance.onIdleInputDragged?.Invoke(new IdleInputParams()
-            {
-                IdleXValue = _playerMovementValue.x,
-                IdleZValue = _playerMovementValue.z
-            });
-        }
-
-
+        
         #endregion
         #region Subscribed Methods
-
-        public void OnChangeInputState() //yeni
-        {
-            _playerInput.Runner.Disable();
-            _playerInput.Idle.Enable();
-           
-        }
 
         private void OnEnableInput()
         {

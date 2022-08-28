@@ -163,7 +163,6 @@ namespace Managers
             
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
             NewCameraSignals.Instance.onChangeCameraState(CameraStates.Idle);
-            CoreGameSignals.Instance.onChangeGameStateNew?.Invoke(); //YENÝ
         }
     }
 }
