@@ -1,9 +1,10 @@
+using Data.ValueObjects;
 using Enums;
 namespace Commands
 {
     public class OnGetSaveDataCommand
     {
-        public int OnGetSaveData(SaveTypes _saveType)
+        public int GetIntSaveData(SaveTypes _saveType)
         {
             if (ES3.FileExists())
             {
@@ -26,9 +27,18 @@ namespace Commands
                 } 
                 
             }
-            else{
-                return 0;
+
+            return 0;
+        }
+
+        public IdleLevelListData GetIdleLevelData()
+        {
+            if (ES3.FileExists())
+            {
+                return ES3.Load<IdleLevelListData>("IdleLevelListData");
             }
+
+           return new IdleLevelListData();
         }
     }
 }

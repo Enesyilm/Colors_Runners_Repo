@@ -38,6 +38,8 @@ namespace Controllers
                         manager.DecreaseStack();
                     }
                 }
+
+                
                 if (other.CompareTag("Obstacle"))
                 {
                     Destroy(other.transform.parent.gameObject);
@@ -61,6 +63,11 @@ namespace Controllers
                     manager.CheckColorType(other.GetComponent<DroneColorAreaManager>());
                     tag = "Untagged";
                 }
+            }
+            if (other.CompareTag("Roulette"))
+            {
+                manager.DecreaseStackOnIdle();
+                Debug.Log("Roulette Calisti");
             }
             if (other.CompareTag("DroneAreaPhysics"))
             {

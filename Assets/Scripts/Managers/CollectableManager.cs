@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Commands;
 using UnityEngine;
 using Controllers;
+using DG.Tweening;
 using Enums;
 using Signals;
 
@@ -57,6 +58,18 @@ public class CollectableManager : MonoBehaviour
         gameObject.transform.parent = null;
         DelayedDeath(false);
         
+    }
+
+    public void DecreaseStackOnIdle()
+    {
+        //DOScale
+        //transform.DOJump(transform.position+new Vector3(0,0,1),1,1,0.05f);
+        DecreaseStack();
+        // transform.DOScale(0,0.2f).OnComplete(() =>
+        // {
+        //     
+        // });
+        PlayerSignal.Instance.onIncreaseScale?.Invoke();
     }
     public void DeListStack()
     {

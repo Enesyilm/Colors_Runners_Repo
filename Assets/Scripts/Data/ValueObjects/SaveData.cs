@@ -8,6 +8,7 @@ namespace Data.ValueObjects
         public int TotalColorman;
         public int Level;
         public int IdleLevel;
+        public IdleLevelListData IdleLevelListData;
         public int Bonus;
     }
 }

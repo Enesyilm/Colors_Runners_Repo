@@ -12,4 +12,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec92d7fe5114bc4acc5f62c2c026304, type: 3}
   m_Name: CD_IdleLevel
   m_EditorClassIdentifier: 
-  IdleLevelData: []
+  IdleLevelListData:
+    IdleLevelData:
+    - IdleBuildingData:
+      - BuildingId: 0
+        IsDepended: 1
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+      - BuildingId: 0
+        IsDepended: 0
+        PayedAmount: 0
+        TotalRequiredAmount: 4
+        IsCompleted: 0
+        SideObjectData:
+          PayedAmount: 0
+          TotalRequiredAmount: 10
+          IsCompleted: 0
+        IsSideObjectActive: 0
+    - IdleBuildingData: []

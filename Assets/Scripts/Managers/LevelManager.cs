@@ -62,12 +62,11 @@ namespace Managers
         private int GetActiveLevel()
         {
 
-            return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.Level);
+            return SaveSignals.Instance.onGetIntSaveData.Invoke(SaveTypes.Level);
         }
         private int GetActiveIdleLevel()
         {
-
-            return SaveSignals.Instance.onGetSaveData.Invoke(SaveTypes.IdleLevel);
+            return _idleLevelID;
         }
         #region Event Subscription
 
@@ -154,7 +153,7 @@ namespace Managers
         }
         private void OnInitializeIdleLevel()
         {
-            var newLevelData = _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelData.Count;
+            var newLevelData = _idleLevelID % Resources.Load<CD_IdleLevel>("Data/CD_IdleLevel").IdleLevelListData.IdleLevelData.Count;
             idleLevelLoader.InitializeIdleLevel(newLevelData, levelHolder.transform);
         }
 

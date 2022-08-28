@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Enums;
@@ -92,7 +93,7 @@ namespace Managers
                 stackList[0].transform.position = new Vector3(
                     Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
                     Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-1,.2f));
+                    Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-.8f,.2f));
                 Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
                 _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
                 stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
@@ -103,7 +104,7 @@ namespace Managers
                         stackList[index].transform.position = new Vector3(
                             Mathf.Lerp(stackList[index].transform.position.x, stackList[index - 1].transform.position.x,.2f),
                             Mathf.Lerp(stackList[index].transform.position.y, stackList[index - 1].transform.position.y,.2f),
-                            Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-1,.2f));
+                            Mathf.Lerp(stackList[index].transform.position.z, stackList[index - 1].transform.position.z-.8f,.2f));
                         Quaternion toRotation = Quaternion.LookRotation(stackList[index - 1].transform.position - stackList[index].transform.position);
                         toRotation = Quaternion.Euler(0,toRotation.eulerAngles.y,0);
                         stackList[index].transform.rotation = Quaternion.Slerp( stackList[index-1].transform.rotation,toRotation,1f);
@@ -118,6 +119,19 @@ namespace Managers
         {
             _currentGameObject.transform.SetParent(transform);
             stackList.Add(_currentGameObject);
+            StartCoroutine(ScaleUp());
+        }
+
+        private IEnumerator ScaleUp()
+        {
+            for (int i = 0; i<stackList.Count; i++)
+            {
+                Vector3 Scale=Vector3.one*1.2f;
+                stackList[i].transform.DOScale(Scale, 0.1f).SetEase(Ease.InOutSine);
+                yield return new WaitForSeconds(.05f);
+                stackList[i].transform.DOScale(Vector3.one,0.1f ).SetDelay(0.2f).SetEase(Ease.Flash); 
+                yield return new WaitForSeconds(.05f);
+            }
         }
         private void OnDecreaseStack(int _removedIndex)
         {

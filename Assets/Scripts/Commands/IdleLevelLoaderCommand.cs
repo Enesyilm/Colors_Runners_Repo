@@ -9,8 +9,9 @@ namespace Commands
     {
         public void InitializeIdleLevel(int _idleLevelID, Transform levelHolder)
         {
-            Debug.Log("_idleLevel"+_idleLevelID);
             Instantiate(Resources.Load<GameObject>($"Prefabs/IdleLevelPrefabs/IdleLevel {_idleLevelID}"), levelHolder);
+            CoreGameSignals.Instance.onGameInit?.Invoke();
+
         }
     }
 }
