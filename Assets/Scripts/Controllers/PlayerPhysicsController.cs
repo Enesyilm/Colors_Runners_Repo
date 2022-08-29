@@ -48,7 +48,7 @@ namespace Controllers
             }
             if (other.CompareTag("Roulette"))
             {
-                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
+                //other.GetComponent<Collider>().isTrigger = false;
                 playerManager.StopAllMovement();
                 playerManager.ActivateMesh();
             }
