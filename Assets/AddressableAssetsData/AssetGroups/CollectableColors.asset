@@ -65,6 +65,10 @@ MonoBehaviour:
     m_Address: Collectable/Color_Yellow
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 60223e40f510c2246b42446276e3f562
+    m_Address: Collectable/Color_Rainbow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5202342a0ecdaf948999b0768acc181d, type: 2}
   m_SchemaSet:

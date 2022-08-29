@@ -666,6 +666,8 @@ MonoBehaviour:
     TotalColorman: 0
     Level: 0
     IdleLevel: 0
+    IdleLevelListData:
+      IdleLevelData: []
     Bonus: 0
 --- !u!1 &1304877987
 GameObject:

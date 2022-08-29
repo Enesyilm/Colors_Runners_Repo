@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Enums;
+using Controllers;
 using Signals;
 using UnityEngine;
 
@@ -20,10 +22,12 @@ public class DroneAreaManager : MonoBehaviour
 
    [SerializeField]
    private GameObject droneColliderObject;
+
    [SerializeField]
    private GameObject droneObject;
 
    [SerializeField] private List<Collider> droneColliderForDetect;
+   [SerializeField] private List<DroneColorAreaManager> droneColorAreaManagers;
    #endregion
 
    #region Private Variables
@@ -59,6 +63,14 @@ public class DroneAreaManager : MonoBehaviour
 
    private void OnDroneCheckStarted()
    {
+      foreach (var droneColorAreaManager in droneColorAreaManagers)
+      {
+
+         if (droneColorAreaManager.matchType == MatchType.UnMatched)
+         {
+            droneColorAreaManager.gameObject.transform.DOScaleZ(0,0.5f);
+         }
+      }
       droneObject.SetActive(true);
    }
 

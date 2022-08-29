@@ -28,7 +28,6 @@ namespace Controllers
 
         public void ActiveMesh()
         {
-            Debug.Log("true");
             meshRenderer.enabled = true;
         }
     }

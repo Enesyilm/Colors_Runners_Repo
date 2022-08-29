@@ -152,8 +152,9 @@ namespace Managers
             stackList.TrimExcess();
             if (stackList.Count == 0)
             {
+                await Task.Delay(4000);
                 DroneAreaSignals.Instance.onDroneCheckStarted?.Invoke();
-                await Task.Delay(5000);
+                await Task.Delay(2000);
                 DroneAreaSignals.Instance.onDroneCheckCompleted?.Invoke();
             }
                 

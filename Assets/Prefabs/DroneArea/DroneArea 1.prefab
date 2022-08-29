@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7555604420147239028}
   - component: {fileID: 2856764032703935905}
   - component: {fileID: 6240938074504677045}
+  - component: {fileID: 1060251609806996212}
   m_Layer: 0
   m_Name: Area 2
   m_TagString: ColoredGround
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentColorType: 5
+  matchType: 0
   openDroneAreaExit: 0
   droneAreaMeshController: {fileID: 6240938074504677045}
 --- !u!114 &6240938074504677045
@@ -125,6 +127,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 1835740951638854042}
+--- !u!114 &1060251609806996212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420666771512614477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82c47e1338d4fed92cbe6d46c982167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneColorAreaManager: {fileID: 2856764032703935905}
 --- !u!1 &3869399501221559074
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +251,9 @@ MonoBehaviour:
   - {fileID: 7555604420147239028}
   - {fileID: 1155954638945301600}
   - {fileID: 1916197497404763109}
+  droneColorAreaManagers:
+  - {fileID: 8024798533953028936}
+  - {fileID: 2856764032703935905}
 --- !u!1 &6539905404703337503
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +268,7 @@ GameObject:
   - component: {fileID: 1155954638945301600}
   - component: {fileID: 8024798533953028936}
   - component: {fileID: 4631161586667996473}
+  - component: {fileID: 8802054361013954421}
   m_Layer: 0
   m_Name: Area
   m_TagString: ColoredGround
@@ -346,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentColorType: 0
+  matchType: 0
   openDroneAreaExit: 0
   droneAreaMeshController: {fileID: 4631161586667996473}
 --- !u!114 &4631161586667996473
@@ -361,6 +381,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 6301340546740451046}
+--- !u!114 &8802054361013954421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6539905404703337503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82c47e1338d4fed92cbe6d46c982167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneColorAreaManager: {fileID: 8024798533953028936}
 --- !u!1001 &170983653897933383
 PrefabInstance:
   m_ObjectHideFlags: 0
