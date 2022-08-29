@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Enums;
 using UnityEngine;
@@ -40,8 +41,9 @@ namespace Controllers
                 ? MatchType.Match
                 : MatchType.UnMatched;
         }
-        public void ActivateOutline(bool _isOutlineActive)
+        public async void ActivateOutline(bool _isOutlineActive)
         {
+            await Task.Delay(2000);
             float _outlineValue = _isOutlineActive ? 71 : 0;
             meshRenderer.material.DOFloat(_outlineValue,"_OutlineSize",1f);
         }

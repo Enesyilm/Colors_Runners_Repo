@@ -34,6 +34,7 @@ namespace Controllers
         }
         public void ChangeAreaColor(ColorTypes _colorType)
         {
+            Debug.Log($"PortalColors/Color_{_colorType}");
             var colorHandler=Addressables.LoadAssetAsync<Material>($"PortalColors/Color_{_colorType}");
             meshRenderer.material = (colorHandler.WaitForCompletion() != null)?colorHandler.Result:null;
         }

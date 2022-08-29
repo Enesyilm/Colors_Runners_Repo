@@ -103,9 +103,8 @@ public class CollectableManager : MonoBehaviour
         if (_isDelayed)
         { 
         collider.enabled=false;
-        await Task.Delay(3000);
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
-        Destroy(gameObject,3f);
+        Destroy(gameObject,1f);
         }
         else
         {

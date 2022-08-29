@@ -59,7 +59,6 @@ namespace Managers
             }
             if(IsSideObjectActive&&IsCompleted)
             {
-                Debug.Log("DecideMarketState else if");
                 sideBuildingMarketController.gameObject.SetActive(false);
             }
             else

@@ -71,7 +71,6 @@ namespace Managers
         private void OnGetSaveData(SaveData _saveData)
         {
 
-            Debug.Log("OnGetSaveData");
             _currentIdleLevelId=CoreGameSignals.Instance.onGetIdleLevelID.Invoke();
             _idleLevelListData = _saveData.IdleLevelListData;
             SyncDataToBuildings();
