@@ -142,6 +142,10 @@ namespace Managers
             stackList[_removedIndex].SetActive(false);
             stackList.RemoveAt(_removedIndex);
             stackList.TrimExcess();
+            if (stackList.Count == 0)
+            {
+                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
+            }
 
         }
         private async void OnDroneAreaDecrease(int index)
