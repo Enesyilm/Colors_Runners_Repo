@@ -236,8 +236,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.983201, y: 11.009421, z: 0.2}
-  m_Center: {x: 0.00067281723, y: -0.042625666, z: -1.6165804e-16}
+  m_Size: {x: 10.983201, y: 11.009421, z: 2.2884982}
+  m_Center: {x: 0.00067278766, y: -0.04262568, z: -1.0442474}
 --- !u!114 &4490873916613128537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +261,6 @@ GameObject:
   - component: {fileID: 3425286854737306432}
   - component: {fileID: 4615113336498142672}
   - component: {fileID: 4381116277199131612}
-  - component: {fileID: 7558762680897714881}
   m_Layer: 0
   m_Name: MainRoad
   m_TagString: Untagged
@@ -332,19 +331,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7558762680897714881
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714167072375550551}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.6038091, z: 1}
-  m_Center: {x: 0, y: 0.19809565, z: -0.0000000013494194}
 --- !u!1 &5906761572053381877
 GameObject:
   m_ObjectHideFlags: 0
