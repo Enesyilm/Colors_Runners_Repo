@@ -14,6 +14,7 @@ namespace Enums
         Red,
         Turquoise,
         Yellow,
+        Rainbow
         
     }
 }

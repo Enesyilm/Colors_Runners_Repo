@@ -67,7 +67,6 @@ namespace Controllers
             if (other.CompareTag("Roulette"))
             {
                 manager.DecreaseStackOnIdle();
-                Debug.Log("Roulette Calisti");
             }
             if (other.CompareTag("DroneAreaPhysics"))
             {

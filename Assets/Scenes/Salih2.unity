@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiPanelController: {fileID: 125663013}
+  arrow: {fileID: 0}
   levelPanelController: {fileID: 125663012}
   idlePanelController: {fileID: 125663011}
 --- !u!4 &125663010
@@ -945,6 +946,8 @@ MonoBehaviour:
     TotalColorman: 0
     Level: 0
     IdleLevel: 0
+    IdleLevelListData:
+      IdleLevelData: []
     Bonus: 0
 --- !u!4 &586287562
 Transform:

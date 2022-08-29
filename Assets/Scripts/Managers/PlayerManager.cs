@@ -61,20 +61,32 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputTaken += OnActivateMovement;
+            InputSignals.Instance.onIdleInputTaken += OnGetIdleInputValues;
             InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
+            CoreGameSignals.Instance.onGetGameState += OnChangeGameState;
             PlayerSignal.Instance.onChangeVerticalSpeed += OnChangeVerticalSpeed;
             PlayerSignal.Instance.onIncreaseScale += OnIncreaseSize;
             InputSignals.Instance.onSidewaysEnable += OnSidewaysEnable;
             //ScoreSignals.Instance.onUpdateScore += OnUpdateScore;
         }
 
+        private void OnChangeGameState(GameStates arg0)
+        {
+            playerMovementController.CurrentGameState = arg0;
+            if (arg0 == GameStates.Idle)
+            {
+                playerMovementController.EnableIdleMovement();
+            }
+        }
+
         private void UnSubscribeEvents()
         {
+            InputSignals.Instance.onIdleInputTaken += OnGetIdleInputValues;
             InputSignals.Instance.onInputTaken -= OnActivateMovement;
             InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
@@ -82,6 +94,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
+            CoreGameSignals.Instance.onGetGameState -= OnChangeGameState;
             PlayerSignal.Instance.onChangeVerticalSpeed -= OnChangeVerticalSpeed;
             PlayerSignal.Instance.onIncreaseScale -= OnIncreaseSize;
             InputSignals.Instance.onSidewaysEnable -= OnSidewaysEnable;
@@ -121,6 +134,10 @@ namespace Managers
         private void OnGetInputValues(RunnerHorizontalInputParams inputParam)
         {
             playerMovementController.UpdateInputValue(inputParam);
+        }
+        private void OnGetIdleInputValues(IdleInputParams inputParam)
+        {
+            playerMovementController.UpdateIdleInputValue(inputParam);
         }
         #endregion
 

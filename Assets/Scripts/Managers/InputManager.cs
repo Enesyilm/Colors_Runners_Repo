@@ -5,6 +5,7 @@ using Keys;
 using Signals;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine.InputSystem;
 using Extentions;
 
@@ -61,9 +62,13 @@ namespace Managers
             InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onGetGameState += OnChangeInputType;
             _playerInput.Runner.MouseDelta.performed += OnPlayerInputMouseDeltaPerformed;
             _playerInput.Runner.MouseDelta.canceled += OnPlayerInputMouseDeltaCanceled;
             _playerInput.Runner.MouseLeftButton.started += OnMouseLeftButtonStart;
+            _playerInput.Idle.JoyStick.performed += OnPlayerInputJoyStickPerformed;
+            _playerInput.Idle.JoyStick.canceled += OnPlayerInputJoyStickCanceled;
+            _playerInput.Idle.JoyStick.started += OnPlayerInputJoyStickStart;
         }
 
         private void UnSubscribeEvents()
@@ -77,6 +82,42 @@ namespace Managers
             _playerInput.Runner.MouseDelta.performed -= OnPlayerInputMouseDeltaPerformed;
             _playerInput.Runner.MouseDelta.canceled -= OnPlayerInputMouseDeltaCanceled;
             _playerInput.Runner.MouseLeftButton.started -= OnMouseLeftButtonStart;
+            _playerInput.Idle.JoyStick.performed -= OnPlayerInputJoyStickPerformed;
+            _playerInput.Idle.JoyStick.canceled -= OnPlayerInputJoyStickCanceled;
+            _playerInput.Idle.JoyStick.started -= OnPlayerInputJoyStickStart;
+        }
+
+        private void OnPlayerInputJoyStickStart(InputAction.CallbackContext context)
+        {
+            _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, context.ReadValue<Vector2>().y);
+            Debug.Log("OnPlayerInputJoyStickStart"+_moveVector.x);
+
+            InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
+            {
+                XValue = _playerMovementValue.x,
+                ZValue = _playerMovementValue.z
+            });
+        } 
+        private void OnPlayerInputJoyStickPerformed(InputAction.CallbackContext context)
+        {
+            Debug.Log("OnPlayerInputJoyStickPerformed"+_moveVector.x);
+            _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, context.ReadValue<Vector2>().y);
+            Debug.Log("_playerMovementValue"+_playerMovementValue);
+            InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
+            {
+                XValue = _playerMovementValue.x*Data.InputSpeed,
+                ZValue = _playerMovementValue.z*Data.InputSpeed
+            });
+            
+        }
+        private void OnPlayerInputJoyStickCanceled(InputAction.CallbackContext context)
+        {
+            _playerMovementValue = Vector3.zero;
+            InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
+            {
+                XValue = _playerMovementValue.x*Data.InputSpeed,
+                ZValue = _playerMovementValue.z*Data.InputSpeed
+            });
         }
 
         private void OnDisable()
@@ -136,6 +177,24 @@ namespace Managers
         private void OnDisableInput()
         {
             isReadyForTouch = false;
+        }
+        private void OnChangeInputType(GameStates _currentGameState)
+        {
+            switch (_currentGameState)
+            {
+                case GameStates.Idle:
+                    _playerInput.Runner.Disable();                
+                    _playerInput.Idle.Enable();
+                    break;
+                case GameStates.Runner:
+                    _playerInput.Idle.Disable();                
+                    _playerInput.Runner.Enable();
+                    break;
+                default:
+                    
+                    break;
+            }
+           
         }
 
         private void OnPlay()

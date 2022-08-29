@@ -417,7 +417,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   delay: 0
-  duration: 6
+  duration: 3
   easeType: 32
   easeCurve:
     serializedVersion: 2
@@ -628,8 +628,8 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 2
-  duration: 1
+  delay: 1
+  duration: 0.5
   easeType: 32
   easeCurve:
     serializedVersion: 2
@@ -735,8 +735,8 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 4
-  duration: 2
+  delay: 2
+  duration: 1
   easeType: 32
   easeCurve:
     serializedVersion: 2
@@ -843,7 +843,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
-  duration: 0.5
+  duration: 0.25
   easeType: 7
   easeCurve:
     serializedVersion: 2
@@ -949,8 +949,8 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 6
-  duration: 1
+  delay: 3
+  duration: 0.5
   easeType: 6
   easeCurve:
     serializedVersion: 2
