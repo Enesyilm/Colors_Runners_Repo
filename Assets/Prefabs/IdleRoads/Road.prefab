@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 1780827714005474946}
   - component: {fileID: 5409855451268328275}
   - component: {fileID: 2843512487835296433}
-  - component: {fileID: 5987484162273409348}
   m_Layer: 0
   m_Name: MainRoad
   m_TagString: Untagged
@@ -163,19 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5987484162273409348
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760010165496281644}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2472823298839618784
 GameObject:
   m_ObjectHideFlags: 0
