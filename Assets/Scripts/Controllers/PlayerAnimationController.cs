@@ -14,7 +14,15 @@ namespace Controllers
 
         public void ChangeAnimation(PlayerAnimationTypes _animationType)
         {
-            animator.SetTrigger(_animationType.ToString());
+            if (_animationType==PlayerAnimationTypes.Run)
+            {
+                animator.Play("Running");
+            }
+            else
+            {
+                animator.SetTrigger(_animationType.ToString());
+                
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4958572997685816358}
   m_Layer: 0
   m_Name: IdlePortal
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

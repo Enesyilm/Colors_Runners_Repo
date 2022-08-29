@@ -73,7 +73,9 @@ namespace Controllers
                 tag = "Collected";
                 if (manager.MatchType == MatchType.Match)
                 {
+                    manager.ChangeOutlineState(true);
                     manager.IncreaseStack();
+                    
                 }
                 else
                 {
