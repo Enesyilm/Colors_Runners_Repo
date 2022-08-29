@@ -68,7 +68,10 @@ public class DroneAreaManager : MonoBehaviour
 
          if (droneColorAreaManager.matchType == MatchType.UnMatched)
          {
-            droneColorAreaManager.gameObject.transform.DOScaleZ(0,0.5f);
+            droneColorAreaManager.gameObject.transform.DOScaleZ(0,0.5f).OnComplete(() =>
+            {
+               droneColorAreaManager.gameObject.transform.DOScaleX(0, 0.5f);
+            });
          }
       }
       droneObject.SetActive(true);

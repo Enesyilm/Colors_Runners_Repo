@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 718343022280148778}
   - component: {fileID: 786979924822382581}
   - component: {fileID: 6974590308622049623}
-  - component: {fileID: 5455576158749109821}
   m_Layer: 0
   m_Name: Garden
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5455576158749109821
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3817716816533934287}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4088541453621185663
 GameObject:
   m_ObjectHideFlags: 0

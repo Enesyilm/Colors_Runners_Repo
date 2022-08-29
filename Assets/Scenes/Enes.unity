@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectablePrefab: {fileID: 249829562155634829, guid: 4611e7d9b49b46749a2c9b1d48356ae9, type: 3}
-  initAmount: 6
+  initAmount: 60
   stackList: []
   tempHolder: {fileID: 320004848}
 --- !u!1 &927477670
