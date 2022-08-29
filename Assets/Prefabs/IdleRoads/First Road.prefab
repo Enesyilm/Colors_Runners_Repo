@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 2567302168169136739}
   - component: {fileID: 4029011891351028634}
   - component: {fileID: 368304907871074007}
-  - component: {fileID: 7498084387184592991}
   m_Layer: 0
   m_Name: SideRoad2
   m_TagString: Untagged
@@ -115,19 +114,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7498084387184592991
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3693604498870949236}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.8064861, z: 1}
-  m_Center: {x: 0, y: -0.096756935, z: 0}
 --- !u!1 &4142025306673060315
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +220,6 @@ GameObject:
   - component: {fileID: 1893351026234049221}
   - component: {fileID: 7334144378838793091}
   - component: {fileID: 2051411921459674615}
-  - component: {fileID: 7337517496663452866}
   m_Layer: 0
   m_Name: SideRoad1
   m_TagString: Untagged
@@ -305,16 +290,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7337517496663452866
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7645035651352612569}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.80067635, z: 1}
-  m_Center: {x: 0, y: -0.09966183, z: 0}
