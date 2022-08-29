@@ -22,6 +22,8 @@ namespace Controllers
         #endregion
 
         #region Private Variables
+
+        private bool _isEnteredRoullette=false;
         #endregion
 
         #endregion
@@ -48,9 +50,13 @@ namespace Controllers
             }
             if (other.CompareTag("Roulette"))
             {
-                //other.GetComponent<Collider>().isTrigger = false;
+                if (_isEnteredRoullette==false)
+                {
                 playerManager.StopAllMovement();
                 playerManager.ActivateMesh();
+                _isEnteredRoullette = true;
+                }
+                //other.GetComponent<Collider>().enabled = false;
             }
         }
     }

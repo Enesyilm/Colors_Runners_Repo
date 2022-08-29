@@ -100,9 +100,7 @@ namespace Managers
         } 
         private void OnPlayerInputJoyStickPerformed(InputAction.CallbackContext context)
         {
-            Debug.Log("OnPlayerInputJoyStickPerformed"+_moveVector.x);
             _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, context.ReadValue<Vector2>().y);
-            Debug.Log("_playerMovementValue"+_playerMovementValue);
             InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
             {
                 XValue = _playerMovementValue.x*Data.InputSpeed,

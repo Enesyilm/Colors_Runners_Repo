@@ -53,6 +53,7 @@ namespace Managers
             private void SubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
+                StackSignals.Instance.onDecreaseStackRoullette += OnDecreaseStackRoullette;
                 StackSignals.Instance.onDroneArea += OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
@@ -67,6 +68,7 @@ namespace Managers
             {
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
                 StackSignals.Instance.onDroneArea -= OnDroneAreaDecrease;
+                StackSignals.Instance.onDecreaseStackRoullette += OnDecreaseStackRoullette;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
                 CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
@@ -142,12 +144,28 @@ namespace Managers
             stackList[_removedIndex].SetActive(false);
             stackList.RemoveAt(_removedIndex);
             stackList.TrimExcess();
+            // if (stackList.Count == 0)
+            // {
+            //     CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
+            // }
+
+        }
+        private void OnDecreaseStackRoullette(int _removedIndex)
+        {
+            if (stackList[_removedIndex] is null)
+            {
+                return;
+            }
+            stackList[_removedIndex].SetActive(false);
+            stackList.RemoveAt(_removedIndex);
+            stackList.TrimExcess();
             if (stackList.Count == 0)
             {
                 CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
             }
 
         }
+        
         private async void OnDroneAreaDecrease(int index)
         {
             

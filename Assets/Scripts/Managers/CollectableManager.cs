@@ -64,7 +64,9 @@ public class CollectableManager : MonoBehaviour
     {
         //DOScale
         //transform.DOJump(transform.position+new Vector3(0,0,1),1,1,0.05f);
-        DecreaseStack();
+        StackSignals.Instance.onDecreaseStackRoullette?.Invoke( transform.GetSiblingIndex());
+        gameObject.transform.parent = null;
+        DelayedDeath(false);
         // transform.DOScale(0,0.2f).OnComplete(() =>
         // {
         //     
