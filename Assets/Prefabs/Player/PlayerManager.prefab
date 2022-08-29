@@ -270,7 +270,7 @@ MonoBehaviour:
   CurrentScore: 0
   playerMovementController: {fileID: 7848978240880427759}
   playerPhysicsController: {fileID: 0}
-  playerAnimationController: {fileID: 0}
+  playerAnimationController: {fileID: 2614178301733796999}
   playerMeshController: {fileID: 3345144743447524696}
   playerTextController: {fileID: 0}
   _currentColor: 1
@@ -286,7 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7e57d94d760fb4e857e35be4efc0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentGameState: 2
   rigidbody: {fileID: 554347032040964690}
+  playerManager: {fileID: 1301851064357201414}
 --- !u!54 &554347032040964690
 Rigidbody:
   m_ObjectHideFlags: 0

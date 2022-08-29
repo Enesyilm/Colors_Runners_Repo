@@ -167,7 +167,7 @@ namespace Managers
 
         public void ChangeAnimation(PlayerAnimationTypes _animationType)
         {
-            //playerAnimationController.ChangeAnimation(_animationType);
+            playerAnimationController.ChangeAnimation(_animationType);
         }
         public void StopAllMovement()
         {
