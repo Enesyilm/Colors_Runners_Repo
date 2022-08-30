@@ -157,7 +157,7 @@ namespace Managers
         
         private void OnUpdateScore(float totalScore)
         {
-            playerTextController.UpdatePlayerScore(totalScore);
+            //playerTextController.UpdatePlayerScore(totalScore);
             CurrentScore = totalScore;
         }
         public void StopVerticalMovement()
@@ -196,8 +196,6 @@ namespace Managers
 
         private void OnReset()
         {
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             OnUpdateScore(0);
             playerMovementController.OnReset();
         }

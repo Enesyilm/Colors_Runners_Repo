@@ -30,7 +30,7 @@ namespace Managers
         #endregion
 
         #region SubscribeEvents
-
+        
         public void GetReferences()
         {
             _cinemachineStateDrivenCamera= gameObject.GetComponent<CinemachineStateDrivenCamera>();
@@ -47,6 +47,7 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onReset+=OnReset;
             NewCameraSignals.Instance.onChangeCameraState+=OnChangeCameraState;
             CoreGameSignals.Instance.onGameInit+=OnGameInit;
         }
@@ -63,11 +64,12 @@ namespace Managers
         }
         private void OnFindPlayer()
         {
-            _playerManager=GameObject.FindWithTag("Player").transform;  
+            _playerManager=FindObjectOfType<PlayerManager>().transform;  
         }
 
         private void UnSubscribeEvents()
         {
+            CoreGameSignals.Instance.onReset-=OnReset;
             NewCameraSignals.Instance.onChangeCameraState-=OnChangeCameraState;
             CoreGameSignals.Instance.onGameInit-=OnGameInit;
 
@@ -81,6 +83,11 @@ namespace Managers
         public void OnChangeCameraState(CameraStates _currentcameraStates)
         {
             animator.Play(_currentcameraStates.ToString());
+        }
+
+        private void OnReset()
+        {
+            OnChangeCameraState(CameraStates.Runner);
         }
     }
 }

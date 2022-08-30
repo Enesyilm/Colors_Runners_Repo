@@ -4,6 +4,7 @@ namespace Enums
     {
         Idle,
         Roulette,
-        Runner
+        Runner,
+        Failed
     }
 }

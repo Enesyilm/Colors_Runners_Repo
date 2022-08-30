@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28139d7f052b4eca8db024b3bd236ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorType: 5
+  ColorType: 0
   CurrentTargetPos: {x: 0, y: 0, z: 0}
   turretAreaManager: {fileID: 4334286384673038186}
   turret: {fileID: 5497023314302567009}
@@ -284,7 +284,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a0ffdf800b6918e49bb342039a180303, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28139d7f052b4eca8db024b3bd236ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorType: 6
+  ColorType: 0
   CurrentTargetPos: {x: 0, y: 0, z: 0}
   turretAreaManager: {fileID: 4334286384673038186}
   turret: {fileID: 6447942337594226683}

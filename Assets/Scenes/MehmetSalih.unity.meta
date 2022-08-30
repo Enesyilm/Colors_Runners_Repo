@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/MehmetSalih.unity.meta
 guid: 578b6069289807b4a8488bbe680a3b19
+========
+guid: 752c62fee5059634e9a34105623d8ec1
+folderAsset: yes
+>>>>>>>> origin/main:Assets/Prefabs/Levels/OldLevels.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
