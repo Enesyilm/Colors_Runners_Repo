@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3368148675932410908}
   m_Layer: 0
   m_Name: Guilliotine
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6882788611962791607}
   m_Layer: 0
   m_Name: GuillotinBladeMesh
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
