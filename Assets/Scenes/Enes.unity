@@ -4579,6 +4579,7 @@ MonoBehaviour:
     InputSpeed: 2
     ClampSides: {x: -3, y: 3}
     ClampSpeed: 0.007
+    IdleInputSpeed: 1.161
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
 --- !u!4 &2139162551
