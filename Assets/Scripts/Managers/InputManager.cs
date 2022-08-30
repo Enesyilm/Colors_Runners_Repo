@@ -42,6 +42,13 @@ namespace Managers
         private void Awake()
         {
             Data = GetInputData();
+            InitialSettings();
+           
+        }
+
+        private void InitialSettings()
+        {
+           
             _playerInput = new PlayerInputSystem();
             _playerMovementValue = Vector3.zero;
         }
@@ -202,6 +209,7 @@ namespace Managers
 
         private void OnReset()
         {
+            Debug.Log("OnReset Calisti");
             _isTouching = false;
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;

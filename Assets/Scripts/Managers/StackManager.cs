@@ -53,6 +53,8 @@ namespace Managers
             private void SubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
+                CoreGameSignals.Instance.onReset += OnReset;
+                CoreGameSignals.Instance.onGameInitLevel += FindPlayer;
                 StackSignals.Instance.onDecreaseStackRoullette += OnDecreaseStackRoullette;
                 StackSignals.Instance.onDroneArea += OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
@@ -67,6 +69,8 @@ namespace Managers
             private void UnSubscribeEvents()
             {
                 StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
+                CoreGameSignals.Instance.onReset -= OnReset;
+                CoreGameSignals.Instance.onGameInitLevel -= FindPlayer;
                 StackSignals.Instance.onDroneArea -= OnDroneAreaDecrease;
                 StackSignals.Instance.onDecreaseStackRoullette += OnDecreaseStackRoullette;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
@@ -91,14 +95,19 @@ namespace Managers
         {
             if (stackList.Count > 0)
             {
+                if (stackList[0]!=null&&_playerManager!=null)
+                {
+                    Debug.Log("calisiyor");
+                    stackList[0].transform.position = new Vector3(
+                   Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
+                   Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
+                   Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-.8f,.2f));
+                     Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
+                     //_toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
+                     stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
+                }
                 // stackList[0].transform.position = _playerManager.position;
-                stackList[0].transform.position = new Vector3(
-                    Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
-                    Mathf.Lerp(stackList[0].transform.position.z, _playerManager.transform.position.z-.8f,.2f));
-                Quaternion _toPlayerRotation = Quaternion.LookRotation(_playerManager.transform.position - stackList[0].transform.position);
-                _toPlayerRotation = Quaternion.Euler(0,_toPlayerRotation.eulerAngles.y,0);
-                stackList[0].transform.rotation = Quaternion.Slerp( _playerManager.transform.rotation,_toPlayerRotation,1f);
+                
                 if (stackList.Count > 1)
                 {
                     for (int index = 1; index < stackList.Count; index++)
@@ -121,7 +130,7 @@ namespace Managers
         {
             _currentGameObject.transform.SetParent(transform);
             stackList.Add(_currentGameObject);
-            StartCoroutine(ScaleUp());
+            //StartCoroutine(ScaleUp());
         }
 
         private IEnumerator ScaleUp()
@@ -231,8 +240,25 @@ namespace Managers
         #endregion
           private void FindPlayer()
         {
-            _playerManager=GameObject.FindWithTag("Player").transform;
+            _playerManager=FindObjectOfType<PlayerManager>().transform;
         }
+          private void DeleteStack()
+          {
+              for (int i = 0; i < stackList.Count; i++)
+              {
+                  stackList[i].transform.SetParent(null);
+                  Destroy(stackList[i]);
+
+              }
+          }
+
+          private void OnReset()
+          {
+              DeleteStack();
+              stackList.Clear();
+              stackList.TrimExcess();
+              OnInitalStackSettings();
+          }
         
     }
 }

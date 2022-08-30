@@ -2,6 +2,7 @@ using Controllers;
 using DG.Tweening;
 using Enums;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -17,6 +18,7 @@ namespace Managers
         [SerializeField]
         private RectTransform arrow;
         [SerializeField] private LevelPanelController levelPanelController;
+        [SerializeField] private TextMeshProUGUI leveltext;
         [SerializeField] private IdlePanelController idlePanelController;
 
         #endregion
@@ -32,6 +34,7 @@ namespace Managers
         #region Event Subscriptions
         private void Awake()
         {
+            UpdateLevelText();
         }
         private void OnEnable()
         {
@@ -42,13 +45,84 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
-            CoreGameSignals.Instance.onGameInit += OnGameInit;
+            //CoreGameSignals.Instance.onGameInit += OnGameInit;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            CoreGameSignals.Instance.onGameInit += UpdateLevelText;
             CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
         }
 
+       
+
+        private void UnsubscribeEvents()
+        {
+            UISignals.Instance.onOpenPanel -= OnOpenPanel;
+            UISignals.Instance.onClosePanel -= OnClosePanel;
+           //CoreGameSignals.Instance.onGameInit -= OnGameInit;
+           CoreGameSignals.Instance.onGameInit -= UpdateLevelText;
+           CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
+            CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
+
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+
+        private void OnOpenPanel(UIPanelTypes panelParam)
+        {
+            uiPanelController.OpenPanel(panelParam);
+        }
+
+        private void OnClosePanel(UIPanelTypes panelParam)
+        {
+            uiPanelController.ClosePanel(panelParam);
+        }
+        
+
+        private void OnSetLevelText(int value)
+        {
+            levelPanelController.SetLevelText(value);
+        }
+
+        private void OnPlay()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.LevelPanel);
+        }
+        
+
+        private void OnLevelFailed()
+        {
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.FailPanel);
+        }
+        private void UpdateLevelText()
+        {
+            leveltext.text="Level "+CoreGameSignals.Instance.onGetLevelID?.Invoke().ToString();
+            
+        }
+
+        // private void OnGameInit()
+        // {
+        //     UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
+        // }
+        private void OnLevelSuccessful()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.LevelPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.IdlePanel);
+        }
+        
+        public void Play()
+        {
+            CoreGameSignals.Instance.onPlay?.Invoke();
+            
+        }
         private void CursorMovementOnRoulette()
         {
             Sequence _sequence = DOTween.Sequence();
@@ -77,85 +151,24 @@ namespace Managers
             }
         }
 
-        private void UnsubscribeEvents()
-        {
-            UISignals.Instance.onOpenPanel -= OnOpenPanel;
-            UISignals.Instance.onClosePanel -= OnClosePanel;
-            CoreGameSignals.Instance.onGameInit -= OnGameInit;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
-            CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
-
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
-        #endregion
-
-        private void OnOpenPanel(UIPanelTypes panelParam)
-        {
-            uiPanelController.OpenPanel(panelParam);
-        }
-
-        private void OnClosePanel(UIPanelTypes panelParam)
-        {
-            uiPanelController.ClosePanel(panelParam);
-        }
-
-        private void OnSetLevelText(int value)
-        {
-            levelPanelController.SetLevelText(value);
-        }
-
-        private void OnPlay()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.StartPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.LevelPanel);
-        }
-        
-
-        private void OnLevelFailed()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.FailPanel);
-        }
-
-        private void OnGameInit()
-        {
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
-        }
-        private void OnLevelSuccessful()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.IdlePanel);
-        }
-        
-        public void Play()
-        {
-            CoreGameSignals.Instance.onPlay?.Invoke();
-            
-        }
-
         public void NextLevel()
         {
+            CoreGameSignals.Instance.onChangeGameState.Invoke(GameStates.Runner);
             CoreGameSignals.Instance.onNextLevel?.Invoke();
             UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.LevelPanel);
         }
-
-        public void RestartLevel()
+        public void RetryLevel()
         {
-            CoreGameSignals.Instance.onRestartLevel?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
             UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.LevelPanel);
+
         }
-        public void RetryButton()
+        public void RestartButton()
         {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
         }
