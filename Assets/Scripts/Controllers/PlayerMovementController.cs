@@ -7,6 +7,7 @@ using Data.ValueObjects;
 using Keys;
 using DG.Tweening;
 using Enums;
+using Managers;
 
 namespace Controllers
 {
@@ -21,6 +22,7 @@ namespace Controllers
         #endregion
         #region Serialized Variables
         [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private PlayerManager playerManager;
         #endregion
 
         #region Private Variables
@@ -111,8 +113,12 @@ namespace Controllers
             {
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
                     _inputValueZ * _movementData.ForwardSpeed));
-
+                playerManager.ChangeAnimation(PlayerAnimationTypes.Run);
                 transform.rotation = toRotation;
+            }
+            else
+            {
+                playerManager.ChangeAnimation(PlayerAnimationTypes.Idle);
             }
         }
 
@@ -162,7 +168,7 @@ namespace Controllers
         }
         public void RepositionPlayerForDrone(GameObject _other)
         {
-           transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z+_other.transform.localScale.z),2f);
+           transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z+_other.transform.localScale.z*2),2f);
         }
         public void DisableStopVerticalMovement()
         {

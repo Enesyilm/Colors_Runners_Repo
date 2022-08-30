@@ -69,6 +69,7 @@ namespace Managers
                 case GameStates.Idle:
                     OnOpenPanel(UIPanelTypes.IdlePanel);
                     OnClosePanel(UIPanelTypes.RoulettePanel);
+                    OnClosePanel(UIPanelTypes.LevelPanel);
                     break;
                 case GameStates.Runner:
                     OnOpenPanel(UIPanelTypes.StartPanel);

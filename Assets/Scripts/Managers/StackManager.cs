@@ -161,6 +161,7 @@ namespace Managers
             stackList.TrimExcess();
             if (stackList.Count == 0)
             {
+                SaveSignals.Instance.onChangeSaveData(SaveTypes.TotalColorman,100);
                 CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
             }
 

@@ -93,19 +93,20 @@ public class CollectableManager : MonoBehaviour
         movementCommand.MoveToGround(groundTransform);
         ChangeOutlineState(false);
         await Task.Delay(3000);
-        ChangeOutlineState(true);
+        //ChangeOutlineState(true);
     }
     
-    private void ChangeOutlineState(bool _state)
+    public void ChangeOutlineState(bool _state)
     {
         collectableMeshController.ActivateOutline(_state);
     }
-    public async void DelayedDeath(bool _isDelayed)
+    public void DelayedDeath(bool _isDelayed)
     {
         if (_isDelayed)
         { 
         collider.enabled=false;
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
+        ChangeOutlineState(true);
         Destroy(gameObject,1f);
         }
         else
