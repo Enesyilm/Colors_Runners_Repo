@@ -41,7 +41,7 @@ namespace Controllers
         {
             _movementData = playerMovementData;
         }
-        
+
         public void EnableMovement()
         {
             _isReadyToMove = true;
@@ -53,15 +53,15 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
-        public void UpdateInputValue(RunnerHorizontalInputParams inputParam)
+        public void UpdateRunnerInputValue(RunnerHorizontalInputParams inputParam)
         {
             _inputValue = inputParam.XValue;
             _clampValues = inputParam.ClampValues;
         }
         public void UpdateIdleInputValue(IdleInputParams inputParam)
         {
-            _inputValueX = inputParam.XValue;
-            _inputValueZ = inputParam.ZValue;
+            _inputValueX = inputParam.IdleXValue;
+            _inputValueZ = inputParam.IdleZValue;
         }
 
         public void IsReadyToPlay(bool state)
@@ -90,26 +90,26 @@ namespace Controllers
         {
             if (CurrentGameState == GameStates.Runner)
             {
-                SideMovement();
+                RunnerMove();
             }
             if (CurrentGameState == GameStates.Idle)
             {
-                IdleMovement();
+                IdleMove();
             }
         }
 
-        private void IdleMovement()
+        private void IdleMove()
         {
             var velocity = rigidbody.velocity;
             velocity = new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
                 _inputValueZ * _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
 
-            Vector3 position;
-            position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
-            rigidbody.position = position;
+            //Vector3 position;
+            //position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
+            //rigidbody.position = position;
 
-            if ( _inputValueX!= 0||_inputValueZ!= 0)
+            if (_inputValueX != 0 || _inputValueZ != 0)
             {
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
                     _inputValueZ * _movementData.ForwardSpeed));
@@ -122,11 +122,11 @@ namespace Controllers
             }
         }
 
-        private void SideMovement()
+        private void RunnerMove()
         {
             var velocity = rigidbody.velocity;
-            
-            velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed,velocity.y,
+
+            velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed, velocity.y,
                 _movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
             Vector3 position;
@@ -173,7 +173,7 @@ namespace Controllers
         public void DisableStopVerticalMovement()
         {
             _movementData.ForwardSpeed = 0;
-            rigidbody.angularVelocity =Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
         }
 
         public void StopAllMovement()

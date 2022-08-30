@@ -6,13 +6,13 @@ namespace Signals
 {
     public class InputSignals : MonoSingleton<InputSignals>
     {
-        public UnityAction onEnableInput = delegate { };
-        public UnityAction onDisableInput = delegate { };
-        public UnityAction onFirstTimeTouchTaken = delegate { };
-        public UnityAction onInputTaken = delegate { };
+        //public UnityAction onEnableInput = delegate { };
+        //public UnityAction onDisableInput = delegate { };
+        //public UnityAction onFirstTimeTouchTaken = delegate { };
+        //public UnityAction onInputTaken = delegate { };
+        //public UnityAction onInputReleased = delegate { };
         public UnityAction<RunnerHorizontalInputParams> onInputDragged = delegate { };
         public UnityAction<IdleInputParams> onIdleInputTaken = delegate { };
-        public UnityAction onInputReleased = delegate { };
         public UnityAction<bool> onSidewaysEnable = delegate { };
     }
 }

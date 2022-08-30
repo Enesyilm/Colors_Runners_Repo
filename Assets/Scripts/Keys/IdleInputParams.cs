@@ -2,8 +2,8 @@ namespace Keys
 {
     public struct IdleInputParams
     {
-        public float XValue;
-        public float ZValue;
+        public float IdleXValue;
+        public float IdleZValue;
 
     }
 }

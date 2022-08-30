@@ -65,8 +65,8 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onEnableInput += OnEnableInput;
-            InputSignals.Instance.onDisableInput += OnDisableInput;
+           //InputSignals.Instance.onEnableInput += OnEnableInput;
+           //InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetGameState += OnChangeInputType;
@@ -80,12 +80,10 @@ namespace Managers
 
         private void UnSubscribeEvents()
         {
-            InputSignals.Instance.onEnableInput -= OnEnableInput;
-            InputSignals.Instance.onDisableInput -= OnDisableInput;
+           //InputSignals.Instance.onEnableInput -= OnEnableInput;
+           //InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-
-            
             _playerInput.Runner.MouseDelta.performed -= OnPlayerInputMouseDeltaPerformed;
             _playerInput.Runner.MouseDelta.canceled -= OnPlayerInputMouseDeltaCanceled;
             _playerInput.Runner.MouseLeftButton.started -= OnMouseLeftButtonStart;
@@ -97,12 +95,11 @@ namespace Managers
         private void OnPlayerInputJoyStickStart(InputAction.CallbackContext context)
         {
             _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, context.ReadValue<Vector2>().y);
-            Debug.Log("OnPlayerInputJoyStickStart"+_moveVector.x);
-
+            //Debug.Log("OnPlayerInputJoyStickStart"+_moveVector.x);
             InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
             {
-                XValue = _playerMovementValue.x,
-                ZValue = _playerMovementValue.z
+                IdleXValue = _playerMovementValue.x * Data.IdleInputSpeed,
+                IdleZValue = _playerMovementValue.z * Data.IdleInputSpeed
             });
         } 
         private void OnPlayerInputJoyStickPerformed(InputAction.CallbackContext context)
@@ -110,8 +107,8 @@ namespace Managers
             _playerMovementValue = new Vector3(context.ReadValue<Vector2>().x, 0f, context.ReadValue<Vector2>().y);
             InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
             {
-                XValue = _playerMovementValue.x*Data.InputSpeed,
-                ZValue = _playerMovementValue.z*Data.InputSpeed
+                IdleXValue = _playerMovementValue.x*Data.IdleInputSpeed,
+                IdleZValue = _playerMovementValue.z*Data.IdleInputSpeed
             });
             
         }
@@ -120,8 +117,8 @@ namespace Managers
             _playerMovementValue = Vector3.zero;
             InputSignals.Instance.onIdleInputTaken?.Invoke(new IdleInputParams()
             {
-                XValue = _playerMovementValue.x*Data.InputSpeed,
-                ZValue = _playerMovementValue.z*Data.InputSpeed
+                IdleXValue = _playerMovementValue.x,
+                IdleZValue = _playerMovementValue.z
             });
         }
 

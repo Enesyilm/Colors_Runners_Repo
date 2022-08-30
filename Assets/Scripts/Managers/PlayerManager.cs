@@ -60,9 +60,9 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onInputTaken += OnActivateMovement;
+            //InputSignals.Instance.onInputTaken += OnActivateMovement;
             InputSignals.Instance.onIdleInputTaken += OnGetIdleInputValues;
-            InputSignals.Instance.onInputReleased += OnDeactivateMovement;
+            //InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
@@ -87,8 +87,8 @@ namespace Managers
         private void UnSubscribeEvents()
         {
             InputSignals.Instance.onIdleInputTaken += OnGetIdleInputValues;
-            InputSignals.Instance.onInputTaken -= OnActivateMovement;
-            InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
+          //  InputSignals.Instance.onInputTaken -= OnActivateMovement;
+          //  InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
@@ -133,7 +133,7 @@ namespace Managers
 
         private void OnGetInputValues(RunnerHorizontalInputParams inputParam)
         {
-            playerMovementController.UpdateInputValue(inputParam);
+            playerMovementController.UpdateRunnerInputValue(inputParam);
         }
         private void OnGetIdleInputValues(IdleInputParams inputParam)
         {
