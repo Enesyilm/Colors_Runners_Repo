@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using Enums;
+using Signals;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Managers
 {
@@ -7,8 +12,10 @@ namespace Managers
         #region Self Variables
 
         #region Private Variables
+
         private int _totalScore;
         private int _levelScore;
+        private List<int> _scoreVariables = new List<int>(Enum.GetNames(typeof(ScoreVariableType)).Length);
         
 
         #endregion
@@ -18,5 +25,105 @@ namespace Managers
 
         #endregion
         #endregion
+
+        private void Awake()
+        {
+            InitScoreValues();
+        }
+
+        private void InitScoreValues()
+        {
+            for (int i = 0; i < Enum.GetNames(typeof(ScoreVariableType)).Length; i++)
+            {
+                _scoreVariables.Add(0);
+            }
+        }
+
+        #region Event Subscription
+        
+        private void OnEnable()
+        {
+            
+            SubscribeEvents();
+        }
+
+
+        private void SubscribeEvents()
+        {
+            ScoreSignals.Instance.onChangeScore+=OnChangeScore;
+            ScoreSignals.Instance.onAddLevelTototalScore += OnAddLevelToTotalScore;
+            CoreGameSignals.Instance.onGameInit += OnGameInit;
+            // CoreGameSignals.Instance.onReset += OnReset;
+            StackSignals.Instance.onStackInit += OnReset;
+            ScoreSignals.Instance.onGetScore+=OnGetScore;
+        }
+
+        private void OnAddLevelToTotalScore()
+        {
+            _scoreVariables[0] += _scoreVariables[1];
+        }
+
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+
+        private void UnSubscribeEvents()
+        {
+            ScoreSignals.Instance.onAddLevelTototalScore -= OnAddLevelToTotalScore;
+            ScoreSignals.Instance.onChangeScore-=OnChangeScore;
+            CoreGameSignals.Instance.onGameInit -= OnGameInit;
+            //CoreGameSignals.Instance.onReset -= OnReset;
+            ScoreSignals.Instance.onGetScore-=OnGetScore;
+            StackSignals.Instance.onStackInit -= OnReset;
+        }
+
+        private void OnGameInit()
+        {
+            
+        }
+
+        #endregion
+        private int OnGetScore(ScoreVariableType _scoreVarType)
+        {
+            return _scoreVariables[(int)_scoreVarType];
+        }
+
+        private void OnReset()
+        {
+            _scoreVariables[1] = 0;
+            ScoreSignals.Instance.onUpdateScore?.Invoke( _scoreVariables);
+        }
+        private void OnChangeScore(ScoreTypes _scoreType,ScoreVariableType _scoreVarType)
+        {
+            int _changedScoreValue = 0;
+            switch (_scoreType)
+            {
+                case ScoreTypes.DecScore:
+                    _changedScoreValue--;
+                    break;
+                case ScoreTypes.IncScore:
+                    _changedScoreValue++;
+                    break;
+                case ScoreTypes.DoubleScore:
+                    _changedScoreValue+= _scoreVariables[(int)_scoreVarType];
+                    break;
+                    
+            }
+
+            _scoreVariables[(int)_scoreVarType]+=_changedScoreValue;
+            ScoreSignals.Instance.onUpdateScore?.Invoke( _scoreVariables);
+            // switch (_scoreVarType)
+            // {
+            //     case ScoreVariableType.LevelScore:
+            //         ScoreSignals.Instance.onUpdateLevelScore?.Invoke( _scoreVariables[(int)_scoreVarType]);
+            //         break;
+            //     case ScoreVariableType.TotalScore:
+            //         ScoreSignals.Instance.onUpdateTotalScore?.Invoke( _scoreVariables[(int)_scoreVarType]);
+            //         break;    
+            // }
+            
+        }
     }
 }

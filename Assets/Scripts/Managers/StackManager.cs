@@ -59,7 +59,7 @@ namespace Managers
                 StackSignals.Instance.onDroneArea += OnDroneAreaDecrease;
                 StackSignals.Instance.onDoubleStack += OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
-                CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
+                // CoreGameSignals.Instance.onGameInit += OnInitalStackSettings;
                 CoreGameSignals.Instance.onPlay +=OnInitRunAnimation;
                 StackSignals.Instance.onAnimationChange += OnChangeAnimationInStack;
                 StackSignals.Instance.onColorChange += OnChangeColor;
@@ -75,7 +75,7 @@ namespace Managers
                 StackSignals.Instance.onDecreaseStackRoullette += OnDecreaseStackRoullette;
                 StackSignals.Instance.onDoubleStack -= OnDoubleStack;
                 StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
-                CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
+                // CoreGameSignals.Instance.onGameInit -= OnInitalStackSettings;
                 StackSignals.Instance.onAnimationChange -= OnChangeAnimationInStack;
                 StackSignals.Instance.onColorChange -= OnChangeColor;
 
@@ -87,7 +87,12 @@ namespace Managers
 
             #endregion
 
-        private void FixedUpdate()
+            private void Start()
+            {
+                OnInitalStackSettings();
+            }
+
+            private void FixedUpdate()
         {
             LerpStack();
         }
@@ -97,7 +102,6 @@ namespace Managers
             {
                 if (stackList[0]!=null&&_playerManager!=null)
                 {
-                    Debug.Log("calisiyor");
                     stackList[0].transform.position = new Vector3(
                    Mathf.Lerp(stackList[0].transform.position.x, _playerManager.transform.position.x,.2f),
                    Mathf.Lerp(stackList[0].transform.position.y, _playerManager.transform.position.y,.2f),
@@ -128,6 +132,7 @@ namespace Managers
         #region Subscribed Methods
         private void OnIncreaseStack(GameObject _currentGameObject)
         {
+            ScoreSignals.Instance.onChangeScore(ScoreTypes.IncScore,ScoreVariableType.LevelScore);
             _currentGameObject.transform.SetParent(transform);
             stackList.Add(_currentGameObject);
             //StartCoroutine(ScaleUp());
@@ -146,11 +151,13 @@ namespace Managers
         }
         private void OnDecreaseStack(int _removedIndex)
         {
+            ScoreSignals.Instance.onChangeScore(ScoreTypes.DecScore,ScoreVariableType.LevelScore);
             if (stackList[_removedIndex] is null)
             {
                 return;
             }
-            stackList[_removedIndex].SetActive(false);
+            stackList[_removedIndex].transform.parent = tempHolder;
+            ///stackList[_removedIndex].SetActive(false);
             stackList.RemoveAt(_removedIndex);
             stackList.TrimExcess();
             // if (stackList.Count == 0)
@@ -175,10 +182,10 @@ namespace Managers
             }
 
         }
-        
+
         private async void OnDroneAreaDecrease(int index)
         {
-            
+            ScoreSignals.Instance.onChangeScore(ScoreTypes.DecScore,ScoreVariableType.LevelScore);
             stackList[index].transform.parent = tempHolder;
             stackList.RemoveAt(index);
             stackList.TrimExcess();
@@ -229,7 +236,7 @@ namespace Managers
 
 
         private void OnInitalStackSettings()
-        {//deger datadan gelmeli
+        {//deger datadan gelmel
             FindPlayer();
             OnChangeStack(initAmount);
             StackSignals.Instance.onAnimationChange?.Invoke(CollectableAnimationTypes.Crouch);
@@ -246,8 +253,10 @@ namespace Managers
           {
               for (int i = 0; i < stackList.Count; i++)
               {
+                  // onreset ve ongame init initstacki iki kere  cagiriyor
                   stackList[i].transform.SetParent(null);
                   Destroy(stackList[i]);
+                  ScoreSignals.Instance.onChangeScore(ScoreTypes.DecScore,ScoreVariableType.LevelScore);
 
               }
           }
@@ -257,6 +266,8 @@ namespace Managers
               DeleteStack();
               stackList.Clear();
               stackList.TrimExcess();
+              Debug.Log("onreset");
+              StackSignals.Instance.onStackInit.Invoke();
               OnInitalStackSettings();
           }
         

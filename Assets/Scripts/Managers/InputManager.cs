@@ -22,13 +22,13 @@ namespace Managers
         #endregion
         #region Serialized Variables
 
-        [SerializeField] private bool isReadyForTouch;
-        [SerializeField] private bool isFirstTimeTouchTaken =false;
 
         #endregion
 
         #region Private Variables
 
+        private bool isFirstTimeTouchTaken =false;
+        private bool isReadyForTouch;
         private PlayerInputSystem _playerInput;
         private bool _isTouching; //ref type
         private float _currentVelocity; //ref type
@@ -206,7 +206,6 @@ namespace Managers
 
         private void OnReset()
         {
-            Debug.Log("OnReset Calisti");
             _isTouching = false;
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;

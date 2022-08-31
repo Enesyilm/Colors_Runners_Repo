@@ -5,6 +5,7 @@ using Controllers;
 using Keys;
 using Enums;
 using System.Collections;
+using System.Collections.Generic;
 using Signals;
 
 namespace Managers
@@ -39,7 +40,7 @@ namespace Managers
         #region Private Variables
 
         private PlayerData Data;
-        private PlayerState _playerState=PlayerState.Runner;
+        private GameStates _currentGameState=GameStates.Runner;
         
 
         #endregion
@@ -62,6 +63,7 @@ namespace Managers
         {
             //InputSignals.Instance.onInputTaken += OnActivateMovement;
             InputSignals.Instance.onIdleInputTaken += OnGetIdleInputValues;
+            ScoreSignals.Instance.onUpdateScore += OnUpdateScoreText;
             //InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -78,6 +80,7 @@ namespace Managers
         private void OnChangeGameState(GameStates arg0)
         {
             playerMovementController.CurrentGameState = arg0;
+            _currentGameState = arg0;
             if (arg0 == GameStates.Idle)
             {
                 playerMovementController.EnableIdleMovement();
@@ -90,6 +93,7 @@ namespace Managers
           //  InputSignals.Instance.onInputTaken -= OnActivateMovement;
           //  InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
+            ScoreSignals.Instance.onUpdateScore -= OnUpdateScoreText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
@@ -155,11 +159,11 @@ namespace Managers
             playerMovementController.IsReadyToPlay(false);
         }
         
-        private void OnUpdateScore(float totalScore)
-        {
-            //playerTextController.UpdatePlayerScore(totalScore);
-            CurrentScore = totalScore;
-        }
+        // private void OnUpdateScore(float totalScore)
+        // {
+        //     //playerTextController.UpdatePlayerScore(totalScore);
+        //     CurrentScore = totalScore;
+        // }
         public void StopVerticalMovement()
         {
             playerMovementController.ChangeVerticalMovement(0);
@@ -196,7 +200,7 @@ namespace Managers
 
         private void OnReset()
         {
-            OnUpdateScore(0);
+            //OnUpdateScore(0);
             playerMovementController.OnReset();
         }
         #endregion
@@ -208,6 +212,32 @@ namespace Managers
         {
             NewCameraSignals.Instance.onChangeCameraState.Invoke(CameraStates.StartOfIdle);
             playerMeshController.ActiveMesh();
+        }
+
+        public void OnUpdateScoreText(List<int> _currentScores)
+        {
+            switch (_currentGameState)
+            {
+                case GameStates.Idle:
+                    playerTextController.UpdatePlayerScore(_currentScores[0]);
+                    break;
+                case GameStates.Runner:
+                    playerTextController.UpdatePlayerScore(_currentScores[1]);
+
+                    break;
+                
+            }
+           
+        }
+
+        public void OnIdleMovement()
+        {
+            
+        }
+
+        public void CloseScoreText(bool _visiblitystate)
+        {
+            playerTextController.CloseScoreText(_visiblitystate);
         }
     }
 }

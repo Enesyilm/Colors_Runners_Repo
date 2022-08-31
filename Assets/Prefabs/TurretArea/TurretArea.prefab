@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4324413353066166724}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: -0.82, z: 0}
+  m_LocalPosition: {x: 2, y: -0.93, z: 0}
   m_LocalScale: {x: 4, y: 0.3, z: 7}
   m_Children: []
   m_Father: {fileID: 5213241218378453016}
@@ -114,6 +114,7 @@ MonoBehaviour:
   turretAreaManager: {fileID: 4334286384673038186}
   turret: {fileID: 5497023314302567009}
   turretSearchPeriod: 2
+  meshRenderer: {fileID: 3581440942163616573}
 --- !u!114 &8820089248331684687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5312462050158758806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: -0.82, z: 0}
+  m_LocalPosition: {x: -2, y: -0.93, z: 0}
   m_LocalScale: {x: 4, y: 0.3, z: 7}
   m_Children: []
   m_Father: {fileID: 5213241218378453016}
@@ -336,6 +337,7 @@ MonoBehaviour:
   turretAreaManager: {fileID: 4334286384673038186}
   turret: {fileID: 6447942337594226683}
   turretSearchPeriod: 2
+  meshRenderer: {fileID: 9203337783922089025}
 --- !u!114 &7593036349545497701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +749,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 565b27b999c1f6f43aee1750c78d8150, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1478d4a6c90a5d94ebda0d1f5d74d763, type: 2}
+      objectReference: {fileID: 2100000, guid: 7fcaafee1bea8b947b99279c40d4adda, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 565b27b999c1f6f43aee1750c78d8150, type: 3}
 --- !u!4 &5497023314302567009 stripped
@@ -829,7 +831,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 565b27b999c1f6f43aee1750c78d8150, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1478d4a6c90a5d94ebda0d1f5d74d763, type: 2}
+      objectReference: {fileID: 2100000, guid: 7fcaafee1bea8b947b99279c40d4adda, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 565b27b999c1f6f43aee1750c78d8150, type: 3}
 --- !u!4 &6447942337594226683 stripped

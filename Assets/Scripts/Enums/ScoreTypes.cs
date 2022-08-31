@@ -3,6 +3,12 @@ namespace Enums
     public enum ScoreTypes
     {
         DoubleScore,
-        DecreaseScore
+        IncScore,
+        DecScore
+    }
+    public enum ScoreVariableType
+    {
+       TotalScore,
+        LevelScore,
     }
 }

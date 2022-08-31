@@ -11,7 +11,6 @@ namespace Commands
         {
             Instantiate(Resources.Load<GameObject>($"Prefabs/IdleLevelPrefabs/IdleLevel {_idleLevelID}"), levelHolder);
             CoreGameSignals.Instance.onGameInit?.Invoke();
-            Debug.Log("erererer");
 
         }
     }

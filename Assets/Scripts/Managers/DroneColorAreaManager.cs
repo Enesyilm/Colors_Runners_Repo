@@ -15,7 +15,7 @@ namespace Controllers
         #region Public Variables
 
         public ColorTypes CurrentColorType;
-        public  MatchType matchType=MatchType.Match;
+        public  MatchType matchType=MatchType.UnMatched;
 
         #endregion
         #region Serialized Variables

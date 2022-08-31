@@ -9,7 +9,7 @@ namespace Signals
     {
         public UnityAction<GameObject> onIncreaseStack = delegate { };
         public UnityAction<int> onDecreaseStack = delegate { };
-        public UnityAction onActivateStackOutline = delegate { };
+        public UnityAction onStackInit = delegate { };
         public UnityAction<int> onDecreaseStackRoullette = delegate { };
         public UnityAction<int> onDroneArea = delegate { };
         public UnityAction<int> onDecreaseStackOnDroneArea = delegate { };

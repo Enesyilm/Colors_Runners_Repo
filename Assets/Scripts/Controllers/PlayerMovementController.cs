@@ -23,6 +23,7 @@ namespace Controllers
         #region Serialized Variables
         [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private PlayerManager playerManager;
+        [SerializeField] private Transform playerMesh;
         #endregion
 
         #region Private Variables
@@ -114,7 +115,7 @@ namespace Controllers
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
                     _inputValueZ * _movementData.ForwardSpeed));
                 playerManager.ChangeAnimation(PlayerAnimationTypes.Run);
-                transform.rotation = toRotation;
+                playerMesh.rotation = toRotation;
             }
             else
             {
@@ -168,7 +169,11 @@ namespace Controllers
         }
         public void RepositionPlayerForDrone(GameObject _other)
         {
-           transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z+_other.transform.localScale.z*2),2f);
+           transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z+_other.transform.localScale.z*2),2f).OnComplete((
+               () =>
+               {
+                   playerManager.CloseScoreText(false);
+               }));
         }
         public void DisableStopVerticalMovement()
         {

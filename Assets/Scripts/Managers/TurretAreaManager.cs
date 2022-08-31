@@ -45,7 +45,7 @@ namespace Managers
 
         public void Start()
         {
-            InvokeRepeating("KillFromTargetList",0,0.8f);
+            InvokeRepeating("KillFromTargetList",0,0.5f);
         }
 
         public void AddTargetToList(GameObject _other)
@@ -59,9 +59,13 @@ namespace Managers
             {
                GameObject _currentTarget = _targetList[0];
             _targetList.RemoveAt(0);
-            _currentTarget.GetComponent<CollectableManager>().DelayedDeath(false);
+            _currentTarget.GetComponent<CollectableManager>().DelayedDeath(true);
             StackSignals.Instance.onDecreaseStack(0);
             _turretState = _targetList.Count > 0 ? ChangeTurretState(TurretStates.Warned) : ChangeTurretState(TurretStates.Search);
+            foreach (var turret in turretList)
+            {
+                turret.FireTurretAnimation();
+            }
             }
             
         }

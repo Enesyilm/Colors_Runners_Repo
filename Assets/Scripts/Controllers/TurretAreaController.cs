@@ -2,6 +2,7 @@ using System;
 using Enums;
 using Managers;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
@@ -28,6 +29,7 @@ namespace Controllers
 
         [SerializeField]
         private int turretSearchPeriod;
+        [SerializeField] MeshRenderer meshRenderer;
 
 
 
@@ -39,6 +41,17 @@ namespace Controllers
         #endregion
 
         #endregion
+
+        private void Awake()
+        {
+            ChangeInitColor();
+        }
+
+        private void ChangeInitColor()
+        {
+              var colorHandler=Addressables.LoadAssetAsync<Material>($"CoreColor/Color_{ColorType}");
+                        meshRenderer.material = (colorHandler.WaitForCompletion() != null)?colorHandler.Result:null;
+        }
 
         public void GetRandomSearchPoint() {
             CurrentTargetPos= new Vector3(
@@ -68,12 +81,12 @@ namespace Controllers
         {
             CurrentTargetPos=_target.transform.position;
             RotateToTargetPos();
-            FireTurretAnimation();
+            
            
         }
 
 
-        private void FireTurretAnimation()
+        public void FireTurretAnimation()
         {
             Debug.Log("Ates edildi öldu");
         }

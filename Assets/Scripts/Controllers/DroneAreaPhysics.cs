@@ -22,10 +22,9 @@ namespace Controllers
         {
             if (other.CompareTag("Collected"))
             {
-                if (other.GetComponentInParent<CollectableManager>().CurrentColorType != droneColorAreaManager.CurrentColorType)
+                if (other.GetComponentInParent<CollectableManager>().CurrentColorType == droneColorAreaManager.CurrentColorType)
                 {
-                    Debug.Log("Unmatch");
-                    droneColorAreaManager.matchType = MatchType.UnMatched;
+                    droneColorAreaManager.matchType = MatchType.Match;
                 }
                 
             }

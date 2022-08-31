@@ -169,7 +169,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_08d7b738affd45428427347aa46101ad: -90
-    - Vector1_a6cd913e17394aff96e5289a9062db27: 0.5
+    - Vector1_a6cd913e17394aff96e5289a9062db27: 0.2
     - _AdvancedTab: 0
     - _AlphaClip: 0
     - _AlphaClipping: 0

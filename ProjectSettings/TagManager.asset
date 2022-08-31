@@ -16,6 +16,7 @@ TagManager:
   - TurretAreaGround
   - Portal
   - Roulette
+  - Market
   layers:
   - Default
   - TransparentFX

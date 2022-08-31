@@ -161,6 +161,8 @@ namespace Managers
         }
         public void RetryLevel()
         {
+            //Debug.Log("RetryLevel");
+
             CoreGameSignals.Instance.onReset?.Invoke();
             UISignals.Instance.onClosePanel?.Invoke(UIPanelTypes.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
@@ -169,6 +171,7 @@ namespace Managers
         }
         public void RestartButton()
         {
+            Debug.Log("RestartButton");
             UISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
         }

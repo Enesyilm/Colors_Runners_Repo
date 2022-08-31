@@ -129,7 +129,6 @@ namespace Managers
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            Debug.Log("Level onReset");
             SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
             CoreGameSignals.Instance.onLevelIdleInitialize?.Invoke();

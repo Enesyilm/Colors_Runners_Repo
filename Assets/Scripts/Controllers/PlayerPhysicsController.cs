@@ -30,6 +30,16 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("DroneArea"))
+            {
+               playerManager.CloseScoreText(true);
+
+            }
+
+            if (other.CompareTag("Market"))
+            {
+                playerManager.ChangeAnimation(PlayerAnimationTypes.Throw);
+            }
             
             if(other.CompareTag("DroneAreaPhysics"))
             {
@@ -51,10 +61,11 @@ namespace Controllers
             if (other.CompareTag("Roulette"))
             {
                 if (_isEnteredRoullette==false)
-                {
-                playerManager.StopAllMovement();
-                playerManager.ActivateMesh();
-                _isEnteredRoullette = true;
+                { 
+                    ScoreSignals.Instance.onAddLevelTototalScore?.Invoke();
+                    playerManager.StopAllMovement();
+                    playerManager.ActivateMesh();
+                    _isEnteredRoullette = true;
                 }
                 //other.GetComponent<Collider>().enabled = false;
             }
