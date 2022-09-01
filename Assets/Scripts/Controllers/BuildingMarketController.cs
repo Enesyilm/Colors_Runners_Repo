@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using DG.Tweening;
 using Enums;
 using Managers;
 using Signals;
@@ -19,7 +21,8 @@ namespace Controllers
 
         #region Serialized Variables
 
-        
+        [SerializeField] 
+        private List<MeshRenderer> meshRendererList; 
 
         #endregion
 
@@ -37,7 +40,7 @@ namespace Controllers
         private void Awake()
         {
             _marketText = GetComponent<TextMeshPro>();
-            _buildingManager = GetComponentInParent<BuildingManager>();
+            _buildingManager = transform.parent.GetComponentInParent<BuildingManager>();
             
         }
 
@@ -59,20 +62,21 @@ namespace Controllers
 
         private bool CheckCanIncrease()
         {
+            Debug.Log("_buildingManager.IsCompleted");
             //Score Managerden gelecek burasi
             if (/*SaveSignals.Instance.onGetIntSaveData(SaveTypes.TotalColorman) > 0*/true&&!_buildingManager.IsCompleted)
             {
                 _totalColorMan--;
-                _buildingManager.PayedAmount++;
-                _buildingManager.PayedAmount++;
-                if (_buildingManager.PayedAmount>=_buildingManager.TotalAmount)
+               
+                    _buildingManager.PayedAmount++;
+                    if (_buildingManager.PayedAmount>=_buildingManager.TotalAmount)
                 {
                     _buildingManager.IsCompleted = true;
                     if (_buildingManager.IsDepended&&!_buildingManager.IsSideObjectActive)
                     {
                         _buildingManager.NextBuilding();
                     }
-                    else if(_buildingManager.IsDepended&&_buildingManager.IsSideObjectActive)
+                    else
                     {
                         _buildingManager.CloseBuilding();
                     }
@@ -91,14 +95,34 @@ namespace Controllers
 
         private void CalculateSaturation()
         {
-            _saturation= (_buildingManager.PayedAmount != 0 && _buildingManager.TotalAmount != 0)
-                ? _buildingManager.PayedAmount / _buildingManager.TotalAmount
-                : 0;
+            _saturation=((float)_buildingManager.PayedAmount / _buildingManager.TotalAmount) * 2;
+            Debug.Log("_saturation"+_saturation);
+            ChangeSaturation();
+        }
+
+        private void ChangeSaturation()
+        {
+             foreach (var meshrenderer in meshRendererList)
+             {
+                 
+                 meshrenderer.material.DOFloat(_saturation,"_Saturation",1f);
+                 if(CompareTag("Market")&& _buildingManager.IsSideObjectActive)
+                 {
+                     Debug.Log("Calisti kill");
+                     // DOTween.Kill(meshrenderer.material);
+                     meshrenderer.material.DOFloat(2,"_Saturation",1f);
+                 }
+                 
+
+             }
         }
 
         private void UpdateText()
         {
-            _marketText.text =_buildingManager.PayedAmount+"/"+_buildingManager.TotalAmount;
+            
+                _marketText.text =_buildingManager.PayedAmount+"/"+_buildingManager.TotalAmount;
+            
+          
         }
     }
 }

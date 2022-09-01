@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Controllers;
 using Managers.Interface;
 using Signals;
@@ -17,6 +18,7 @@ namespace Managers
     #region Public Variables
 
     public int PayedAmount;
+    public int SidePayedAmount;
     public int TotalAmount;
     public int SideTotalAmount;
     public bool IsDepended;
@@ -43,8 +45,9 @@ namespace Managers
 
     #endregion
 
-    private void Start()
+    private async void Start()
     {
+        await Task.Delay(1000);
         DecideMarketState();
     }
 
@@ -54,53 +57,53 @@ namespace Managers
         {
             if (IsSideObjectActive)
             {
-                sideBuildingMarketController.gameObject.SetActive(true);
-                buildingMarketController.gameObject.SetActive(false);
+                sideBuildingMarketController.gameObject.transform.parent.gameObject.SetActive(true);
+                buildingMarketController.gameObject.transform.parent.gameObject.SetActive(false);
             }
-            if(IsSideObjectActive&&IsCompleted)
+           if(IsSideObjectActive&&IsCompleted)
             {
-                sideBuildingMarketController.gameObject.SetActive(false);
+                sideBuildingMarketController.transform.parent.gameObject.SetActive(false);
             }
-            else
-            {
-                sideBuildingMarketController.gameObject.SetActive(false);
-                buildingMarketController.gameObject.SetActive(true);
-            }
-            
+
+        }
+        else if (IsCompleted)
+        {
+            buildingMarketController.gameObject.transform.parent.gameObject.SetActive(false);
         }
     }
 
     public void UpgradeBuilding()
     {
-        if (IsDepended)
+        if (IsDepended&&IsSideObjectActive)
         {
-            if (IsSideObjectActive)
-            {
-                sideBuildingMarketController.UpgradeBuilding();
-
-            }
-            else
-            {
-                buildingMarketController.UpgradeBuilding();
-            }
+            sideBuildingMarketController.UpgradeBuilding();
+           
+        }
+        else
+        {
+            buildingMarketController.UpgradeBuilding();
         }
     }
 
-    public void NextBuilding()
+    public async void NextBuilding()
     {
+        
+        buildingMarketController.gameObject.transform.parent.gameObject.SetActive(false);
+        sideBuildingMarketController.gameObject.transform.parent.gameObject.SetActive(true);
         IsCompleted = false;
         IsSideObjectActive=true;
         PayedAmount = 0;
         TotalAmount = SideTotalAmount;
-        buildingMarketController.gameObject.SetActive(false);
-        sideBuildingMarketController.gameObject.SetActive(true);
     }
 
     public void CloseBuilding()
     {
         IsCompleted = true;
-        buildingMarketController.gameObject.SetActive(false);
-        sideBuildingMarketController.gameObject.SetActive(false);
+        buildingMarketController.gameObject.transform.parent.gameObject.SetActive(false);
+        if (IsDepended)
+        {
+             sideBuildingMarketController.gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
     
     }

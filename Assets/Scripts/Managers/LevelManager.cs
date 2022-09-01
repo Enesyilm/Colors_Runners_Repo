@@ -46,7 +46,6 @@ namespace Managers
         private void Awake()
         {
             
-            _levelID = GetActiveLevel();
             _idleLevelID = GetActiveIdleLevel();
             GetCommandComponents();
         }
@@ -108,6 +107,7 @@ namespace Managers
 
         private void Start()
         {
+            _levelID = GetActiveLevel();
             OnInitializeLevel();
             OnInitializeIdleLevel();
         }
@@ -115,6 +115,7 @@ namespace Managers
         private void OnNextLevel()
         {
             _levelID++;
+            SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
             CoreGameSignals.Instance.onReset?.Invoke();
         }
         private void OnNextIdleLevel()

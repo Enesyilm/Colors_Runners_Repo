@@ -17,6 +17,7 @@ TagManager:
   - Portal
   - Roulette
   - Market
+  - SideMarket
   layers:
   - Default
   - TransparentFX

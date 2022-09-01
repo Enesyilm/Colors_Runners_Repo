@@ -139,6 +139,7 @@ public class SaveManager : MonoBehaviour
         if (pauseStatus)
         {
             SaveSignals.Instance.onApplicationPause?.Invoke();
+            Debug.Log("OnApplicationPause");
             
         }
     }

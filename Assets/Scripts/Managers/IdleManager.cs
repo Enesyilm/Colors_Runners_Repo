@@ -115,7 +115,7 @@ namespace Managers
                 if (buildingList[i].IsDepended&&buildingList[i].IsSideObjectActive)
                 {
                    _currentIdleLevelData.IdleBuildingData[i].SideObjectData.IsCompleted = buildingList[i].IsCompleted;
-                   _currentIdleLevelData.IdleBuildingData[i].PayedAmount = buildingList[i].PayedAmount;
+                   _currentIdleLevelData.IdleBuildingData[i].SideObjectData.PayedAmount = buildingList[i].PayedAmount;
                    _currentIdleLevelData.IdleBuildingData[i].TotalRequiredAmount = buildingList[i].TotalAmount;
                 }
             }
@@ -126,8 +126,8 @@ namespace Managers
         }
         public void SendDataToSaveManager()
         {
-            PrepareSaveData();
             Debug.Log("Prepare Save Data calsiti");
+            PrepareSaveData();
             SaveSignals.Instance.onChangeIdleLevelListData?.Invoke(_idleLevelListData);
             
         }
