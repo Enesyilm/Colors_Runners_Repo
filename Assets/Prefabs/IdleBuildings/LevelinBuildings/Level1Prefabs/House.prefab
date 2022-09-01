@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PayedAmount: 0
+  SidePayedAmount: 0
   TotalAmount: 80
   SideTotalAmount: 40
   IsDepended: 1
@@ -215,6 +216,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6152324876818605629, guid: 94d8201c1e8b53c42bf4185e487d48a9, type: 3}
   m_PrefabInstance: {fileID: 488158046536416297}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &3988905726169273765 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3575077139975399820, guid: 94d8201c1e8b53c42bf4185e487d48a9, type: 3}
+  m_PrefabInstance: {fileID: 488158046536416297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3131736973609933111 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3292240211470656798, guid: 94d8201c1e8b53c42bf4185e487d48a9, type: 3}
+  m_PrefabInstance: {fileID: 488158046536416297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7232395055436557929 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7104685507922842176, guid: 94d8201c1e8b53c42bf4185e487d48a9, type: 3}
+  m_PrefabInstance: {fileID: 488158046536416297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5331489168813307615 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5709165812619184886, guid: 94d8201c1e8b53c42bf4185e487d48a9, type: 3}
+  m_PrefabInstance: {fileID: 488158046536416297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7287385833110623552 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7198924728881965417, guid: 94d8201c1e8b53c42bf4185e487d48a9, type: 3}
+  m_PrefabInstance: {fileID: 488158046536416297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4284002068714377459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,6 +319,38 @@ PrefabInstance:
     - target: {fileID: 6543512451675237214, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
       propertyPath: m_fontSize
       value: 64.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[0]
+      value: 
+      objectReference: {fileID: 3988905726169273765}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[1]
+      value: 
+      objectReference: {fileID: 3131736973609933111}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[2]
+      value: 
+      objectReference: {fileID: 7232395055436557929}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[3]
+      value: 
+      objectReference: {fileID: 5331489168813307615}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[4]
+      value: 
+      objectReference: {fileID: 7287385833110623552}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[5]
+      value: 
+      objectReference: {fileID: 6435518909637805905}
+    - target: {fileID: 8318180134184971013, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: m_TagString
+      value: SideMarket
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
@@ -386,6 +444,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3996520974766562749, guid: 430dd67c90e7d564e9f9e6a5bd0d2ca8, type: 3}
   m_PrefabInstance: {fileID: 4494625495808806671}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2963771547459476916 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1675744326537335483, guid: 430dd67c90e7d564e9f9e6a5bd0d2ca8, type: 3}
+  m_PrefabInstance: {fileID: 4494625495808806671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5839637072094510102 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8028388616671343385, guid: 430dd67c90e7d564e9f9e6a5bd0d2ca8, type: 3}
+  m_PrefabInstance: {fileID: 4494625495808806671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1962217484027824036 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2691794082897004715, guid: 430dd67c90e7d564e9f9e6a5bd0d2ca8, type: 3}
+  m_PrefabInstance: {fileID: 4494625495808806671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2775930483251716281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1794130306429398966, guid: 430dd67c90e7d564e9f9e6a5bd0d2ca8, type: 3}
+  m_PrefabInstance: {fileID: 4494625495808806671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6704563724273667260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -460,6 +538,30 @@ PrefabInstance:
     - target: {fileID: 6543512451675237214, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
       propertyPath: m_fontSize
       value: 50.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[0]
+      value: 
+      objectReference: {fileID: 2963771547459476916}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[1]
+      value: 
+      objectReference: {fileID: 5839637072094510102}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1962217484027824036}
+    - target: {fileID: 7964199057317706804, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: meshRendererList.Array.data[3]
+      value: 
+      objectReference: {fileID: 2775930483251716281}
+    - target: {fileID: 8318180134184971013, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
+      propertyPath: m_TagString
+      value: Market
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
