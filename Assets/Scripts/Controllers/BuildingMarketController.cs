@@ -56,6 +56,7 @@ namespace Controllers
         {
             if (CheckCanIncrease())
             {
+                ParticleSignals.Instance.onParticleBurst(transform.position);
                 UpdateText();
                 CalculateSaturation();
             }

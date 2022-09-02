@@ -54,6 +54,7 @@ public class CollectableManager : MonoBehaviour
 
     public void DecreaseStack()
     {
+        ParticleSignals.Instance.onPlayerDeath?.Invoke(transform.position);
         StackSignals.Instance.onDecreaseStack?.Invoke( transform.GetSiblingIndex());
         gameObject.transform.parent = null;
         DelayedDeath(false);
@@ -102,12 +103,13 @@ public class CollectableManager : MonoBehaviour
     }
     public void DelayedDeath(bool _isDelayed)
     {
+        ParticleSignals.Instance.onPlayerDeath?.Invoke(transform.position);
         if (_isDelayed)
         { 
         collider.enabled=false;
         ChangeAnimationOnController(CollectableAnimationTypes.Death);
         ChangeOutlineState(true);
-        Destroy(gameObject,1f);
+        Destroy(gameObject,2f);
         }
         else
         {

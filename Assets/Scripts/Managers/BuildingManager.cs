@@ -67,7 +67,6 @@ namespace Managers
 
     private void SendDataToControllers()
     {
-        Debug.Log("SendDataToControllers"+_totalColorMan);
         buildingMarketController.TotalColorMan=_totalColorMan;
         if (IsDepended)
         {

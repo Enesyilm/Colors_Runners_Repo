@@ -160,10 +160,10 @@ namespace Managers
             ///stackList[_removedIndex].SetActive(false);
             stackList.RemoveAt(_removedIndex);
             stackList.TrimExcess();
-            // if (stackList.Count == 0)
-            // {
-            //     CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Roulette);
-            // }
+            if (stackList.Count == 0)
+            {
+                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Failed);
+            }
 
         }
         private void OnDecreaseStackRoullette(int _removedIndex)
@@ -266,7 +266,6 @@ namespace Managers
               DeleteStack();
               stackList.Clear();
               stackList.TrimExcess();
-              Debug.Log("onreset");
               StackSignals.Instance.onStackInit.Invoke();
               OnInitalStackSettings();
           }

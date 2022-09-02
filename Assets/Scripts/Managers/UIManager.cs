@@ -151,6 +151,10 @@ namespace Managers
                 case GameStates.Runner:
                     OnOpenPanel(UIPanelTypes.StartPanel);
                     break;
+                case GameStates.Failed:
+                    OnClosePanel(UIPanelTypes.LevelPanel);
+                    OnOpenPanel(UIPanelTypes.FailPanel);
+                    break;
             }
         }
 

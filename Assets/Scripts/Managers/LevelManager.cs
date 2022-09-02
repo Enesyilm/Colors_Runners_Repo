@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 //using Controllers;
 using Data.UnityObjects;
 using Data.ValueObjects;
@@ -127,11 +128,13 @@ namespace Managers
             CoreGameSignals.Instance.onLevelIdleInitialize?.Invoke();
         }
 
-        private void OnReset()
+        private async  void OnReset()
         {
+            await Task.Delay(50);
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             SaveSignals.Instance.onChangeSaveData?.Invoke(SaveTypes.Level,_levelID);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            //await Task.Delay(50);
             CoreGameSignals.Instance.onLevelIdleInitialize?.Invoke();
         }
 

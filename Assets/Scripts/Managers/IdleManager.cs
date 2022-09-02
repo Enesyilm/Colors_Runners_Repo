@@ -46,6 +46,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             SaveSignals.Instance.onApplicationPause += SendDataToSaveManager;
+            //CoreGameSignals.Instance.onNextLevel += SendDataToSaveManager;
             SaveSignals.Instance.onSendDataToManagers += OnGetSaveData;
         }
         private void OnDisable()
@@ -55,6 +56,7 @@ namespace Managers
 
         private void UnSubscribeEvents()
         {
+            //CoreGameSignals.Instance.onNextLevel -= SendDataToSaveManager;
             SaveSignals.Instance.onApplicationPause -= SendDataToSaveManager;
             SaveSignals.Instance.onSendDataToManagers -= OnGetSaveData;
 
@@ -70,7 +72,7 @@ namespace Managers
 
         private void OnGetSaveData(SaveData _saveData)
         {
-
+            Debug.Log("OnGetSaveData calisti");
             _currentIdleLevelId=CoreGameSignals.Instance.onGetIdleLevelID.Invoke();
             _idleLevelListData = _saveData.IdleLevelListData;
             SyncDataToBuildings();
@@ -90,6 +92,7 @@ namespace Managers
                         buildingList[i].SideTotalAmount= _loadedbuilding.SideObjectData.TotalRequiredAmount;
                     }
                     buildingList[i].PayedAmount = _loadedbuilding.PayedAmount;
+                    Debug.Log("buildingList[i].LoadPayedAmount;"+_loadedbuilding.PayedAmount);
                     buildingList[i].TotalAmount = _loadedbuilding.TotalRequiredAmount;
                     if (_loadedbuilding.IsDepended&&_loadedbuilding.IsSideObjectActive)
                     {
@@ -111,6 +114,7 @@ namespace Managers
                 _currentIdleLevelData.IdleBuildingData[i].IsCompleted = buildingList[i].IsCompleted;
                 _currentIdleLevelData.IdleBuildingData[i].IsSideObjectActive=buildingList[i].IsSideObjectActive;
                 _currentIdleLevelData.IdleBuildingData[i].PayedAmount = buildingList[i].PayedAmount;
+                Debug.Log("buildingList[i].SaavePayedAmount;"+buildingList[i].PayedAmount);
                 _currentIdleLevelData.IdleBuildingData[i].TotalRequiredAmount = buildingList[i].TotalAmount;
                 if (buildingList[i].IsDepended&&buildingList[i].IsSideObjectActive)
                 {
@@ -126,7 +130,6 @@ namespace Managers
         }
         public void SendDataToSaveManager()
         {
-            Debug.Log("Prepare Save Data calsiti");
             PrepareSaveData();
             SaveSignals.Instance.onChangeIdleLevelListData?.Invoke(_idleLevelListData);
             

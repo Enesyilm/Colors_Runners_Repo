@@ -62,6 +62,7 @@ public class SaveManager : MonoBehaviour
     }
     private void SubscribeEvents()
     {
+        CoreGameSignals.Instance.onNextLevel += OnNextLevel;
         SaveSignals.Instance.onChangeSaveData+=OnChangeSaveData;
         SaveSignals.Instance.onChangeIdleLevelListData+=OnChangeIdleLevelListData;
         SaveSignals.Instance.onGetIntSaveData+=OnGetIntSaveData;
@@ -79,6 +80,7 @@ public class SaveManager : MonoBehaviour
 
     private void UnSubscribeEvents()
     {
+        CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         SaveSignals.Instance.onChangeSaveData-=OnChangeSaveData;
         SaveSignals.Instance.onChangeIdleLevelListData-=OnChangeIdleLevelListData;
         SaveSignals.Instance.onGetIntSaveData-=OnGetIntSaveData;
@@ -95,7 +97,6 @@ public class SaveManager : MonoBehaviour
     private void OnChangeIdleLevelListData(IdleLevelListData _idleLevelListData)
     {
         Data.IdleLevelListData=_idleLevelListData;
-        Debug.Log("Data"+Data.IdleLevelListData.IdleLevelData[0].IdleBuildingData[0].PayedAmount);
         _saveToDBCommand.SaveDataToDatabase(Data);
     }
     private int OnGetIntSaveData(SaveTypes _type)
@@ -142,6 +143,11 @@ public class SaveManager : MonoBehaviour
             Debug.Log("OnApplicationPause");
             
         }
+    }
+
+    private void OnNextLevel()
+    {
+        SaveSignals.Instance.onApplicationPause?.Invoke();
     }
     private void OnApplicationQuit()
     {

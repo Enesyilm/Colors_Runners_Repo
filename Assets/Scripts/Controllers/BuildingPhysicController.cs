@@ -1,5 +1,6 @@
 using System;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -34,6 +35,7 @@ namespace Controllers
                 if (_timer >= _repeatOffset)
                 {
                     _timer = 0;
+                   
                     _buildingManager.UpgradeBuilding();
                 }
                 

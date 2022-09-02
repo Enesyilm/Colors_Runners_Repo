@@ -57,7 +57,6 @@ namespace Managers
             SaveSignals.Instance.onSendDataToManagers += InitTotalScoreData;
             SaveSignals.Instance.onApplicationPause += OnSendScoreToSave;
             ScoreSignals.Instance.onAddLevelTototalScore += OnAddLevelToTotalScore;
-            CoreGameSignals.Instance.onGameInit += OnGameInit;
             // CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onStackInit += OnReset;
             ScoreSignals.Instance.onGetScore+=OnGetScore;
@@ -81,7 +80,6 @@ namespace Managers
             SaveSignals.Instance.onSendDataToManagers -= InitTotalScoreData;
             ScoreSignals.Instance.onAddLevelTototalScore -= OnAddLevelToTotalScore;
             ScoreSignals.Instance.onChangeScore-=OnChangeScore;
-            CoreGameSignals.Instance.onGameInit -= OnGameInit;
             //CoreGameSignals.Instance.onReset -= OnReset;
             ScoreSignals.Instance.onGetScore-=OnGetScore;
             StackSignals.Instance.onStackInit -= OnReset;
@@ -96,11 +94,6 @@ namespace Managers
         {
             _scoreVariables[0]=_saveData.TotalColorman;
             ScoreSignals.Instance.onUpdateScore?.Invoke(_scoreVariables);
-        }
-
-        private void OnGameInit()
-        {
-            
         }
 
         #endregion
@@ -133,16 +126,7 @@ namespace Managers
 
             _scoreVariables[(int)_scoreVarType]+=_changedScoreValue;
             ScoreSignals.Instance.onUpdateScore?.Invoke( _scoreVariables);
-            // switch (_scoreVarType)
-            // {
-            //     case ScoreVariableType.LevelScore:
-            //         ScoreSignals.Instance.onUpdateLevelScore?.Invoke( _scoreVariables[(int)_scoreVarType]);
-            //         break;
-            //     case ScoreVariableType.TotalScore:
-            //         ScoreSignals.Instance.onUpdateTotalScore?.Invoke( _scoreVariables[(int)_scoreVarType]);
-            //         break;    
-            // }
-            
+
         }
         private void OnSendScoreToManagers(GameStates arg0)
         {

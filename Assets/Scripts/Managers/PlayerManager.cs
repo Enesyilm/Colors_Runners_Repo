@@ -219,7 +219,6 @@ namespace Managers
 
         public void OnUpdateScoreText(List<int> _currentScores)
         {
-            Debug.Log("Idle Scorea gecti"+_currentGameState);
             switch (_currentGameState)
             {
                 case GameStates.Idle:
@@ -228,6 +227,11 @@ namespace Managers
                     break;
                 case GameStates.Runner:
                     playerTextController.UpdatePlayerScore(_currentScores[1]);
+
+                    break;
+                case GameStates.Failed:
+                    CloseScoreText(true);
+                    StopAllMovement();
 
                     break;
                 
