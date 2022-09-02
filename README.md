@@ -17,8 +17,7 @@
 
 ## GamePlay Screenshots
 
-
-![COLORSRUNNERSSCREENSHOT](https://user-images.githubusercontent.com/60696929/188218266-9e669772-ce72-4c8f-bb3e-16b7f5c7afd1.png)
+![COLORSRUNNERSSCREENSHOT](https://user-images.githubusercontent.com/60696929/188223135-b307be7e-b692-4865-a429-6c49364831f6.png)
 
 
 ## Used Mechanics 
