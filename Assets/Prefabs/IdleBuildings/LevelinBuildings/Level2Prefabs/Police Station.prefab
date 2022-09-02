@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PayedAmount: 0
+  SidePayedAmount: 0
   TotalAmount: 235
   SideTotalAmount: 110
   IsDepended: 1
@@ -434,7 +435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2878746447507830053, guid: c96da6cf620ba044da270e4849b7903f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.23
       objectReference: {fileID: 0}
     - target: {fileID: 2878746447507830053, guid: c96da6cf620ba044da270e4849b7903f, type: 3}
       propertyPath: m_LocalRotation.w

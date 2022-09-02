@@ -91,7 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3688209949542581908}
   - component: {fileID: 553183212490995603}
-  - component: {fileID: 5178827868404559022}
   m_Layer: 0
   m_Name: BuildingPhysics
   m_TagString: Untagged
@@ -126,19 +125,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.829191, y: 8.618729, z: 19.22602}
   m_Center: {x: 0, y: 1.1996346, z: -0.23150826}
---- !u!65 &5178827868404559022
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4557896352890496681}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.704133, y: 1.6313858, z: 10.134057}
-  m_Center: {x: 6.145494, y: -2.16776, z: -5.4930615}
 --- !u!1 &7825169660883145141
 GameObject:
   m_ObjectHideFlags: 0

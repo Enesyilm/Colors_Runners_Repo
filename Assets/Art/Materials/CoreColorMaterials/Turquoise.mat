@@ -214,7 +214,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _ColorBlend: 0
     - _ColorGrading: 0
-    - _Contrast: 1
+    - _Contrast: 2
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -266,7 +266,7 @@ Material:
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
-    - _OutlineSize: 5
+    - _OutlineSize: 0
     - _OutlineTab: 1
     - _Parallax: 0.005
     - _ParticlesTab: 0
@@ -279,7 +279,7 @@ Material:
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
     - _Roughness: 0.5
-    - _Saturation: 1
+    - _Saturation: 2
     - _SketchMapScale: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0

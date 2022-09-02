@@ -280,7 +280,7 @@ Material:
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
     - _Roughness: 0.5
-    - _Saturation: 1
+    - _Saturation: 3
     - _SketchMapScale: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
@@ -301,7 +301,7 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 1
     - _ThresholdMapScale: 1
     - _VertexAnimation: 0
@@ -313,13 +313,13 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 0.5647059, b: 0, a: 0.44705883}
+    - _AlbedoColor: {r: 1, g: 0.64889014, b: 0.19339621, a: 0.44705883}
     - _BaseColor: {r: 1, g: 0.5647059, b: 0, a: 1}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1, g: 0.2784314, b: 0, a: 1}
+    - _EmissionColor: {r: 1.7411011, g: 1.0514885, b: 0, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
