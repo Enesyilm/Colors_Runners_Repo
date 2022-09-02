@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Controllers;
 using Managers.Interface;
@@ -26,7 +27,7 @@ namespace Managers
     public bool IsSideObjectActive;
 
 
-    #endregion
+            #endregion
 
     #region Serialized Variables
         [SerializeField]
@@ -40,11 +41,52 @@ namespace Managers
 
     #region Private Variables
 
+    private int _totalColorMan;
 
     #endregion
 
     #endregion
 
+    #region Event Subscription
+
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        ScoreSignals.Instance.onUpdateScore+=OnGetScoreData;
+    }
+
+    private void OnGetScoreData(List<int> _scoreData)
+    {
+        _totalColorMan = _scoreData[0];
+        SendDataToControllers();
+    }
+
+    private void SendDataToControllers()
+    {
+        Debug.Log("SendDataToControllers"+_totalColorMan);
+        buildingMarketController.TotalColorMan=_totalColorMan;
+        if (IsDepended)
+        {
+            sideBuildingMarketController.TotalColorMan=_totalColorMan;
+            
+        }
+    }
+
+    private void OnDisable()
+    {
+        UnSubscribeEvents();
+    }
+
+    private void UnSubscribeEvents()
+    {
+        ScoreSignals.Instance.onUpdateScore-=OnGetScoreData;
+    }
+
+    #endregion
     private async void Start()
     {
         if(IsDepended&&IsCompleted)

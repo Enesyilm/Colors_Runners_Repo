@@ -423,6 +423,7 @@ MonoBehaviour:
   arrow: {fileID: 171451504}
   levelPanelController: {fileID: 125663012}
   leveltext: {fileID: 1746747912}
+  totalScore: {fileID: 830838202}
   idlePanelController: {fileID: 125663011}
 --- !u!4 &125663010
 Transform:
@@ -800,7 +801,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level
+  m_text: Level 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

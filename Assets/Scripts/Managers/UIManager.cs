@@ -187,11 +187,12 @@ namespace Managers
 
         public void GetTotalScoreData(List<int> ScoreValues)
         {
-            ScoreValues[0]
+            string _currentTotalScore=ScoreValues[0].ToString();
+            UpdateTotalScore(_currentTotalScore);
         }
-        public void UpdateTotalScore()
+        public void UpdateTotalScore(string _currentTotalScore)
         {
-            totalScore.text = ;
+            totalScore.text = _currentTotalScore;
         }
     }
 }

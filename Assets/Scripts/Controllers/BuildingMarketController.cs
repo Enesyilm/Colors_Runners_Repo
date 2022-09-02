@@ -14,6 +14,7 @@ namespace Controllers
         #region Self Variables
 
         #region Public Variables
+        public int TotalColorMan;
 
         
 
@@ -30,8 +31,8 @@ namespace Controllers
 
         private TextMeshPro _marketText;
         private BuildingManager _buildingManager;
-        private int _totalColorMan;
         private float _saturation;
+        
         
         #endregion
 
@@ -64,10 +65,11 @@ namespace Controllers
         {
             Debug.Log("_buildingManager.IsCompleted");
             //Score Managerden gelecek burasi
-            if (/*SaveSignals.Instance.onGetIntSaveData(SaveTypes.TotalColorman) > 0*/true&&!_buildingManager.IsCompleted)
+            Debug.Log("TotalColorMan"+TotalColorMan);
+            if (TotalColorMan>0&&!_buildingManager.IsCompleted)
             {
-                _totalColorMan--;
-               
+                TotalColorMan--;
+                ScoreSignals.Instance.onChangeScore?.Invoke(ScoreTypes.DecScore,ScoreVariableType.TotalScore);
                     _buildingManager.PayedAmount++;
                     if (_buildingManager.PayedAmount>=_buildingManager.TotalAmount)
                 {
@@ -96,7 +98,6 @@ namespace Controllers
         private void CalculateSaturation()
         {
             _saturation=((float)_buildingManager.PayedAmount / _buildingManager.TotalAmount) * 2;
-            Debug.Log("tag"+gameObject.tag+" id"+_buildingManager.PayedAmount+" _saturation"+_saturation);
             ChangeSaturation();
         }
 
@@ -108,7 +109,6 @@ namespace Controllers
                  meshrenderer.material.DOFloat(_saturation,"_Saturation",1f);
                  if(CompareTag("Market")&& _buildingManager.IsSideObjectActive)
                  {
-                     Debug.Log("Calisti kill");
                      // DOTween.Kill(meshrenderer.material);
                      meshrenderer.material.DOFloat(2,"_Saturation",1f);
                  }

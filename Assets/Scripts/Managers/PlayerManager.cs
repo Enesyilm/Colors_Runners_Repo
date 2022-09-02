@@ -79,8 +79,11 @@ namespace Managers
 
         private void OnChangeGameState(GameStates arg0)
         {
+
             playerMovementController.CurrentGameState = arg0;
             _currentGameState = arg0;
+            Debug.Log("Idle Scorea gecti"+_currentGameState);
+           //OnUpdateScoreText(new List<int>(){ScoreSignals.Instance.onGetScore.Invoke(ScoreVariableType.TotalScore)});
             if (arg0 == GameStates.Idle)
             {
                 playerMovementController.EnableIdleMovement();
@@ -216,9 +219,11 @@ namespace Managers
 
         public void OnUpdateScoreText(List<int> _currentScores)
         {
+            Debug.Log("Idle Scorea gecti"+_currentGameState);
             switch (_currentGameState)
             {
                 case GameStates.Idle:
+                    Debug.Log("Idle Scorea gecti");
                     playerTextController.UpdatePlayerScore(_currentScores[0]);
                     break;
                 case GameStates.Runner:

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data.ValueObjects;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace Managers
         {
             InitScoreValues();
         }
+        
 
         private void InitScoreValues()
         {
@@ -50,7 +52,10 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onChangeGameState += OnSendScoreToManagers;
             ScoreSignals.Instance.onChangeScore+=OnChangeScore;
+            SaveSignals.Instance.onSendDataToManagers += InitTotalScoreData;
+            SaveSignals.Instance.onApplicationPause += OnSendScoreToSave;
             ScoreSignals.Instance.onAddLevelTototalScore += OnAddLevelToTotalScore;
             CoreGameSignals.Instance.onGameInit += OnGameInit;
             // CoreGameSignals.Instance.onReset += OnReset;
@@ -71,12 +76,26 @@ namespace Managers
 
         private void UnSubscribeEvents()
         {
+            SaveSignals.Instance.onApplicationPause -= OnSendScoreToSave;
+            CoreGameSignals.Instance.onChangeGameState -= OnSendScoreToManagers;
+            SaveSignals.Instance.onSendDataToManagers -= InitTotalScoreData;
             ScoreSignals.Instance.onAddLevelTototalScore -= OnAddLevelToTotalScore;
             ScoreSignals.Instance.onChangeScore-=OnChangeScore;
             CoreGameSignals.Instance.onGameInit -= OnGameInit;
             //CoreGameSignals.Instance.onReset -= OnReset;
             ScoreSignals.Instance.onGetScore-=OnGetScore;
             StackSignals.Instance.onStackInit -= OnReset;
+        }
+
+        private void OnSendScoreToSave()
+        {
+            SaveSignals.Instance.onChangeSaveData(SaveTypes.TotalColorman,_totalScore);
+        }
+
+        private void InitTotalScoreData(SaveData _saveData)
+        {
+            _scoreVariables[0]=_saveData.TotalColorman;
+            ScoreSignals.Instance.onUpdateScore?.Invoke(_scoreVariables);
         }
 
         private void OnGameInit()
@@ -124,6 +143,10 @@ namespace Managers
             //         break;    
             // }
             
+        }
+        private void OnSendScoreToManagers(GameStates arg0)
+        {
+            ScoreSignals.Instance.onUpdateScore?.Invoke(_scoreVariables);
         }
     }
 }
