@@ -25,7 +25,9 @@ namespace Controllers
 
         public void SetLevelText(int value)
         {
-            levelText.text = "LEVEL " + (value + 1).ToString();
+            int _levelValue=value + 1;
+            Debug.Log("_levelValue"+_levelValue);
+            levelText.text = "LEVEL " + (_levelValue + 1).ToString();
         }
     }
 }

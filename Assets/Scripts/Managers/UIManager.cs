@@ -107,7 +107,7 @@ namespace Managers
         }
         private void UpdateLevelText()
         {
-            leveltext.text="Level "+CoreGameSignals.Instance.onGetLevelID?.Invoke().ToString();
+            leveltext.text="Level "+(1+CoreGameSignals.Instance.onGetLevelID?.Invoke()).ToString();
             
         }
 

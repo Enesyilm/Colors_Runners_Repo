@@ -167,8 +167,9 @@ namespace Controllers
         {
              _movementData.ForwardSpeed = _verticalSpeed;
         }
-        public void RepositionPlayerForDrone(GameObject _other)
+        public async void RepositionPlayerForDrone(GameObject _other)
         {
+            await Task.Delay(200);
            transform.DOMove(new Vector3(_other.transform.position.x, transform.position.y, _other.transform.position.z+_other.transform.localScale.z*2),2f).OnComplete((
                () =>
                {

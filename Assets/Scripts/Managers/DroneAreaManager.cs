@@ -61,11 +61,13 @@ public class DroneAreaManager : MonoBehaviour
       DroneAreaSignals.Instance.onDroneCheckStarted -= OnDroneCheckStarted;
    }
 
-   private void OnDroneCheckStarted()
+   private async void OnDroneCheckStarted()
    {
+      droneObject.SetActive(true);
+      await Task.Delay(150);
       foreach (var droneColorAreaManager in droneColorAreaManagers)
       {
-
+         
          if (droneColorAreaManager.matchType == MatchType.UnMatched)
          {
             droneColorAreaManager.gameObject.transform.DOScaleZ(0,0.5f).OnComplete(() =>
@@ -74,7 +76,7 @@ public class DroneAreaManager : MonoBehaviour
             });
          }
       }
-      droneObject.SetActive(true);
+     
    }
 
 

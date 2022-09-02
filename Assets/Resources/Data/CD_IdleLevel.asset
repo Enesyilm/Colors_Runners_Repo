@@ -78,11 +78,11 @@ MonoBehaviour:
       - BuildingId: 0
         IsDepended: 1
         PayedAmount: 0
-        TotalRequiredAmount: 25
+        TotalRequiredAmount: 15
         IsCompleted: 0
         SideObjectData:
           PayedAmount: 0
-          TotalRequiredAmount: 15
+          TotalRequiredAmount: 9
           IsCompleted: 0
         IsSideObjectActive: 0
       - BuildingId: 0

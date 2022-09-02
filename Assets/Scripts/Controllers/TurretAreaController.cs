@@ -88,7 +88,6 @@ namespace Controllers
 
         public void FireTurretAnimation()
         {
-            Debug.Log("Ates edildi öldu");
         }
     }
 }
