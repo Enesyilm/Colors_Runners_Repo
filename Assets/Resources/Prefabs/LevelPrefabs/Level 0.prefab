@@ -379,6 +379,10 @@ PrefabInstance:
       propertyPath: ColorType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3581440942163616573, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cac379a5a6c86ff41a36534f00c06117, type: 2}
     - target: {fileID: 5213241218378453016, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -427,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretArea
       objectReference: {fileID: 0}
+    - target: {fileID: 9203337783922089025, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a9523721053ac1147afb4294436487c8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
 --- !u!4 &5406585238570997489 stripped
@@ -3619,6 +3627,10 @@ PrefabInstance:
       propertyPath: ColorType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3581440942163616573, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9af77edcd286cd745bfde62734e1aa08, type: 2}
     - target: {fileID: 5213241218378453016, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3667,6 +3679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretArea (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9203337783922089025, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: af9032688a0e7ab45b0524df726ee992, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
 --- !u!4 &1965617788622990885 stripped
@@ -4823,6 +4839,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3315463186393506857}
     m_Modifications:
+    - target: {fileID: 1835740951638854042, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9af77edcd286cd745bfde62734e1aa08, type: 2}
     - target: {fileID: 2856764032703935905, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
       propertyPath: CurrentColorType
       value: 0
@@ -4875,6 +4895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneArea
       objectReference: {fileID: 0}
+    - target: {fileID: 6301340546740451046, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c9ffff75d388719468b03fddcccd9f8e, type: 2}
     - target: {fileID: 8024798533953028936, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
       propertyPath: CurrentColorType
       value: 2

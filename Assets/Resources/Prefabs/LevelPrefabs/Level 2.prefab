@@ -274,7 +274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3368148675932410908, guid: d46fc258966a7384dac096d8555a178e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 249.1493
+      value: 244.93932
       objectReference: {fileID: 0}
     - target: {fileID: 3368148675932410908, guid: d46fc258966a7384dac096d8555a178e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -458,6 +458,10 @@ PrefabInstance:
       propertyPath: ColorType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3581440942163616573, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0ffdf800b6918e49bb342039a180303, type: 2}
     - target: {fileID: 5213241218378453016, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -506,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretArea
       objectReference: {fileID: 0}
+    - target: {fileID: 9203337783922089025, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: af9032688a0e7ab45b0524df726ee992, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
 --- !u!4 &5406585238570997489 stripped
@@ -678,7 +686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7274554467960100370, guid: 33679e55094c2eb4bbca333e98974a9e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 237.49
+      value: 234.12
       objectReference: {fileID: 0}
     - target: {fileID: 7274554467960100370, guid: 33679e55094c2eb4bbca333e98974a9e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -810,7 +818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028681056214896677, guid: a61b536ca82e8e944bfe27a45f2e31c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 248.29
+      value: 244.08
       objectReference: {fileID: 0}
     - target: {fileID: 3028681056214896677, guid: a61b536ca82e8e944bfe27a45f2e31c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3924,6 +3932,10 @@ PrefabInstance:
       propertyPath: ColorType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3581440942163616573, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cac379a5a6c86ff41a36534f00c06117, type: 2}
     - target: {fileID: 5213241218378453016, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3972,6 +3984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretArea (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9203337783922089025, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b6a6b42baccd0645a3485a8325b340f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d44ba740bd4cdf48a114028d73102fc, type: 3}
 --- !u!4 &1965617788622990885 stripped
@@ -4462,7 +4478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028681056214896677, guid: a61b536ca82e8e944bfe27a45f2e31c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 248.29
+      value: 244.08
       objectReference: {fileID: 0}
     - target: {fileID: 3028681056214896677, guid: a61b536ca82e8e944bfe27a45f2e31c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5528,6 +5544,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3315463186393506857}
     m_Modifications:
+    - target: {fileID: 1835740951638854042, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3fcb87abc23f7114aa6d1d13a82744f8, type: 2}
     - target: {fileID: 2856764032703935905, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
       propertyPath: CurrentColorType
       value: 10
@@ -5546,7 +5566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3357478725684184515, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 223.74
+      value: 221.71
       objectReference: {fileID: 0}
     - target: {fileID: 3357478725684184515, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5580,6 +5600,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneArea
       objectReference: {fileID: 0}
+    - target: {fileID: 6301340546740451046, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9af77edcd286cd745bfde62734e1aa08, type: 2}
     - target: {fileID: 8024798533953028936, guid: 2d2a3e688f7f288478652e3b095faeaa, type: 3}
       propertyPath: CurrentColorType
       value: 0

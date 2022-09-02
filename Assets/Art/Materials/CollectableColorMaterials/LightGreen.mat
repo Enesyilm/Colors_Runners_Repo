@@ -205,7 +205,7 @@ Material:
     - _Blend: 0
     - _BlendDst: 0
     - _BlendSrc: 1
-    - _Brightness: 2
+    - _Brightness: 1
     - _BumpScale: 1
     - _CameraFade: 0
     - _CameraFadeFarDistance: 2

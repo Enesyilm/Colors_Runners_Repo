@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PayedAmount: 0
+  SidePayedAmount: 0
   TotalAmount: 200
   SideTotalAmount: 0
   IsDepended: 0
@@ -184,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5098642790588967097, guid: e4c94c451dbe67847a0e0710b9fe0483, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.53
       objectReference: {fileID: 0}
     - target: {fileID: 5098642790588967097, guid: e4c94c451dbe67847a0e0710b9fe0483, type: 3}
       propertyPath: m_LocalRotation.w
@@ -258,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6543512450071812915, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.426666
+      value: 13.22
       objectReference: {fileID: 0}
     - target: {fileID: 6543512450071812915, guid: 45adb6f881af9504a88079bc6f2e653b, type: 3}
       propertyPath: m_LocalRotation.w
