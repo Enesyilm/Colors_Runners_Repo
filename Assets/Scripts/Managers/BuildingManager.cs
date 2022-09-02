@@ -47,7 +47,11 @@ namespace Managers
 
     private async void Start()
     {
-        await Task.Delay(1000);
+        if(IsDepended&&IsCompleted)
+        {
+            sideBuildingMarketController.gameObject.transform.parent.gameObject.SetActive(true);
+        }
+        await Task.Delay(100);
         DecideMarketState();
     }
 

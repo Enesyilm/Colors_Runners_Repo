@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Controllers;
 using DG.Tweening;
 using Enums;
@@ -19,6 +20,7 @@ namespace Managers
         private RectTransform arrow;
         [SerializeField] private LevelPanelController levelPanelController;
         [SerializeField] private TextMeshProUGUI leveltext;
+        [SerializeField] private TextMeshProUGUI totalScore;
         [SerializeField] private IdlePanelController idlePanelController;
 
         #endregion
@@ -43,6 +45,7 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            ScoreSignals.Instance.onUpdateScore+=GetTotalScoreData;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             //CoreGameSignals.Instance.onGameInit += OnGameInit;
@@ -180,6 +183,15 @@ namespace Managers
             
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
             NewCameraSignals.Instance.onChangeCameraState(CameraStates.Idle);
+        }
+
+        public void GetTotalScoreData(List<int> ScoreValues)
+        {
+            ScoreValues[0]
+        }
+        public void UpdateTotalScore()
+        {
+            totalScore.text = ;
         }
     }
 }

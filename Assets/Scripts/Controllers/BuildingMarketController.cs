@@ -96,7 +96,7 @@ namespace Controllers
         private void CalculateSaturation()
         {
             _saturation=((float)_buildingManager.PayedAmount / _buildingManager.TotalAmount) * 2;
-            Debug.Log("_saturation"+_saturation);
+            Debug.Log("tag"+gameObject.tag+" id"+_buildingManager.PayedAmount+" _saturation"+_saturation);
             ChangeSaturation();
         }
 
