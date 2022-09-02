@@ -261,11 +261,12 @@ namespace Managers
               }
           }
 
-          private void OnReset()
+          private async void OnReset()
           {
               DeleteStack();
               stackList.Clear();
               stackList.TrimExcess();
+              await Task.Delay(200);
               StackSignals.Instance.onStackInit.Invoke();
               OnInitalStackSettings();
           }
